@@ -7,6 +7,7 @@ import csv
 import requests
 from pathlib import Path
 from botok.tokenizers.wordtokenizer import WordTokenizer
+from utils import get_notes
 
 arch_modern_url = 'https://raw.githubusercontent.com/Esukhia/Tibetan-archaic2modern-word/main/arch_modern.yml'
 
@@ -29,14 +30,6 @@ def resolve_archaics(collated_text):
             new_collated_text+=collated_text[char_walker:end]    
         char_walker = end+1
     return new_collated_text
-
-
-def get_notes(collated_text):
-    notes = []
-    p = re.compile("\d+\s*<[^>]*>")
-    for m in p.finditer(collated_text):
-        notes.append({"note":m.group(),"span":m.span()})
-    return notes
 
 
 def get_default_word(collated_text,end_index):
@@ -86,7 +79,6 @@ def remove_particles(text):
     wt = WordTokenizer()
     tokenized_texts = wt.tokenize(text,split_affixes=True)
     particle_free_text = ""
-
     for tokenized_text in tokenized_texts:
         if tokenized_text.pos and tokenized_text.pos != "PART":
             particle_free_text+=tokenized_text.text    

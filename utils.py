@@ -185,3 +185,10 @@ def is_title_note(note):
             return True
     
     return False
+
+def get_notes(collated_text):
+    notes = []
+    p = re.compile("\d+\s*<[^>]*>")
+    for m in p.finditer(collated_text):
+        notes.append({"note":m.group(),"span":m.span()})
+    return notes    
