@@ -10,7 +10,7 @@ from botok.tokenizers.wordtokenizer import WordTokenizer
 
 arch_modern_url = 'https://raw.githubusercontent.com/Esukhia/Tibetan-archaic2modern-word/main/arch_modern.yml'
 
-def make_new_collated_text(collated_text):
+def resolve_archaics(collated_text):
     new_collated_text=""
     char_walker = 0
     notes = get_notes(collated_text)
@@ -20,7 +20,7 @@ def make_new_collated_text(collated_text):
         start,end = note["span"]
         default_word,default_word_start_index = get_default_word(collated_text,start)
         alt_words = get_alternative_words(foot_note)
-        modern_word = check_lekshi_gurkhang(default_word,alt_words)
+        modern_word = check_lekshi_gurkhang(alt_words)
         if default_word in archaic_words:
             new_collated_text+=collated_text[char_walker:default_word_start_index-1]+alt_words[0]
         elif modern_word != None:
@@ -67,7 +67,7 @@ def get_alternative_words(note):
     return words
 
 
-def check_lekshi_gurkhang(default_word,alt_words): 
+def check_lekshi_gurkhang(alt_words): 
     res = requests.get(arch_modern_url)
     parsed_yaml_file = yaml.load(res.text, Loader=yaml.FullLoader)
     result = None
@@ -107,5 +107,5 @@ def get_archaic_words():
 
 if __name__ == "__main__":
     collated_text = Path("resources/sample_text.txt").read_text(encoding="utf-8")
-    new_collated_text = make_new_collated_text(collated_text)
+    new_collated_text = resolve_archaics(collated_text)
     Path("resources/gen_text.txt").write_text(new_collated_text)
