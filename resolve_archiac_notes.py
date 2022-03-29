@@ -105,7 +105,3 @@ def get_archaic_words():
     return archaic_words
 
 
-if __name__ == "__main__":
-    collated_text = Path("resources/sample_text.txt").read_text(encoding="utf-8")
-    new_collated_text = resolve_archaics(collated_text)
-    Path("resources/gen_text.txt").write_text(new_collated_text)
