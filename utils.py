@@ -168,3 +168,20 @@ def get_sample_entry(note_walker, note, note_info):
         note_info['text_id'],
         ]
     return data_entry
+
+def is_title_note(note):
+    right_context = get_context(note[0], "right")
+    left_context = get_context(note[0], "left")
+    left_context = re.sub(r"\xa0", " ", left_context)
+    possible_right_texts = ["༄༅། །"]
+    possible_left_texts = ["༄༅༅། །རྒྱ་གར་","༄༅། །རྒྱ་གར་","༅༅། །རྒྱ་གར་སྐད་དུ།","༄༅༅། ","༄༅༅།། །རྒྱ་གར་","ལྟར་བཀོད་ཅིང།"]
+    
+    
+    for left_text in possible_left_texts:
+        if left_text in left_context:
+            return True
+    for right_text in possible_right_texts:
+        if right_text in right_context:
+            return True
+    
+    return False
