@@ -9,7 +9,9 @@ from pathlib import Path
 from botok.tokenizers.wordtokenizer import WordTokenizer
 from utils import get_notes_with_span
 
-arch_modern_url = 'https://raw.githubusercontent.com/Esukhia/Tibetan-archaic2modern-word/main/arch_modern.yml'
+
+lekshi_gurkhang_url = 'https://raw.githubusercontent.com/Esukhia/Tibetan-archaic2modern-word/main/arch_modern.yml'
+
 
 def resolve_archaics(collated_text):
     new_collated_text=""
@@ -62,7 +64,7 @@ def get_alternative_words(note):
 
 
 def check_lekshi_gurkhang(alt_words): 
-    res = requests.get(arch_modern_url)
+    res = requests.get(lekshi_gurkhang_url)
     parsed_yaml_file = yaml.load(res.text, Loader=yaml.FullLoader)
     result = None
     alt_words = [remove_particles(word) for word in alt_words]
