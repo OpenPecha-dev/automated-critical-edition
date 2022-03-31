@@ -7,14 +7,14 @@ import csv
 import requests
 from pathlib import Path
 from botok.tokenizers.wordtokenizer import WordTokenizer
-from utils import get_notes
+from utils import get_notes_with_span
 
 arch_modern_url = 'https://raw.githubusercontent.com/Esukhia/Tibetan-archaic2modern-word/main/arch_modern.yml'
 
 def resolve_archaics(collated_text):
     new_collated_text=""
     char_walker = 0
-    notes = get_notes(collated_text)
+    notes = get_notes_with_span(collated_text)
     archaic_words = get_archaic_words()
     for note in notes:
         foot_note = note["note"]
@@ -29,6 +29,7 @@ def resolve_archaics(collated_text):
         elif modern_word == None:
             new_collated_text+=collated_text[char_walker:end]    
         char_walker = end+1
+    new_collated_text+=collated_text[end:]    
     return new_collated_text
 
 
@@ -54,7 +55,7 @@ def get_alternative_words(note):
     regex = "»([^(«|>)]*)"
     texts = re.findall(regex,note)
     for text in texts:
-        if text == "":
+        if text == "" or "-" in text:
             continue
         words.append(text)
     return words
@@ -64,12 +65,12 @@ def check_lekshi_gurkhang(alt_words):
     res = requests.get(arch_modern_url)
     parsed_yaml_file = yaml.load(res.text, Loader=yaml.FullLoader)
     result = None
+    alt_words = [remove_particles(word) for word in alt_words]
     combinations = list(itertools.product(parsed_yaml_file,alt_words))
     for combination in combinations:
         id,word = combination
-        particle_free_word = remove_particles(word)
         modern_words = parsed_yaml_file[id]['modern']
-        if particle_free_word in modern_words:
+        if word in modern_words:
             result = word
             break
     return result       
@@ -96,4 +97,9 @@ def get_archaic_words():
                 archaic_words.append(word)
     return archaic_words
 
+
+if __name__ == "__main__":
+    text = Path("data/collated_text/D1115_v001.txt").read_text(encoding="utf-8")
+    new_text = resolve_archaics(text)
+    print(new_text)
 
