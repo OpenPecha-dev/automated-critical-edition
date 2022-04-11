@@ -169,6 +169,15 @@ def get_sample_entry(note_walker, note, note_info):
         ]
     return data_entry
 
+def get_notes(note):
+    notes = []
+    notes.append(note[1]['chone'])
+    notes.append(note[1]['derge'])
+    notes.append(note[1]['narthang'])
+    notes.append(note[1]['peking'])
+    return notes
+    
+
 def is_title_note(note):
     right_context = get_context(note[0], "right")
     left_context = get_context(note[0], "left")
@@ -182,7 +191,12 @@ def is_title_note(note):
             return True
     for right_text in possible_right_texts:
         if right_text in right_context:
-            return True
+            notes = get_notes(note)
+            for note_ in notes:
+                if '༄༅།' in note_:
+                    return False
+                else:
+                    return True
     
     return False
 
