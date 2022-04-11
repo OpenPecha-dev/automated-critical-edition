@@ -1,4 +1,5 @@
 import re
+from sqlite3 import Row
 from unittest import result
 import utils
 import itertools
@@ -7,7 +8,7 @@ import csv
 import requests
 from pathlib import Path
 from botok.tokenizers.wordtokenizer import WordTokenizer
-from utils import get_notes_with_span
+from utils import get_notes_with_span,parse_notes,is_title_note
 
 
 lekshi_gurkhang_url = 'https://raw.githubusercontent.com/Esukhia/Tibetan-archaic2modern-word/main/arch_modern.yml'
@@ -16,23 +17,39 @@ lekshi_gurkhang_url = 'https://raw.githubusercontent.com/Esukhia/Tibetan-archaic
 def resolve_archaics(collated_text):
     new_collated_text=""
     char_walker = 0
-    notes = get_notes_with_span(collated_text)
+    notes_with_span = get_notes_with_span(collated_text)
+    notes_with_context = parse_notes(collated_text)
     archaic_words = get_archaic_words()
-    for note in notes:
-        foot_note = note["note"]
-        start,end = note["span"]
-        default_word,default_word_start_index = get_default_word(collated_text,start)
-        alt_words = get_alternative_words(foot_note)
-        modern_word = check_lekshi_gurkhang(alt_words)
-        if default_word in archaic_words:
-            new_collated_text+=collated_text[char_walker:default_word_start_index-1]+alt_words[0]
-        elif modern_word != None:
-            new_collated_text+=collated_text[char_walker:default_word_start_index-1]+modern_word    
-        elif modern_word == None:
-            new_collated_text+=collated_text[char_walker:end]    
-        char_walker = end+1
+    for note_with_span,note_with_context in zip(notes_with_span,notes_with_context):
+        _,end = note_with_span["span"]
+        gen_text,char_walker=build_collated_text(note_with_context,note_with_span,archaic_words,collated_text,char_walker)
+        new_collated_text+=gen_text
     new_collated_text+=collated_text[end:]    
     return new_collated_text
+
+
+def build_collated_text(note_with_context,note_with_span,archaic_words,collated_text,char_walker):
+    gen_text = ""
+    foot_note = note_with_span["note"]
+    start,end = note_with_span["span"]
+    default_word,default_word_start_index = get_default_word(collated_text,start)
+    alt_words = get_alternative_words(note_with_context[1])
+    modern_word = check_lekshi_gurkhang(alt_words)
+    write_csvs = True
+    if is_title_note(note_with_context) or len(alt_words) == 0:
+        gen_text=collated_text[char_walker:end]
+        write_csvs = False 
+    elif default_word in archaic_words:
+        gen_text=collated_text[char_walker:default_word_start_index-1]+alt_words[0]
+        modern_word= alt_words[0]
+    elif modern_word != None:
+        gen_text=collated_text[char_walker:default_word_start_index-1]+modern_word    
+    elif modern_word == None:
+        gen_text=collated_text[char_walker:end]    
+    char_walker = end+1
+    if write_csvs:
+        write_csv(note_with_context,modern_word)
+    return gen_text,char_walker
 
 
 def get_default_word(collated_text,end_index):
@@ -54,12 +71,13 @@ def get_default_word(collated_text,end_index):
 
 def get_alternative_words(note):
     words =[]
-    regex = "»([^(«|>)]*)"
-    texts = re.findall(regex,note)
+    """ regex = "»([^(«|>)]*)"
+    texts = re.findall(regex,note) """
+    texts = list(note.values())
     for text in texts:
-        if text == "" or "-" in text:
+        if text == "" or "-" in text or "+" in text:
             continue
-        words.append(text)
+        words.append(text.replace("\n",""))
     return words
 
 
@@ -99,9 +117,18 @@ def get_archaic_words():
                 archaic_words.append(word)
     return archaic_words
 
+def write_csv(note_with_context,modern_word):
+    with open("feed.csv","a") as file:
+        writer = csv.writer(file)
+        row = get_alternative_words(note_with_context[1])
+        if modern_word == None:
+            modern_word = "None"
+        row.append(modern_word)
+        print(row)
+        writer.writerow(row)
+
 
 if __name__ == "__main__":
     text = Path("data/collated_text/D1115_v001.txt").read_text(encoding="utf-8")
     new_text = resolve_archaics(text)
-    print(new_text)
 
