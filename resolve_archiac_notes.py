@@ -1,7 +1,4 @@
 import re
-from sqlite3 import Row
-from unittest import result
-import utils
 import itertools
 import yaml
 import csv
@@ -9,7 +6,7 @@ import requests
 from pathlib import Path
 from botok.tokenizers.wordtokenizer import WordTokenizer
 from utils import get_notes_with_span,parse_notes,is_title_note
-
+import write_csv
 
 lekshi_gurkhang_url = 'https://raw.githubusercontent.com/Esukhia/Tibetan-archaic2modern-word/main/arch_modern.yml'
 
@@ -30,7 +27,6 @@ def resolve_archaics(collated_text):
 
 def build_collated_text(note_with_context,note_with_span,archaic_words,collated_text,char_walker):
     gen_text = ""
-    foot_note = note_with_span["note"]
     start,end = note_with_span["span"]
     default_word,default_word_start_index = get_default_word(collated_text,start)
     alt_words = get_alternative_words(note_with_context[1])
@@ -48,7 +44,7 @@ def build_collated_text(note_with_context,note_with_span,archaic_words,collated_
         gen_text=collated_text[char_walker:end]    
     char_walker = end+1
     if write_csvs:
-        write_csv(note_with_context,modern_word)
+        write_csv.write_csv(note_with_context,modern_word)
     return gen_text,char_walker
 
 
@@ -71,8 +67,6 @@ def get_default_word(collated_text,end_index):
 
 def get_alternative_words(note):
     words =[]
-    """ regex = "»([^(«|>)]*)"
-    texts = re.findall(regex,note) """
     texts = list(note.values())
     for text in texts:
         if text == "" or "-" in text or "+" in text:
@@ -117,15 +111,6 @@ def get_archaic_words():
                 archaic_words.append(word)
     return archaic_words
 
-def write_csv(note_with_context,modern_word):
-    with open("feed.csv","a") as file:
-        writer = csv.writer(file)
-        row = get_alternative_words(note_with_context[1])
-        if modern_word == None:
-            modern_word = "None"
-        row.append(modern_word)
-        print(row)
-        writer.writerow(row)
 
 
 if __name__ == "__main__":
