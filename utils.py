@@ -99,8 +99,15 @@ def get_note_sample(prev_chunk, note_chunk, next_chunk):
     next_context = get_context(next_chunk, type_= 'right')
     note_options = get_note_options(default_option, note_chunk)
     note_options = dict(sorted(note_options.items()))
-    note_sample = f'{prev_context}[{",".join(str(note) for note in note_options.values())}]{next_context}'
-    return [note_sample, note_options]
+    #note_sample = f'{prev_context}[{",".join(str(note) for note in note_options.values())}]{next_context}'
+    note = {
+        "left_context":prev_context,
+        "right_context":next_context,
+        "default_option":default_option,
+        "note_options":note_options,
+        "alt_options":[note for note in note_options.values()]
+    }
+    return note
 
 def parse_notes(collated_text):
     cur_text_notes = []
@@ -112,8 +119,8 @@ def parse_notes(collated_text):
         except:
             next_chunk = ''
         if re.search('\(\d+\) <.+?>', chunk):
-            note_sample, note_options  = get_note_sample(prev_chunk, chunk, next_chunk)
-            cur_text_notes.append([note_sample, note_options])
+            note  = get_note_sample(prev_chunk, chunk, next_chunk)
+            cur_text_notes.append(note)
             continue
         prev_chunk = chunk
     return cur_text_notes

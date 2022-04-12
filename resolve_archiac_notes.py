@@ -1,3 +1,4 @@
+from logging import NOTSET
 import re
 import itertools
 import yaml
@@ -5,7 +6,7 @@ import csv
 import requests
 from pathlib import Path
 from botok.tokenizers.wordtokenizer import WordTokenizer
-from utils import get_notes_with_span,parse_notes,is_title_note
+from utils import get_notes_with_span,get_notes,is_title_note,parse_notes
 import write_csv
 
 lekshi_gurkhang_url = 'https://raw.githubusercontent.com/Esukhia/Tibetan-archaic2modern-word/main/arch_modern.yml'
@@ -14,9 +15,8 @@ lekshi_gurkhang_url = 'https://raw.githubusercontent.com/Esukhia/Tibetan-archaic
 def resolve_archaics(collated_text):
     new_collated_text=""
     char_walker = 0
-    notes_with_span = get_notes_with_span(collated_text)
-    notes_with_context = parse_notes(collated_text)
-    archaic_words = get_archaic_words()
+    notes_with_span,notes_with_context = get_notes(collated_text)
+    archaic_words = ['གཞག་']
     for note_with_span,note_with_context in zip(notes_with_span,notes_with_context):
         _,end = note_with_span["span"]
         gen_text,char_walker=build_collated_text(note_with_context,note_with_span,archaic_words,collated_text,char_walker)
@@ -42,7 +42,7 @@ def build_collated_text(note_with_context,note_with_span,archaic_words,collated_
         gen_text=collated_text[char_walker:default_word_start_index-1]+modern_word    
     elif modern_word == None:
         gen_text=collated_text[char_walker:end]    
-    char_walker = end+1
+    char_walker = end
     if write_csvs:
         write_csv.write_csv(note_with_context,modern_word)
     return gen_text,char_walker
@@ -79,7 +79,7 @@ def check_lekshi_gurkhang(alt_words):
     res = requests.get(lekshi_gurkhang_url)
     parsed_yaml_file = yaml.load(res.text, Loader=yaml.FullLoader)
     result = None
-    alt_words = [remove_particles(word) for word in alt_words]
+    #alt_words = [remove_particles(word) for word in alt_words]
     combinations = list(itertools.product(parsed_yaml_file,alt_words))
     for combination in combinations:
         id,word = combination
@@ -115,5 +115,6 @@ def get_archaic_words():
 
 if __name__ == "__main__":
     text = Path("data/collated_text/D1115_v001.txt").read_text(encoding="utf-8")
-    new_text = resolve_archaics(text)
+    notes = parse_notes(text)
+    print(notes[0])
 
