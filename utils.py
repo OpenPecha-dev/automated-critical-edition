@@ -169,16 +169,12 @@ def get_sample_entry(note_walker, note, note_info):
         ]
     return data_entry
 
-def get_notes(note):
-    notes = []
-    notes.append(note[1]['chone'])
-    notes.append(note[1]['derge'])
-    notes.append(note[1]['narthang'])
-    notes.append(note[1]['peking'])
-    return notes
-    
-
 def is_title_note(note):
+    notes_options = []
+    notes_options.append(note[1]['chone'])
+    notes_options.append(note[1]['derge'])
+    notes_options.append(note[1]['narthang'])
+    notes_options.append(note[1]['peking'])
     right_context = get_context(note[0], "right")
     left_context = get_context(note[0], "left")
     left_context = re.sub(r"\xa0", " ", left_context)
@@ -191,9 +187,8 @@ def is_title_note(note):
             return True
     for right_text in possible_right_texts:
         if right_text in right_context:
-            notes = get_notes(note)
-            for note_ in notes:
-                if '༄༅།' in note_:
+            for note_option in notes_options:
+                if '༄༅།' in note_option:
                     return False
                 else:
                     return True
@@ -202,7 +197,7 @@ def is_title_note(note):
 
 def get_notes_with_span(collated_text):
     notes = []
-    p = re.compile("\(.*\)\s*<.*?>")
+    p = re.compile("\(.+?\)\s*<.*?>")
     for m in p.finditer(collated_text):
         notes.append({"note":m.group(),"span":m.span()})
-    return notes    
+    return notes
