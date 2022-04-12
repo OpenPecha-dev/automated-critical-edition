@@ -90,7 +90,14 @@ def update_left_context(default_option, prev_chunk, chunk):
     if "+" in chunk:
         left_context = prev_chunk
     return left_context
-        
+
+def get_alt_options(default_option,note_options):
+    alt_options = []
+    for note in set(note_options.values()):
+        if note != default_option and note != "":
+            alt_options.append(note)
+    return alt_options        
+
 def get_note_sample(prev_chunk, note_chunk, next_chunk):
     note_sample = ''
     default_option = get_default_option(prev_chunk)
@@ -99,19 +106,20 @@ def get_note_sample(prev_chunk, note_chunk, next_chunk):
     next_context = get_context(next_chunk, type_= 'right')
     note_options = get_note_options(default_option, note_chunk)
     note_options = dict(sorted(note_options.items()))
+    alt_options = get_alt_options(default_option,note_options)
     #note_sample = f'{prev_context}[{",".join(str(note) for note in note_options.values())}]{next_context}'
     note = {
         "left_context":prev_context,
         "right_context":next_context,
         "default_option":default_option,
         "note_options":note_options,
-        "alt_options":[note for note in note_options.values()]
+        "alt_options":alt_options
     }
     return note
 
 def parse_notes(collated_text):
     cur_text_notes = []
-    chunks = re.split('(\(\d+\) <.+?>)', collated_text)
+    chunks = re.split('(\(\d+\) <.+?>)', collated_text.replace("\n",""))
     prev_chunk = chunks[0]
     for chunk_walker, chunk in enumerate(chunks):
         try:
@@ -178,14 +186,13 @@ def get_sample_entry(note_walker, note, note_info):
 
 def is_title_note(note):
     notes_options = []
-    notes_options.append(note[1]['chone'])
-    notes_options.append(note[1]['derge'])
-    notes_options.append(note[1]['narthang'])
-    notes_options.append(note[1]['peking'])
+    notes_options.append(note['note_options']['chone'])
+    notes_options.append(note['note_options']['derge'])
+    notes_options.append(note['note_options']['narthang'])
+    notes_options.append(note['note_options']['peking'])
     
-    
-    right_context = get_context(note[0], "right")
-    left_context = get_context(note[0], "left")
+    right_context = note['right_context']
+    left_context = note['left_context']
     left_context = re.sub(r"\xa0", " ", left_context)
     possible_right_texts = ["༄༅། །"]
     possible_left_texts = ["༄༅༅། །རྒྱ་གར་","༄༅། །རྒྱ་གར་","༅༅། །རྒྱ་གར་སྐད་དུ།","༄༅༅། ","༄༅༅།། །རྒྱ་གར་","ལྟར་བཀོད་ཅིང།"]

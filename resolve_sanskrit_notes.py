@@ -40,9 +40,9 @@ def parse_notes_for_sanskrit_words(notes_with_span, notes_for_context, collated_
                   else:
                       new_collated_text += collated_text[char_walker:end]
                       char_walker = end
-                 else:
-                      new_collated_text += collated_text[char_walker:end]
-                      char_walker = end
+                else:
+                    new_collated_text += collated_text[char_walker:end]
+                    char_walker = end
             if (num+1) == len(notes_for_context) and len(notes_for_context) != 1:
                 new_collated_text += collated_text[end:]
             elif len(notes_for_context) == 1:

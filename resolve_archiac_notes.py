@@ -6,7 +6,7 @@ import csv
 import requests
 from pathlib import Path
 from botok.tokenizers.wordtokenizer import WordTokenizer
-from utils import get_notes_with_span,get_notes,is_title_note,parse_notes
+from utils import *
 import write_csv
 
 lekshi_gurkhang_url = 'https://raw.githubusercontent.com/Esukhia/Tibetan-archaic2modern-word/main/arch_modern.yml'
@@ -16,7 +16,7 @@ def resolve_archaics(collated_text):
     new_collated_text=""
     char_walker = 0
     notes_with_span,notes_with_context = get_notes(collated_text)
-    archaic_words = ['གཞག་']
+    archaic_words = get_archaic_words()
     for note_with_span,note_with_context in zip(notes_with_span,notes_with_context):
         _,end = note_with_span["span"]
         gen_text,char_walker=build_collated_text(note_with_context,note_with_span,archaic_words,collated_text,char_walker)
@@ -29,7 +29,7 @@ def build_collated_text(note_with_context,note_with_span,archaic_words,collated_
     gen_text = ""
     start,end = note_with_span["span"]
     default_word,default_word_start_index = get_default_word(collated_text,start)
-    alt_words = get_alternative_words(note_with_context[1])
+    alt_words = note_with_context['alt_options']
     modern_word = check_lekshi_gurkhang(alt_words)
     write_csvs = True
     if is_title_note(note_with_context) or len(alt_words) == 0:
@@ -46,33 +46,6 @@ def build_collated_text(note_with_context,note_with_span,archaic_words,collated_
     if write_csvs:
         write_csv.write_csv(note_with_context,modern_word)
     return gen_text,char_walker
-
-
-def get_default_word(collated_text,end_index):
-    index = end_index-1
-    start_index = ""
-    while index > 0:
-        if collated_text[index] == ":":
-            start_index =  index+1
-            break
-        elif re.search("\s",collated_text[index]):
-            index_in = end_index-2
-            while collated_text[index_in] != "་":
-                index_in-=1
-            start_index = index_in+1
-            break
-        index-=1
-    return collated_text[start_index:end_index],start_index
-
-
-def get_alternative_words(note):
-    words =[]
-    texts = list(note.values())
-    for text in texts:
-        if text == "" or "-" in text or "+" in text:
-            continue
-        words.append(text.replace("\n",""))
-    return words
 
 
 def check_lekshi_gurkhang(alt_words): 
@@ -115,6 +88,7 @@ def get_archaic_words():
 
 if __name__ == "__main__":
     text = Path("data/collated_text/D1115_v001.txt").read_text(encoding="utf-8")
-    notes = parse_notes(text)
-    print(notes[0])
+    new_text = resolve_archaics(text)
+    Path("gen_text.txt").write_text(new_text)
+    
 
