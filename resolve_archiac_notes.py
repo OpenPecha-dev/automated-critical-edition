@@ -87,8 +87,10 @@ def get_archaic_words():
 
 
 if __name__ == "__main__":
+    write_csv.write_csv_header()
     text = Path("data/collated_text/D1115_v001.txt").read_text(encoding="utf-8")
     new_text = resolve_archaics(text)
     Path("gen_text.txt").write_text(new_text)
+    write_csv.convert_to_excel()
     
 
