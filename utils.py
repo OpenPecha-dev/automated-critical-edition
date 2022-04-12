@@ -175,6 +175,8 @@ def is_title_note(note):
     notes_options.append(note[1]['derge'])
     notes_options.append(note[1]['narthang'])
     notes_options.append(note[1]['peking'])
+    
+    
     right_context = get_context(note[0], "right")
     left_context = get_context(note[0], "left")
     left_context = re.sub(r"\xa0", " ", left_context)
@@ -192,7 +194,6 @@ def is_title_note(note):
                     return False
                 else:
                     return True
-    
     return False
 
 def get_notes_with_span(collated_text):
@@ -201,3 +202,35 @@ def get_notes_with_span(collated_text):
     for m in p.finditer(collated_text):
         notes.append({"note":m.group(),"span":m.span()})
     return notes
+
+
+def get_default_word(collated_text,end_index):
+    index = end_index-1
+    start_index = ""
+    while index > 0:
+        if collated_text[index] == ":":
+            start_index =  index+1
+            break
+        elif re.search("\s",collated_text[index]):
+            index_in = end_index-2
+            while collated_text[index_in] != "་":
+                index_in-=1
+            start_index = index_in+1
+            break
+        index-=1
+    return collated_text[start_index:end_index],start_index
+
+def get_notes(collated_text):
+    """this function gives the notes of the collated text
+       as return
+
+    Args:
+        text_path (string): path to the collated_text
+
+    Returns:
+        list: list containing all the notes of the current collated text
+    """
+    notes_for_context = parse_notes(collated_text)
+    notes_with_span = get_notes_with_span(collated_text)
+    return notes_with_span, notes_for_context
+        
