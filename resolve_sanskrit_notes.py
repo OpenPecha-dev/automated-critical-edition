@@ -13,7 +13,7 @@ def check_all_notes(line):
 
   
   
-def parse_notes_for_sanskrit_words(notes_with_span, notes_for_context, collated_text):
+def resolve_default_sanskrit_notes(notes_with_span, notes_for_context, collated_text):
     """it parse all the notes of the collated text
         to check if they are sanskrit words
 
