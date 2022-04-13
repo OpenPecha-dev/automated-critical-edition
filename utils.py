@@ -227,7 +227,7 @@ def get_default_word(collated_text,end_index):
             break
         elif re.search("\s",collated_text[index]):
             index_in = end_index-2
-            while collated_text[index_in] != "་":
+            while collated_text[index_in] not in ["་","།","\n"]:
                 index_in-=1
             start_index = index_in+1
             break
