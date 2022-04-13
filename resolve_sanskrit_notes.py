@@ -1,5 +1,3 @@
-from email.policy import default
-import re
 from pathlib import Path
 from utils import *
 from botok.third_party.has_skrt_syl import has_skrt_syl
@@ -24,8 +22,6 @@ def resolve_default_sanskrit_notes(notes_with_span, notes_for_context, collated_
     if len(notes_with_span) == len(notes_for_context):
         new_collated_text = ""
         for num, _ in enumerate(notes_for_context,0):
-            if num == 1071:
-                print("this is 1071")
             title_check = is_title_note(notes_for_context[num])
             start, end = notes_with_span[num]["span"]
             if title_check == False:
@@ -54,16 +50,3 @@ def resolve_default_sanskrit_notes(notes_with_span, notes_for_context, collated_
                     return collated_text
     return new_collated_text
                         
-
-
-
-if __name__ == "__main__":
-    # paths = Path(f"./data/collated_text")
-    # text_paths = list(paths.iterdir())
-    # text_paths.sort()
-    # for text_path in text_paths:
-    text_path = Path(f"./data/collated_text/D4274_v108.txt")
-    collated_text = Path(text_path).read_text(encoding='utf-8')
-    notes_with_span, notes_for_context = get_notes(collated_text)
-    new_collated_text = resolve_default_sanskrit_notes(notes_with_span, notes_for_context, collated_text)
-    Path(f"./cleaned/{text_path.name}").write_text(new_collated_text, encoding='utf-8')
