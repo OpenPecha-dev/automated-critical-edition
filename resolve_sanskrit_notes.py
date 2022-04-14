@@ -9,7 +9,11 @@ def check_all_notes(line):
             return False
     return True      
 
-  
+def  get_prev_note_span(notes_with_span, num):
+    if num == 0:
+        return None, None
+    else:
+        return notes_with_span[num-1]['span']
   
 def resolve_default_sanskrit_notes(notes_with_span, notes_for_context, collated_text):
     """it parse all the notes of the collated text
@@ -24,10 +28,11 @@ def resolve_default_sanskrit_notes(notes_with_span, notes_for_context, collated_
         for num, _ in enumerate(notes_for_context,0):
             title_check = is_title_note(notes_for_context[num])
             start, end = notes_with_span[num]["span"]
+            _, prev_end = get_prev_note_span(notes_with_span, num)
             if title_check == False:
                 check = check_all_notes(notes_for_context[num])
                 if check :
-                  default_word, default_start_index = get_default_word(collated_text,start)
+                  default_word, default_start_index = get_default_word(collated_text,start, prev_end)
                   default_sanskrit_check = has_skrt_syl(default_word)
                   if default_sanskrit_check:
                       if collated_text[default_start_index-1:default_start_index] == ":":
@@ -48,5 +53,4 @@ def resolve_default_sanskrit_notes(notes_with_span, notes_for_context, collated_
                     new_collated_text = collated_text
                 else:
                     return collated_text
-    return new_collated_text
-                        
+    return new_collated_text         

@@ -218,21 +218,25 @@ def get_notes_with_span(collated_text):
     return notes
 
 
-def get_default_word(collated_text,end_index):
-    index = end_index-1
-    start_index = ""
-    while index > 0:
-        if collated_text[index] == ":":
-            start_index =  index+1
-            break
-        elif re.search("\s",collated_text[index]):
-            index_in = end_index-2
-            while collated_text[index_in] not in ["་","།","\n"]:
-                index_in-=1
-            start_index = index_in+1
-            break
-        index-=1
-    return collated_text[start_index:end_index],start_index
+def get_default_word(collated_text, end_index, prev_end):
+    if prev_end == None:
+        prev_end = 0
+    if ":" in collated_text[prev_end:end_index]:
+        span = collated_text[prev_end:end_index].find(":")
+        colon_pos = span + prev_end + 1
+        return collated_text[colon_pos:end_index],colon_pos
+    else:
+        index = end_index-1
+        start_index = ""
+        while index > 0:
+            if re.search("\s",collated_text[index]):
+                index_in = end_index-2
+                while collated_text[index_in] not in ["་","།","\n"]:
+                    index_in-=1
+                start_index = index_in+1
+                break
+            index-=1
+        return collated_text[start_index:end_index],start_index
 
 def get_notes(collated_text):
     """this function gives the notes of the collated text
