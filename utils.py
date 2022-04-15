@@ -1,5 +1,6 @@
 import re
 from typing import DefaultDict
+import yaml
 
 
 def get_syls(text):
@@ -252,3 +253,8 @@ def get_notes(collated_text):
     notes_with_span = get_notes_with_span(collated_text)
     return notes_with_span, notes_for_context
         
+def toyaml(dict):
+    return yaml.safe_dump(dict, sort_keys=False, allow_unicode=True)
+
+def from_yaml(yml_path):
+    return yaml.safe_load(yml_path.read_text(encoding="utf-8"))
