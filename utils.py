@@ -99,8 +99,7 @@ def get_alt_options(default_option,note_options):
             alt_options.append(note)
     return alt_options        
 
-def get_note_sample(prev_chunk, note_chunk, next_chunk):
-    note_sample = ''
+def get_note_sample(prev_chunk, note_chunk, next_chunk,collated_text):
     default_option = get_default_option(prev_chunk)
     prev_chunk = update_left_context(default_option, prev_chunk, note_chunk)
     prev_context = get_context(prev_chunk, type_= 'left')
@@ -108,17 +107,18 @@ def get_note_sample(prev_chunk, note_chunk, next_chunk):
     note_options = get_note_options(default_option, note_chunk)
     note_options = dict(sorted(note_options.items()))
     alt_options = get_alt_options(default_option,note_options)
-    #note_sample = f'{prev_context}[{",".join(str(note) for note in note_options.values())}]{next_context}'
+    note_span = get_note_span(collated_text,note_chunk)
     note = {
         "left_context":prev_context,
         "right_context":next_context,
         "default_option":default_option,
         "note_options":note_options,
-        "alt_options":alt_options
+        "alt_options":alt_options,
+        "span":note_span
     }
     return note
 
-def parse_notes(collated_text):
+def get_notes(collated_text):
     cur_text_notes = []
     chunks = re.split('(\(\d+\) <.+?>)', collated_text.replace("\n",""))
     prev_chunk = chunks[0]
@@ -128,7 +128,7 @@ def parse_notes(collated_text):
         except:
             next_chunk = ''
         if re.search('\(\d+\) <.+?>', chunk):
-            note  = get_note_sample(prev_chunk, chunk, next_chunk)
+            note  = get_note_sample(prev_chunk, chunk, next_chunk,collated_text)
             cur_text_notes.append(note)
             continue
         prev_chunk = chunk
@@ -211,12 +211,11 @@ def is_title_note(note):
                     return True
     return False
 
-def get_notes_with_span(collated_text):
-    notes = []
-    p = re.compile("\(.+?\)\s*<.*?>")
+def get_note_span(collated_text,chunk):
+    p = re.compile("\(.+?\) <.*?>")
     for m in p.finditer(collated_text):
-        notes.append({"note":m.group(),"span":m.span()})
-    return notes
+        if m.group() in chunk:
+            return m.span()
 
 
 def get_default_word(collated_text, end_index, prev_end):
@@ -239,19 +238,6 @@ def get_default_word(collated_text, end_index, prev_end):
             index-=1
         return collated_text[start_index:end_index],start_index
 
-def get_notes(collated_text):
-    """this function gives the notes of the collated text
-       as return
-
-    Args:
-        text_path (string): path to the collated_text
-
-    Returns:
-        list: list containing all the notes of the current collated text
-    """
-    notes_for_context = parse_notes(collated_text)
-    notes_with_span = get_notes_with_span(collated_text)
-    return notes_with_span, notes_for_context
         
 def toyaml(dict):
     return yaml.safe_dump(dict, sort_keys=False, allow_unicode=True)
