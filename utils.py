@@ -40,7 +40,7 @@ def clean_note(note_text):
 def get_default_option(prev_chunk):
     default_option = ''
     if ':' in prev_chunk:
-        default_option = re.search(':(.*)', prev_chunk).group(1)
+        default_option = re.search(':(.*)', prev_chunk,re.DOTALL).group(1)
     else:
         syls = get_syls(prev_chunk)
         if syls:
@@ -111,7 +111,8 @@ def get_note_sample(prev_chunk, note_chunk, next_chunk,collated_text):
     note = {
         "left_context":prev_context,
         "right_context":next_context,
-        "default_option":default_option,
+        "default_option":default_option.replace("\n",""),
+        "default_clone_option":default_option,
         "note_options":note_options,
         "alt_options":alt_options,
         "span":note_span
@@ -120,7 +121,7 @@ def get_note_sample(prev_chunk, note_chunk, next_chunk,collated_text):
 
 def get_notes(collated_text):
     cur_text_notes = []
-    chunks = re.split('(\(\d+\) <.+?>)', collated_text.replace("\n",""))
+    chunks = re.split('(\(\d+\) <.+?>)', collated_text)
     prev_chunk = chunks[0]
     for chunk_walker, chunk in enumerate(chunks):
         try:
@@ -137,7 +138,7 @@ def get_notes(collated_text):
 def get_notes_samples(collated_text, note_samples, text_id):
     collated_text = collated_text.replace('\n', '')
     collated_text = re.sub('\d+-\d+', '', collated_text)
-    cur_text_notes = parse_notes(collated_text)
+    cur_text_notes = get_notes(collated_text)
     for cur_text_note, note_options in cur_text_notes:
         if note_samples.get(cur_text_note, {}):
             note_samples[cur_text_note]['count'] += 1
@@ -195,8 +196,8 @@ def is_title_note(note):
     right_context = note['right_context']
     left_context = note['left_context']
     left_context = re.sub(r"\xa0", " ", left_context)
-    possible_right_texts = ["༄༅། །"]
-    possible_left_texts = ["༄༅༅། །རྒྱ་གར་","༄༅། །རྒྱ་གར་","༅༅། །རྒྱ་གར་སྐད་དུ།","༄༅༅། ","༄༅༅།། །རྒྱ་གར་","ལྟར་བཀོད་ཅིང།"]
+    possible_left_texts = ["༄༅། །"]
+    possible_right_texts = ["༄༅༅། །རྒྱ་གར་","༄༅། །རྒྱ་གར་","༅༅། །རྒྱ་གར་སྐད་དུ།","༄༅༅། ","༄༅༅།། །རྒྱ་གར་","ལྟར་བཀོད་ཅིང།"]
     
     
     for left_text in possible_left_texts:
@@ -244,3 +245,14 @@ def toyaml(dict):
 
 def from_yaml(yml_path):
     return yaml.safe_load(yml_path.read_text(encoding="utf-8"))
+
+def get_default_word_start(collated_text,note):
+    start_index = ""
+    start,_ = note['span']
+    default_option = note['default_clone_option']
+    default_start = start-len(default_option)
+    if collated_text[default_start-1] == ":":
+        start_index = default_start-1
+    else:
+        start_index = default_start 
+    return start_index          

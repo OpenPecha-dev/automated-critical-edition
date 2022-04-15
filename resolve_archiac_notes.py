@@ -14,67 +14,46 @@ import write_csv
 
 lekshi_gurkhang_url = 'https://raw.githubusercontent.com/Esukhia/Tibetan-archaic2modern-word/main/arch_modern.yml'
 source_file_name = ""
+collated_text = ""
+archaic_words = []
+modern_words = []
 
-def resolve_archaic_list(collated_text):
+def built_text():
     new_collated_text=""
     char_walker = 0
-    prev_end = None
-    notes_with_span,notes_with_context = get_notes(collated_text)
-    archaic_words = get_archaic_words()
-    for note_with_span,note_with_context in zip(notes_with_span,notes_with_context):
-        start,end = note_with_span["span"]
-        gen_text,char_walker=build_collated_text(note_with_context,note_with_span,archaic_words,collated_text,char_walker,prev_end)
+    end = ""
+    notes = get_notes(collated_text)
+    for note in notes:
+        _,end = note["span"]
+        gen_text,char_walker=reform_text(note,char_walker)
         new_collated_text+=gen_text
-        prev_end = start 
     new_collated_text+=collated_text[end:]    
     return new_collated_text
 
-def is_archaic(archaic_list,word):
-    for archaic in archaic_list:
-        if normalize_word(archaic) == normalize_word(word):
-            return True
-    return False
 
-def is_archaic_case(archaic_list,options):
-    for option in options:
-        if is_archaic(archaic_list,option):
-            return True
-
-    return False
-
-def get_modern_word(options,archaic_list):
-    for option in options:
-        if not is_archaic(archaic_list,option):
-            return option
-    return None
-
-#istitle
-#+-
-#Check Archaics
-#if true
-#check modern
-
-def build_collated_text(note_with_context,note_with_span,archaic_words,collated_text,char_walker,prev_end):
+def reform_text(note,char_walker):
     gen_text = ""
-    start,end = note_with_span["span"]
-    default_word,default_word_start_index = get_default_word(collated_text,start,prev_end)
-    alt_words = note_with_context['alt_options']
-    if is_title_note(note_with_context) or len(alt_words) == 0:
+    modern_word = None
+    _,end = note["span"]
+    default_word_start_index = get_default_word_start(collated_text,note)
+    alt_options = note['alt_options']
+    if is_title_note(note) or len(alt_options) == 0:
         gen_text=collated_text[char_walker:end]
-    elif is_archaic_case(archaic_words,alt_words):
-        modern_word = get_modern_word(alt_words,archaic_words)
-        gen_text=collated_text[char_walker:default_word_start_index-1]+modern_word
-        modern_word= alt_words[0]
-    else:
-        modern_word = check_lekshi_gurkhang(alt_words)
+    elif is_archaic_case(alt_options):
+        modern_word = get_modern_word(alt_options)
         if modern_word != None:
-            gen_text=collated_text[char_walker:default_word_start_index-1]+modern_word    
-        elif modern_word == None:
-            gen_text=collated_text[char_walker:end]    
+            gen_text=collated_text[char_walker:default_word_start_index]+modern_word
+        else:
+            gen_text=collated_text[char_walker:end] 
+    else:
+        gen_text=collated_text[char_walker:end]    
     char_walker = end
     if modern_word:
-        write_csv.write_csv(note_with_context,modern_word,source_file_name)
+        write_csv.write_csv(note,modern_word,source_file_name)
     return gen_text,char_walker
+
+ 
+
 
 def normalize_word(word):
     puncts = ['།','་']
@@ -83,12 +62,12 @@ def normalize_word(word):
     return word    
 
 
-def check_lekshi_gurkhang(alt_words): 
+def check_lekshi_gurkhang(alt_options): 
     res = requests.get(lekshi_gurkhang_url)
     parsed_yaml_file = yaml.load(res.text, Loader=yaml.FullLoader)
     result = None
-    #alt_words = [remove_particles(word) for word in alt_words]
-    combinations = list(itertools.product(parsed_yaml_file,alt_words))
+    #alt_options = [remove_particles(word) for word in alt_options]
+    combinations = list(itertools.product(parsed_yaml_file,alt_options))
     for id,word in combinations.items():
         modern_words = parsed_yaml_file[id]['modern']
         for modern_word in modern_words:
@@ -108,7 +87,46 @@ def remove_particles(text):
     return particle_free_text
 
 
-def extract_archaic_words():
+def get_archaic_modern_words():
+    global archaic_words,modern_words
+    monlam_archaics = from_yaml(Path("./res/monlam_archaics.yml"))
+    lg_archaics,lg_moderns = extract_lekshi_gurkhang()
+    archaic_words.extend(monlam_archaics)
+    archaic_words.extend(lg_archaics)
+    modern_words.extend(lg_moderns)
+
+
+def is_archaic(word):
+    for archaic in archaic_words:
+        if normalize_word(archaic) == normalize_word(word):
+            return True
+    return False
+
+def is_archaic_case(options):
+    for option in options:
+        if is_archaic(option):
+            return True
+
+    return False
+
+def get_modern_word(options):
+    for option in options:
+        if not is_archaic(option):
+            if option in modern_words:
+                return option
+    return None
+
+def extract_lekshi_gurkhang():
+    res = requests.get(lekshi_gurkhang_url)
+    parsed_yaml = yaml.load(res.text, Loader=yaml.FullLoader)
+    archaics = []
+    modern = []
+    for id in parsed_yaml:
+        archaics.append(parsed_yaml[id]['archaic'])
+        modern.extend(parsed_yaml[id]['modern'])
+    return archaics,modern
+
+def extract_monlam_archaics():
     archaic_words = []
     archaic_word ="བརྡ་རྙིང་།"
     with open("resources/dict.csv","r") as file:
@@ -120,29 +138,28 @@ def extract_archaic_words():
     return archaic_words
 
 
-def get_archaic_words():
-    monlam_archaics = from_yaml(Path("res/monlam_archaic_list.yml"))
-
+def resolve_archaics(text):
+    global collated_text
+    collated_text = text
+    get_archaic_modern_words()
+    new_text = built_text()
+    return new_text
 
 
 def main():
     global source_file_name
-    write_csv.write_csv_header()
     sources = list(Path('data/collated_text').iterdir())
     for source in sorted(sources):
         source_file_name = source.stem
-        text = Path(str(source)).read_text(encoding="utf-8")
-        new_text = resolve_archaic_list(text)
-        print(source_file_name)
+        collated_text = Path(str(source)).read_text(encoding="utf-8")
+        resolve_archaics(collated_text)
     write_csv.convert_to_excel()
 
 
-
 if __name__ == "__main__":
-    """ archaic_list = get_archaic_words()
-    archaic_yml = toyaml(archaic_list)
-    Path("./monlam_archaic_list.yml").write_text(archaic_yml) """
-    main()
+    text = Path("./data/collated_text/D1115_v001.txt").read_text(encoding="utf-8")
+    new_text = resolve_archaics(text)
+    Path("./gen.txt").write_text(new_text)
 
     
     
