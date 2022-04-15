@@ -1,3 +1,4 @@
+from locale import normalize
 from logging import NOTSET
 import re
 import itertools
@@ -52,29 +53,13 @@ def reform_text(note,char_walker):
         write_csv.write_csv(note,modern_word,source_file_name)
     return gen_text,char_walker
 
- 
-
 
 def normalize_word(word):
     puncts = ['།','་']
     for punct in puncts:
         word = word.replace(punct,"")
-    return word    
-
-
-def check_lekshi_gurkhang(alt_options): 
-    res = requests.get(lekshi_gurkhang_url)
-    parsed_yaml_file = yaml.load(res.text, Loader=yaml.FullLoader)
-    result = None
-    #alt_options = [remove_particles(word) for word in alt_options]
-    combinations = list(itertools.product(parsed_yaml_file,alt_options))
-    for id,word in combinations.items():
-        modern_words = parsed_yaml_file[id]['modern']
-        for modern_word in modern_words:
-            if normalize_word(word) == normalize_word(modern_word):
-                result = word
-                break
-    return result       
+    particle_free_text = remove_particles(word)    
+    return particle_free_text    
 
 
 def remove_particles(text):   
@@ -102,6 +87,7 @@ def is_archaic(word):
             return True
     return False
 
+
 def is_archaic_case(options):
     for option in options:
         if is_archaic(option):
@@ -109,12 +95,15 @@ def is_archaic_case(options):
 
     return False
 
+
 def get_modern_word(options):
     for option in options:
         if not is_archaic(option):
-            if option in modern_words:
-                return option
+            for modern_word in modern_words:
+                if normalize_word(option) == normalize_word(modern_word):
+                    return option
     return None
+
 
 def extract_lekshi_gurkhang():
     res = requests.get(lekshi_gurkhang_url)
@@ -125,6 +114,7 @@ def extract_lekshi_gurkhang():
         archaics.append(parsed_yaml[id]['archaic'])
         modern.extend(parsed_yaml[id]['modern'])
     return archaics,modern
+
 
 def extract_monlam_archaics():
     archaic_words = []
