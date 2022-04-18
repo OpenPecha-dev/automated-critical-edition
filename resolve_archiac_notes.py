@@ -11,7 +11,7 @@ import requests
 from pathlib import Path
 from botok.tokenizers.wordtokenizer import WordTokenizer
 from utils import *
-import write_csv
+#import write_csv
 
 lekshi_gurkhang_url = 'https://raw.githubusercontent.com/Esukhia/Tibetan-archaic2modern-word/main/arch_modern.yml'
 source_file_name = ""
@@ -49,21 +49,21 @@ def reform_text(note,char_walker):
     else:
         gen_text=collated_text[char_walker:end]    
     char_walker = end
-    if modern_word:
-        write_csv.write_csv(note,modern_word,source_file_name)
+    """ if modern_word:
+        write_csv.write_csv(note,modern_word,source_file_name) """
     return gen_text,char_walker
 
 
 def normalize_word(word):
+    wt = WordTokenizer()
     puncts = ['།','་']
     for punct in puncts:
         word = word.replace(punct,"")
-    particle_free_text = remove_particles(word)    
+    particle_free_text = remove_particles(word,wt)    
     return particle_free_text    
 
 
-def remove_particles(text):   
-    wt = WordTokenizer()
+def remove_particles(text,wt):   
     tokenized_texts = wt.tokenize(text,split_affixes=True)
     particle_free_text = ""
     for tokenized_text in tokenized_texts:
@@ -143,7 +143,7 @@ def main():
         source_file_name = source.stem
         collated_text = Path(str(source)).read_text(encoding="utf-8")
         resolve_archaics(collated_text)
-    write_csv.convert_to_excel()
+    #write_csv.convert_to_excel()
 
 
 if __name__ == "__main__":
