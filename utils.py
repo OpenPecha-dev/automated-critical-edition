@@ -99,7 +99,7 @@ def get_alt_options(default_option,note_options):
             alt_options.append(note)
     return alt_options        
 
-def get_note_sample(prev_chunk, note_chunk, next_chunk,collated_text):
+def get_note_sample(prev_chunk, note_chunk, next_chunk,collated_text,prev_end):
     default_option = get_default_option(prev_chunk)
     prev_chunk = update_left_context(default_option, prev_chunk, note_chunk)
     prev_context = get_context(prev_chunk, type_= 'left')
@@ -107,7 +107,7 @@ def get_note_sample(prev_chunk, note_chunk, next_chunk,collated_text):
     note_options = get_note_options(default_option, note_chunk)
     note_options = dict(sorted(note_options.items()))
     alt_options = get_alt_options(default_option,note_options)
-    note_span = get_note_span(collated_text,note_chunk)
+    note_span,prev_end = get_note_span(collated_text,note_chunk,prev_end)
     note = {
         "left_context":prev_context,
         "right_context":next_context,
@@ -117,10 +117,11 @@ def get_note_sample(prev_chunk, note_chunk, next_chunk,collated_text):
         "alt_options":alt_options,
         "span":note_span
     }
-    return note
+    return note,prev_end
 
 def get_notes(collated_text):
     cur_text_notes = []
+    prev_end = 0
     chunks = re.split('(\(\d+\) <.+?>)', collated_text)
     prev_chunk = chunks[0]
     for chunk_walker, chunk in enumerate(chunks):
@@ -129,7 +130,7 @@ def get_notes(collated_text):
         except:
             next_chunk = ''
         if re.search('\(\d+\) <.+?>', chunk):
-            note  = get_note_sample(prev_chunk, chunk, next_chunk,collated_text)
+            note,prev_end  = get_note_sample(prev_chunk, chunk, next_chunk,collated_text,prev_end)
             cur_text_notes.append(note)
             continue
         prev_chunk = chunk
@@ -212,11 +213,12 @@ def is_title_note(note):
                     return True
     return False
 
-def get_note_span(collated_text,chunk):
+def get_note_span(collated_text,chunk,prev_end):
     p = re.compile("\(.+?\) <.*?>")
     for m in p.finditer(collated_text):
-        if m.group() in chunk:
-            return m.span()
+        start,end = m.span()
+        if m.group() in chunk and prev_end < start:
+            return m.span(),end
 
 
 def get_default_word(collated_text, end_index, prev_end):

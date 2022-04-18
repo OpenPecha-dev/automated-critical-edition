@@ -147,9 +147,11 @@ def main():
 
 
 if __name__ == "__main__":
-    text = Path("./data/collated_text/D1115_v001.txt").read_text(encoding="utf-8")
-    new_text = resolve_archaics(text)
-    Path("./gen.txt").write_text(new_text)
+    text = Path("./test.txt").read_text(encoding="utf-8")
+    new_text = get_notes(text)
+    for note in new_text:
+        print(note)
+        print("**************")
 
     
     
