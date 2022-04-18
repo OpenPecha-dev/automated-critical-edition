@@ -145,7 +145,6 @@ def main():
         resolve_archaics(collated_text)
     #write_csv.convert_to_excel()
 
-
 if __name__ == "__main__":
     text = Path("./test.txt").read_text(encoding="utf-8")
     new_text = get_notes(text)
