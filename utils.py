@@ -257,4 +257,11 @@ def get_default_word_start(collated_text,note):
         start_index = default_start-1
     else:
         start_index = default_start 
-    return start_index          
+    return start_index
+
+def get_text_id_and_vol_num(text_path):
+    text_name = text_path.name[:-4]
+    map = re.match(r"([A-Z][0-9]+[a-z]?)\_(v[0-9]+)",text_name)
+    text_id = map.group(1)
+    vol_num = map.group(2)[1:]
+    return text_id, vol_num
