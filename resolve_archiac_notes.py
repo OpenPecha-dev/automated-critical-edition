@@ -148,9 +148,6 @@ def main():
 if __name__ == "__main__":
     text = Path("./test.txt").read_text(encoding="utf-8")
     new_text = get_notes(text)
-    for note in new_text:
-        print(note)
-        print("**************")
 
     
     

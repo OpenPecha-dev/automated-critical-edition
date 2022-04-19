@@ -18,6 +18,7 @@ def get_syls(text):
         syls.append(cur_syl)
     return syls
 
+
 def get_context(chunk, type_):
     chunk = chunk.replace(':', '')
     context = ''
@@ -215,9 +216,10 @@ def is_title_note(note):
 
 def get_note_span(collated_text,chunk,prev_end):
     p = re.compile("\(.+?\) <.*?>")
+    print(chunk)
     for m in p.finditer(collated_text):
         start,end = m.span()
-        if m.group() in chunk and prev_end < start:
+        if m.group() in chunk and prev_end <= start:
             return m.span(),end
 
 
