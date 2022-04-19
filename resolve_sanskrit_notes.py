@@ -15,7 +15,7 @@ def  get_prev_note_span(notes, num):
     else:
         return notes[num-1]['span']
   
-def resolve_default_sanskrit_notes(notes, collated_text):
+def resolve_default_sanskrit_notes(collated_text):
     """it parse all the notes of the collated text
         to check if they are sanskrit words
 
@@ -24,6 +24,7 @@ def resolve_default_sanskrit_notes(notes, collated_text):
     """
     char_walker = 0
     new_collated_text = ""
+    notes = get_notes(collated_text)
     for num, note in enumerate(notes,0):
         start, end = note["span"]
         _, prev_end = get_prev_note_span(notes, num)
@@ -51,5 +52,5 @@ def resolve_default_sanskrit_notes(notes, collated_text):
             if new_collated_text == "":
                 new_collated_text = collated_text
             else:
-                return collated_text
+                new_collated_text += collated_text[end:]
     return new_collated_text

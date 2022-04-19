@@ -37,14 +37,6 @@ def get_colon_pos(collated_text, end_index, prev_end):
     else:
         return None
 
-def get_text_id_and_vol_num(text_path):
-    text_name = text_path.name[:-4]
-    map = re.match(r"([A-Z][0-9]+[a-z]?)\_(v[0-9]+)",text_name)
-    text_id = map.group(1)
-    vol_num = map.group(2)[1:]
-    return text_id, vol_num
-
-
 
 def get_page_num(collated_text, note, vol_num):
     pages = re.split(f"({int(vol_num)}-[0-9]+)", collated_text)
