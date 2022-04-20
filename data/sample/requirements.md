@@ -1,3 +1,15 @@
+# 
+
+## Footnotes
+
+
+
+
+
+
+
+
+
 
 ## Derge page numbers 1st instance
 **Syntax:** (<section_name><volume_letter><page><side_ན/བ>)
