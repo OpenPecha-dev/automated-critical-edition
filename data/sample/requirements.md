@@ -71,6 +71,15 @@ Formatted: `འདི་སྐད་དུ།^1 ཐམས་ཅད་ལ་ན�
 
 ## Note selection convention
 
+*   Archaic spellings are removed
 *   Only meaningful notes are kept
 *   Notes about the title are removed
-*   Sanskrit transcription
+*   Sanskrit spellings are not handled
+
+## Normalization convention
+
+*   ⚠️⚠️⚠️ All normalizations are double-checked manually
+*   Normalizations don't appear in notes
+*   Archaic spellings are updated
+*   Obvious particle errors are corrected
+*   Non-word errors are corrected
