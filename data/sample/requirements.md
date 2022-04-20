@@ -72,9 +72,9 @@ Formatted: `འདི་སྐད་དུ།^1 ཐམས་ཅད་ལ་ན�
 ## Note selection convention
 
 *   Archaic spellings are removed
-*   Only meaningful notes are kept
 *   Notes about the title are removed
 *   Sanskrit spellings are not handled
+*   Only meaningful notes are kept
 
 ## Normalization convention
 
