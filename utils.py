@@ -216,7 +216,7 @@ def is_title_note(note):
 
 def get_note_span(collated_text,chunk,prev_end):
     p = re.compile("\(.+?\) <.*?>")
-    print(chunk)
+    # print(chunk)
     for m in p.finditer(collated_text):
         start,end = m.span()
         if m.group() in chunk and prev_end <= start:
@@ -267,3 +267,11 @@ def get_text_id_and_vol_num(text_path):
     text_id = map.group(1)
     vol_num = map.group(2)[1:]
     return text_id, vol_num
+
+def check_all_notes(note):
+    for _, note_option in note['note_options'].items():
+        if note_option == "":
+            return False
+        elif "!" in note_option:
+            return False
+    return True  

@@ -1,13 +1,7 @@
 from pathlib import Path
 from utils import *
 from botok.third_party.has_skrt_syl import has_skrt_syl
-
-
-def check_all_notes(note):
-    for _, note_option in note['note_options'].items():
-        if note_option == "":
-            return False
-    return True      
+    
 
 def  get_prev_note_span(notes, num):
     if num == 0:

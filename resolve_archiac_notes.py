@@ -19,6 +19,9 @@ collated_text = ""
 archaic_words = []
 modern_words = []
 
+wt = WordTokenizer()
+
+
 def built_text():
     new_collated_text=""
     char_walker = 0
@@ -55,15 +58,14 @@ def reform_text(note,char_walker):
 
 
 def normalize_word(word):
-    wt = WordTokenizer()
     puncts = ['།','་']
     for punct in puncts:
         word = word.replace(punct,"")
-    particle_free_text = remove_particles(word,wt)    
+    particle_free_text = remove_particles(word)    
     return particle_free_text    
 
 
-def remove_particles(text,wt):   
+def remove_particles(text):   
     tokenized_texts = wt.tokenize(text,split_affixes=True)
     particle_free_text = ""
     for tokenized_text in tokenized_texts:

@@ -51,7 +51,7 @@ def update_notes_number(automated_critical_text, text_path):
             new_page += page[end:]
       final_page += new_page
     else:
-      final_page += "\n" + page + "\n"
+      final_page += page
   return final_page
       
   
@@ -65,3 +65,6 @@ def get_automated_critical_edition_text(text_path, update_note_number=False):
 
 
 
+if __name__ == "__main__":
+  text_path = Path(f"./data/collated_text/N3667_v047.txt")
+  get_automated_critical_edition_text(text_path, True)
