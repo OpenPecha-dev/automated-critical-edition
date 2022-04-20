@@ -78,7 +78,7 @@ Formatted: `འདི་སྐད་དུ།^1 ཐམས་ཅད་ལ་ན�
 
 ## Normalization convention
 
-*   ⚠️ All normalizations are double-checked manually
+*   ⚠️ All normalizations are double-checked manually⚠️
 *   Normalizations don't appear in notes
 *   Archaic spellings are updated
 *   Obvious particle errors are corrected
