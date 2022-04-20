@@ -1,27 +1,25 @@
-# 
+## Mono-syllable words
 
-## Footnotes
+Input: `གཞན་དག་ལ་ཡང་སླུ་<བསླུ། པེ་ཅིན། སྣར་ཐང་།>མི་མཛད།`
 
+Formatted: `གཞན་དག་ལ་ཡང་སླུ་^1མི་མཛད།` `^1 སླུ། པེ་ཅིན། སྣར་ཐང་།`
 
+## Multi-syllable words without ':'
 
+Input: `བདུད་ཀྱི་བུ་མོ་སྒེག་མོ་<པ། པེ་ཅིན། སྣར་ཐང་།>ཡིས`
 
+Formatted: `བདུད་ཀྱི་བུ་མོ་སྒེག་མོ་^1ཡིས` `^1 སྒེག་པ། པེ་ཅིན། སྣར་ཐང་།`
 
+## Multi-syllable words with ':'
 
+Input: `རྫུ་འཕྲུལ་:ཙམ་བླང་གི<པེ་ཅིན། སྣར་ཐང་། རྣམ་འཕྲུལ་བ།>། །རྨད་བྱུང་གང་`
 
+Formatted: `རྫུ་འཕྲུལ་ཙམ་བླང་གི^1། །རྨད་བྱུང་གང་` `^1 རྫུ་འཕྲུལ་རྣམ་འཕྲུལ་བ། པེ་ཅིན། སྣར་ཐང་།`
 
+## Multi-syllable words split by marker  
 
+Input: `ཐར་པ་རྒྱུད་གཞན་སྐྱེད་<བསྐྱེད། པེ་ཅིན། སྣར་ཐང་།>པ་དང་`
 
-## Derge page numbers 1st instance
-**Syntax:** (<section_name><volume_letter><page><side_ན/བ>)
+Formatted: `ཐར་པ་རྒྱུད་གཞན་སྐྱེད་པ་^1དང་།` `^1 བསྐྱེད་པ། པེ་ཅིན། སྣར་ཐང་།`
 
-**Type:** pagination marker
-
-**Use:** Second instance of Derge page information in any given text.
-
-**Text and Formatting Examples:**
-
-(མདོ་སྡེ་ཨ༡བ)༄༅༅། །རྒྱ་གར་སྐད་དུ། པྲཛྙཱ་ནཱ་མ་མཱུ་ལ་མ་དྷྱཱ་1མ་ཀ་ཀཱ་རི་ཀ2།...
-...གཉིས་ལས་མ་ཡིན་རྒྱུ་མེད་མིན། །(༢ན)དངོས་པོ་གང་དག་གང་ན་ཡང་། །
-
-![image|width=100px](https://user-images.githubusercontent.com/17675331/164214096-57342229-37ea-4f4f-97d1-898066903ce0.png)
 
