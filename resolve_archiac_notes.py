@@ -28,6 +28,7 @@ def built_text():
         _,end = note["span"]
         gen_text,char_walker=reform_text(note,char_walker)
         new_collated_text+=gen_text
+        print(note)
     new_collated_text+=collated_text[end:]    
     return new_collated_text
 
@@ -38,7 +39,7 @@ def reform_text(note,char_walker):
     _,end = note["span"]
     default_word_start_index = get_default_word_start(collated_text,note)
     alt_options = note['alt_options']
-    if is_title_note(note) or len(alt_options) == 0:
+    if is_title_note(note) or not check_all_notes(note):
         gen_text=collated_text[char_walker:end]
     elif is_archaic_case(alt_options):
         modern_word = get_modern_word(alt_options)
@@ -76,7 +77,7 @@ def get_archaic_modern_words():
     lg = from_yaml(Path("./res/lekshi_gurkhang.yml"))
     archaic_words.extend(monlam_archaics)
     archaic_words.extend(lg['archaics'])
-    modern_words.extend(lg['modernd'])
+    modern_words.extend(lg['moderns'])
 
 
 def is_archaic(word):
@@ -122,9 +123,13 @@ def main():
     #write_csv.convert_to_excel()
 
 if __name__ == "__main__":
-    text = Path("./data/collated_text/D3871_v061.txt").read_text(encoding="utf-8")
-    new_text = resolve_archaics(text)
-    Path("./gen.text").write_text(new_text)
+    text = Path("./test.txt").read_text(encoding="utf-8")
+    """ new_text = resolve_archaics(text)
+    Path("./gen.text").write_text(new_text) """
+    notes = get_notes(text)
+    for note in notes:
+        print(note)
+        print("********************")
 
     
     
