@@ -6,14 +6,11 @@ from tracemalloc import start
 from numpy import source
 from pyparsing import Word
 import yaml
-import csv
-import requests
 from pathlib import Path
 from botok.tokenizers.wordtokenizer import WordTokenizer
 from utils import *
 #import write_csv
 
-lekshi_gurkhang_url = 'https://raw.githubusercontent.com/Esukhia/Tibetan-archaic2modern-word/main/arch_modern.yml'
 source_file_name = ""
 collated_text = ""
 archaic_words = []
@@ -61,8 +58,7 @@ def normalize_word(word):
     puncts = ['།','་']
     for punct in puncts:
         word = word.replace(punct,"")
-    particle_free_text = remove_particles(word)    
-    return particle_free_text    
+    return word   
 
 
 def remove_particles(text):   
@@ -77,15 +73,15 @@ def remove_particles(text):
 def get_archaic_modern_words():
     global archaic_words,modern_words
     monlam_archaics = from_yaml(Path("./res/monlam_archaics.yml"))
-    lg_archaics,lg_moderns = extract_lekshi_gurkhang()
+    lg = from_yaml(Path("./res/lekshi_gurkhang.yml"))
     archaic_words.extend(monlam_archaics)
-    archaic_words.extend(lg_archaics)
-    modern_words.extend(lg_moderns)
+    archaic_words.extend(lg['archaics'])
+    modern_words.extend(lg['modernd'])
 
 
 def is_archaic(word):
     for archaic in archaic_words:
-        if normalize_word(archaic) == normalize_word(word):
+        if normalize_word(archaic) == remove_particles(normalize_word(word)):
             return True
     return False
 
@@ -102,32 +98,10 @@ def get_modern_word(options):
     for option in options:
         if not is_archaic(option):
             for modern_word in modern_words:
-                if normalize_word(option) == normalize_word(modern_word):
+                if remove_particles(normalize_word(option)) == normalize_word(modern_word):
                     return option
     return None
 
-
-def extract_lekshi_gurkhang():
-    res = requests.get(lekshi_gurkhang_url)
-    parsed_yaml = yaml.load(res.text, Loader=yaml.FullLoader)
-    archaics = []
-    modern = []
-    for id in parsed_yaml:
-        archaics.append(parsed_yaml[id]['archaic'])
-        modern.extend(parsed_yaml[id]['modern'])
-    return archaics,modern
-
-
-def extract_monlam_archaics():
-    archaic_words = []
-    archaic_word ="བརྡ་རྙིང་།"
-    with open("resources/dict.csv","r") as file:
-        reader = csv.reader(file)
-        for row in reader:
-            word,desc = row     
-            if desc and archaic_word in desc:
-                archaic_words.append(word)
-    return archaic_words
 
 
 def resolve_archaics(text):
@@ -148,8 +122,9 @@ def main():
     #write_csv.convert_to_excel()
 
 if __name__ == "__main__":
-    text = Path("./test.txt").read_text(encoding="utf-8")
-    new_text = get_notes(text)
+    text = Path("./data/collated_text/D3871_v061.txt").read_text(encoding="utf-8")
+    new_text = resolve_archaics(text)
+    Path("./gen.text").write_text(new_text)
 
     
     
