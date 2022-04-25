@@ -2,12 +2,6 @@ from pathlib import Path
 from utils import *
 from botok.third_party.has_skrt_syl import has_skrt_syl
     
-
-def  get_prev_note_span(notes, num):
-    if num == 0:
-        return None, None
-    else:
-        return notes[num-1]['span']
   
 def resolve_default_sanskrit_notes(collated_text):
     """it parse all the notes of the collated text

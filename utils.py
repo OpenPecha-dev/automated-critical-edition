@@ -275,3 +275,10 @@ def check_all_notes(note):
         elif "!" in note_option:
             return False
     return True  
+
+
+def  get_prev_note_span(notes, num):
+    if num == 0:
+        return None, None
+    else:
+        return notes[num-1]['span']
