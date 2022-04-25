@@ -23,7 +23,7 @@ class LSTMLanguageModel(LanguageModel):
     
   @property
   def input_length(self):
-    self.model.layers[0].input_length
+    return self.model.layers[0].input_length
   
   @staticmethod
   def save_model(path, model, tokenizer=None):
@@ -50,14 +50,13 @@ class LSTMLanguageModel(LanguageModel):
   def score_sentence(self, sentence):
     seq = self.tokenizer.texts_to_sequences([sentence])[0]
     x_test, y_test = self.generate_xy_pairs(seq, self.input_length)
-    print(x_test)
     x_test = np.array(x_test)
     y_test = np.array(y_test)
     p_pred = self.model.predict(x_test)
     log_p_sentence = 0
     for i, prob in enumerate(p_pred):
       word = self.vocab_inv[y_test[i]] 
-      history = ' '.join([vocab_inv[w] for w in x_test[i, :] if w != 0])
+      history = ' '.join([self.vocab_inv[w] for w in x_test[i, :] if w != 0])
       prob_word = prob[y_test[i]]
       log_p_sentence += np.log(prob_word)
       # print('P(w={}|h={})={}'.format(word, history, prob_word))

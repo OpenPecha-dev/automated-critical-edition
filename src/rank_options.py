@@ -26,9 +26,10 @@ class OptionsRanker:
     ranks = []
     for option in options:
       sentence = " ".join(left_context + [option] + right_context)
+      print(sentence)
       score = self.lm.score_sentence(sentence)
       ranks.append((option, score))
-    return sorted(ranks, key=lambda x: x[1])
+    return sorted(ranks, key=lambda x: x[1], reverse=True)
   
   
 if __name__ == "__main__":
