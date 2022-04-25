@@ -4,11 +4,11 @@ import yaml
 
 
 def get_syls(text):
-    chunks = re.split('(་|།།|།)',text)
+    chunks = re.split('(་|།།|།|\n)',text)
     syls = []
     cur_syl = ''
     for chunk in chunks:
-        if re.search('་|།།|།',chunk):
+        if re.search('་|།།|།|\n',chunk):
             cur_syl += chunk
             syls.append(cur_syl)
             cur_syl = ''
@@ -216,7 +216,6 @@ def is_title_note(note):
 
 def get_note_span(collated_text,chunk,prev_end):
     p = re.compile("\(.+?\) <.*?>")
-    # print(chunk)
     for m in p.finditer(collated_text):
         start,end = m.span()
         if m.group() in chunk and prev_end <= start:
@@ -226,17 +225,19 @@ def get_note_span(collated_text,chunk,prev_end):
 def get_default_word(collated_text, end_index, prev_end):
     if prev_end == None:
         prev_end = 0
-    if ":" in collated_text[prev_end:end_index]:
+    if end_index == 0:
+        return None,None
+    elif ":" in collated_text[prev_end:end_index]:
         span = collated_text[prev_end:end_index].find(":")
         colon_pos = span + prev_end + 1
         return collated_text[colon_pos:end_index],colon_pos
     else:
         index = end_index-1
         start_index = ""
-        while index > 0:
-            if re.search("\s",collated_text[index]):
+        while index >= 0:
+            if re.search("(\s|\n|>)",collated_text[index]):
                 index_in = end_index-2
-                while collated_text[index_in] not in ["་","།","\n"]:
+                while collated_text[index_in] not in ["་","།","\n",">"]:
                     index_in-=1
                 start_index = index_in+1
                 break
