@@ -1,9 +1,10 @@
-from locale import normalize
+from asyncio import FastChildWatcher
 from logging import NOTSET
+from operator import index
 import re
 import itertools
 from tracemalloc import start
-from numpy import source
+from numpy import issubdtype, source
 from pyparsing import Word
 import yaml
 from pathlib import Path
@@ -11,11 +12,6 @@ from botok.tokenizers.wordtokenizer import WordTokenizer
 from utils import *
 import datetime
 #import write_csv
-
-source_file_name = ""
-collated_text = ""
-archaic_words = []
-modern_words = []
 
 wt = WordTokenizer()
 
@@ -91,7 +87,8 @@ def normalize_word(word):
     puncts = ['།','་']
     for punct in puncts:
         word = word.replace(punct,"")
-    return word   
+    particle_free_word = remove_particles(word)    
+    return particle_free_word   
 
 
 def remove_particles(text):   
@@ -104,45 +101,64 @@ def remove_particles(text):
 
 
 def get_archaic_modern_words():
-    global archaic_words,modern_words
-    monlam_archaics = from_yaml(Path("./res/monlam_archaics.yml"))
-    lg = from_yaml(Path("./res/lekshi_gurkhang.yml"))
-    archaic_words.extend(monlam_archaics)
-    archaic_words.extend(lg['archaics'])
-    modern_words.extend(lg['moderns'])
+    archaic_words = from_yaml(Path("./res/archaic_words.yml"))
+    modern_words = from_yaml(Path("./res/modern_words.yml"))
+    return archaic_words,modern_words
 
 
 def is_archaic(word):
-    for archaic in archaic_words:
-        if normalize_word(archaic) == remove_particles(normalize_word(word)):
-            return True
+    normalized_word = normalize_word(word)
+    if normalized_word == "":
+        pass
+    elif search(normalized_word,archaic_words):
+        return True
     return False
 
 
 def is_archaic_case(options):
     for option in options:
         if is_archaic(option):
-
             return True
-
     return False
 
 
+def search(target_word,words):
+    low = 0
+    high = len(words) - 1
+    while low <= high:
+        middle = (low+high)//2
+        if tibetan_alp_val[words[middle][0]] == tibetan_alp_val[target_word[0]]:
+            index_plus= middle
+            index_minus = middle
+            while  tibetan_alp_val[words[index_minus][0]] == tibetan_alp_val[target_word[0]] or tibetan_alp_val[words[index_plus][0]] == tibetan_alp_val[target_word[0]]:
+                index_plus += 1
+                index_minus -= 1
+                if words[index_plus] == target_word or words[index_minus] == target_word:
+                    print("PRESENT")
+                    return True
+            return False
+        elif  tibetan_alp_val[words[middle][0]] > tibetan_alp_val[target_word[0]]:
+            high = middle - 1
+        else:
+            low =middle + 1 
+    return False          
+
+        
 def get_modern_word(options):
     for option in options:
         if not is_archaic(option):
-            for modern_word in modern_words:
-                if remove_particles(normalize_word(option)) == normalize_word(modern_word):
-                    return option
+            normalize_option = normalize_word(option)
+            if search(normalize_option,modern_words):
+                return True
     return None
 
 
 def resolve_archaics(text):
-    global collated_text
+    global collated_text,archaic_words,modern_words
     collated_text = text
-    get_archaic_modern_words()
-    new_text = built_text()
-    return new_text
+    archaic_words,modern_words = get_archaic_modern_words()
+    build_text = built_text()
+    return build_text
 
 
 def main():
@@ -155,11 +171,11 @@ def main():
     #write_csv.convert_to_excel()
 
 if __name__ == "__main__":
-    text = Path("./test.txt").read_text(encoding="utf-8")
-    """ new_text = resolve_archaics(text)
-    Path("./gen.text").write_text(new_text) """
-    new_text = resolve_archaics(text)
+    text = Path("./data/collated_text/D3871_v061.txt").read_text(encoding="utf-8")
+    new_text = resolve_archaics(text)   
 
     
     
-
+""" check the note iss
+default word other function
+get _prev_notes """
