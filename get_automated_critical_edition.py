@@ -66,5 +66,5 @@ def get_automated_critical_edition_text(text_path, update_note_number=False):
 
 
 if __name__ == "__main__":
-  text_path = Path(f"./data/collated_text/N3667_v047.txt")
+  text_path = Path(f"./data/collated_text/D3871_v061.txt")
   get_automated_critical_edition_text(text_path, True)
