@@ -9,6 +9,7 @@ import yaml
 from pathlib import Path
 from botok.tokenizers.wordtokenizer import WordTokenizer
 from utils import *
+import datetime
 #import write_csv
 
 source_file_name = ""
@@ -28,7 +29,6 @@ def built_text():
         _,end = note["span"]
         gen_text,char_walker=reform_text(note,char_walker)
         new_collated_text+=gen_text
-        print(note)
     new_collated_text+=collated_text[end:]    
     return new_collated_text
 
@@ -90,6 +90,7 @@ def is_archaic(word):
 def is_archaic_case(options):
     for option in options:
         if is_archaic(option):
+
             return True
 
     return False
@@ -102,7 +103,6 @@ def get_modern_word(options):
                 if remove_particles(normalize_word(option)) == normalize_word(modern_word):
                     return option
     return None
-
 
 
 def resolve_archaics(text):
@@ -126,10 +126,7 @@ if __name__ == "__main__":
     text = Path("./test.txt").read_text(encoding="utf-8")
     """ new_text = resolve_archaics(text)
     Path("./gen.text").write_text(new_text) """
-    notes = get_notes(text)
-    for note in notes:
-        print(note)
-        print("********************")
+    new_text = resolve_archaics(text)
 
     
     
