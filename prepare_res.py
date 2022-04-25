@@ -1,50 +1,17 @@
 #normalize
 #sort
 #search
+from asyncore import write
 import csv
 import requests
 import yaml
 from botok.tokenizers.wordtokenizer import WordTokenizer
 from utils import *
+from resolve_archiac_notes import tibetan_alp_val
 from pathlib import Path
 
 lekshi_gurkhang_url = 'https://raw.githubusercontent.com/Esukhia/Tibetan-archaic2modern-word/main/arch_modern.yml'
 
-source_file_name = ""
-collated_text = ""
-
-tibetan_alp_val = {
-    'ཀ':1,
-    'ཁ':2,
-    'ག':3,
-    'ང':4,
-    'ཅ':5,
-    'ཆ':6,
-    'ཇ':7,
-    'ཉ':8,
-    'ཏ':9,
-    'ཐ':10,
-    'ད':11,
-    'ན':12,
-    'པ':13,
-    'ཕ':14,
-    'བ':15,
-    'མ':16,
-    'ཙ':17,
-    'ཚ':18,
-    'ཛ':19,
-    'ཝ':20,
-    'ཞ':21,
-    'ཟ':22,
-    'འ':23,
-    'ཡ':24,
-    'ར':25,
-    'ལ':26,
-    'ཤ':27,
-    'ས':28,
-    'ཧ':29,
-    'ཨ':30,
-}
 
 def extract_monlam_archaics(wt,archaic_words):
     archaic_word ="བརྡ་རྙིང་།"
@@ -108,6 +75,13 @@ def remove_duplicates(dic):
         dic[alph] = list(final_word_list)
     return dic    
 
+def write_yml(dic,fname):
+    comb_li = []
+    for key in dic:
+        comb_li.extend(dic[key])
+    yml_file = toyaml(comb_li)
+    Path(f"./{fname}.yml").write_text(yml_file)
+
 if __name__ == "__main__":
     wt = WordTokenizer()
     archaic_words = create_alph_dic()
@@ -116,8 +90,6 @@ if __name__ == "__main__":
     archaic_words,modern_words = extract_lekshi_gurkhang(wt,archaic_words,modern_words)
     archaic_words = remove_duplicates(archaic_words)
     modern_words = remove_duplicates(modern_words)
-    print(archaic_words)
-    #dic = extract_lekshi_gurkhang(wt)
-    #Path("gen_res/lekshi_gurkhang.yml").write_text(yml)
-
+    write_yml(archaic_words,"archaic_words")
+    write_yml(modern_words,"modern_words")
 
