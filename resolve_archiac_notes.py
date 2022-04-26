@@ -43,6 +43,7 @@ tibetan_alp_val = {
     'ར':25,
     'ལ':26,
     'ཤ':27,
+    'ཥ':27,
     'ས':28,
     'ཧ':29,
     'ཨ':30,
@@ -126,6 +127,8 @@ def is_archaic_case(options):
 def search(target_word,words):
     low = 0
     high = len(words) - 1
+    if target_word[0] not in tibetan_alp_val:
+        return False
     while low <= high:
         middle = (low+high)//2
         if tibetan_alp_val[words[middle][0]] == tibetan_alp_val[target_word[0]]:

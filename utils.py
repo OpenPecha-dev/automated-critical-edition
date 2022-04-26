@@ -4,11 +4,11 @@ import yaml
 
 
 def get_syls(text):
-    chunks = re.split('(་|།།|།|\n)',text)
+    chunks = re.split('(་|།།|།)',text)
     syls = []
     cur_syl = ''
     for chunk in chunks:
-        if re.search('་|།།|།|\n',chunk):
+        if re.search('་|།།|།',chunk):
             cur_syl += chunk
             syls.append(cur_syl)
             cur_syl = ''
@@ -115,13 +115,19 @@ def get_note_sample(prev_chunk, note_chunk, next_chunk,collated_text,prev_end):
     note = {
         "left_context":prev_context,
         "right_context":next_context,
-        "default_option":default_option.replace("\n",""),
+        "default_option":clean_default_option(default_option),
         "default_clone_option":default_option,
         "note_options":note_options,
         "alt_options":alt_options,
         "span":note_span
     }
     return note,prev_end
+
+def clean_default_option(option):
+    option = option.replace("\n","")
+    if re.search("\d+-\d+",option):
+        option = re.sub("\d+\-\d+","",option)
+    return option    
 
 def get_notes(collated_text):
     cur_text_notes = []
@@ -238,14 +244,18 @@ def get_default_word(collated_text, end_index, prev_end):
         index = end_index-1
         start_index = ""
         while index >= 0:
-            if re.search("(\s|\n|>)",collated_text[index]):
+            if re.search("(\s|>)",collated_text[index]):
                 index_in = end_index-2
-                while collated_text[index_in] not in ["་","།","\n",">"]:
+                while collated_text[index_in] not in ["་","།",">"]:
                     index_in-=1
                 start_index = index_in+1
                 break
             index-=1
-        return collated_text[start_index:end_index],start_index
+        default_word = collated_text[start_index:end_index].replace("\n","")
+        if re.search("\d+\-\d+",default_word):
+            default_word = re.sub("\d+\-\d+","",default_word)
+
+        return default_word,start_index
 
         
 def toyaml(dict):
