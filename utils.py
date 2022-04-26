@@ -49,7 +49,10 @@ def get_default_option(prev_chunk):
     return default_option
 
 def get_note_options(default_option, note_chunk):
-    note_chunk = re.sub('\(\d+\)', '', note_chunk)
+    note_chunk = re.sub('\(\d+\) ', '', note_chunk)
+    z = re.match("<.+?(\(.+\))>",note_chunk)
+    if z:
+        note_chunk = note_chunk.replace(z.group(1),'')
     if "+" in note_chunk:
         default_option = ""
     note_chunk = re.sub("\+", "", note_chunk)
