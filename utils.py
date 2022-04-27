@@ -257,14 +257,7 @@ def  get_prev_note_span(notes, num):
         return None, None
     else:
         return notes[num-1]['span']
-    
-def get_notes_without_context(page):
-    note_list = []
-    chunks = re.split(r"(\(\d+\) <.+?>)", page)
-    for chunk in chunks:
-        if re.search(r"(\(\d+\) <.+?>)", chunk):
-            note_list.append(chunk)
-    return note_list
+
     
 def get_pages(collated_text, vol_num):
     pages = re.split(f"({int(vol_num)}-[0-9]+)", collated_text)
@@ -276,17 +269,14 @@ def resolve_title_notes(text_path):
     new_collated_text = ""
     pages = get_pages(collated_text, vol_num)
     page = pages[0]
-    notes_with_context = get_notes(page)
-    notes_without_context = get_notes_without_context(page)
-    if len(notes_with_context) == len(notes_without_context):
-        for num, note_with_context in enumerate(notes_with_context,0):
-            title_check = is_title_note(note_with_context)
-            if title_check:
-                note = notes_without_context[num]
-                page = page.replace(f"{note}", "")
-        pages[0] = page
-        for page_ in pages:
-            new_collated_text += page_
+    notes = get_notes(page)
+    for _, note in enumerate(notes,0):
+        title_check = is_title_note(note)
+        if title_check:
+            page = page.replace(f"{note['real_note']}", "")
+    pages[0] = page
+    for page_ in pages:
+        new_collated_text += page_
     return new_collated_text
 
 def clean_default_option(option):
@@ -294,10 +284,22 @@ def clean_default_option(option):
         option = re.sub("\d+\-\d+","",option)
     return option  
 
-def remove_endline(collated_text):
+def remove_line_break(collated_text):
     text = re.sub(r"\n", "", collated_text)
     return text
-    
-# def tranfer_endline(source_text_path, target_text):
-#     source_text = source_text_path.read_text(encoding='utf-8')
-    
+
+
+def correct_shad_and_tsek_in_note(default_option, replacement_note):
+    if replacement_note:
+        if default_option != replacement_note:
+            if replacement_note[-1:] == "།":
+                if default_option[-1:] != "།":
+                    corrected_note = replacement_note[:-1]+"་"
+                    return corrected_note
+    return replacement_note
+            
+def tranfer_line_break(source_text_path, target_text):
+    source_text = source_text_path.read_text(encoding='utf-8')
+    annotations = [['end_line', r"(\n)"]]
+    result = transfer(source_text, annotations, target_text, output="txt")
+    return result
