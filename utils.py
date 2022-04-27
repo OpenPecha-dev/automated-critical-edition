@@ -1,14 +1,15 @@
 import re
 from typing import DefaultDict
 import yaml
+from antx import transfer
 
 
 def get_syls(text):
-    chunks = re.split('(་|།།|།)',text)
+    chunks = re.split('(་|།།|།|\n)',text)
     syls = []
     cur_syl = ''
     for chunk in chunks:
-        if re.search('་|།།|།',chunk):
+        if re.search('་|།།|།|\n',chunk):
             cur_syl += chunk
             syls.append(cur_syl)
             cur_syl = ''
@@ -49,10 +50,7 @@ def get_default_option(prev_chunk):
     return default_option
 
 def get_note_options(default_option, note_chunk):
-    note_chunk = re.sub('\(\d+\) ', '', note_chunk)
-    z = re.match("<.+?(\(.+\))>",note_chunk)
-    if z:
-        note_chunk = note_chunk.replace(z.group(1),'')
+    note_chunk = re.sub('\(\d+\)', '', note_chunk)
     if "+" in note_chunk:
         default_option = ""
     note_chunk = re.sub("\+", "", note_chunk)
@@ -115,19 +113,13 @@ def get_note_sample(prev_chunk, note_chunk, next_chunk,collated_text,prev_end):
     note = {
         "left_context":prev_context,
         "right_context":next_context,
-        "default_option":clean_default_option(default_option),
+        "default_option":default_option.replace("\n",""),
         "default_clone_option":default_option,
         "note_options":note_options,
         "alt_options":alt_options,
         "span":note_span
     }
     return note,prev_end
-
-def clean_default_option(option):
-    option = option.replace("\n","")
-    if re.search("\d+-\d+",option):
-        option = re.sub("\d+\-\d+","",option)
-    return option    
 
 def get_notes(collated_text):
     cur_text_notes = []
@@ -244,18 +236,14 @@ def get_default_word(collated_text, end_index, prev_end):
         index = end_index-1
         start_index = ""
         while index >= 0:
-            if re.search("(\s|>)",collated_text[index]):
+            if re.search("(\s|\n|>)",collated_text[index]):
                 index_in = end_index-2
-                while collated_text[index_in] not in ["་","།",">"]:
+                while collated_text[index_in] not in ["་","།","\n",">"]:
                     index_in-=1
                 start_index = index_in+1
                 break
             index-=1
-        default_word = collated_text[start_index:end_index].replace("\n","")
-        if re.search("\d+\-\d+",default_word):
-            default_word = re.sub("\d+\-\d+","",default_word)
-
-        return default_word,start_index
+        return collated_text[start_index:end_index],start_index
 
         
 def toyaml(dict):
@@ -296,3 +284,43 @@ def  get_prev_note_span(notes, num):
         return None, None
     else:
         return notes[num-1]['span']
+    
+def get_notes_without_context(page):
+    note_list = []
+    chunks = re.split(r"(\(\d+\) <.+?>)", page)
+    for chunk in chunks:
+        if re.search(r"(\(\d+\) <.+?>)", chunk):
+            note_list.append(chunk)
+    return note_list
+    
+def get_pages(collated_text, vol_num):
+    pages = re.split(f"({int(vol_num)}-[0-9]+)", collated_text)
+    return pages
+
+def resolve_title_notes(text_path):
+    _, vol_num = get_text_id_and_vol_num(text_path)
+    collated_text = text_path.read_text(encoding='utf-8')
+    new_collated_text = ""
+    pages = get_pages(collated_text, vol_num)
+    page = pages[0]
+    notes_with_context = get_notes(page)
+    notes_without_context = get_notes_without_context(page)
+    if len(notes_with_context) == len(notes_without_context):
+        for num, note_with_context in enumerate(notes_with_context,0):
+            title_check = is_title_note(note_with_context)
+            if title_check:
+                note = notes_without_context[num]
+                page = page.replace(f"{note}", "")
+        pages[0] = page
+        for page_ in pages:
+            new_collated_text += page_
+    return new_collated_text
+
+
+def remove_endline(collated_text):
+    text = collated_text.replace("\n", " ")
+    return text
+    
+# def tranfer_endline(source_text_path, target_text):
+#     source_text = source_text_path.read_text(encoding='utf-8')
+    

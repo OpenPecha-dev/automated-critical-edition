@@ -4,6 +4,7 @@ from utils import *
 from resolve_sanskrit_notes import resolve_default_sanskrit_notes
 from botok import WordTokenizer
 from pandas import DataFrame
+from botok.third_party.has_skrt_syl import has_skrt_syl
 
 wt = WordTokenizer()
 
@@ -13,7 +14,10 @@ def check_non_word_using_botok(text, note):
     tokens = wt.tokenize(text)
     for token in tokens:
         if token.pos == 'NON_WORD':
-            return True
+            if has_skrt_syl(text):
+                return False
+            else:
+                return True
     return False
 
 def check_default_for_non_word(default_word, note):
@@ -44,10 +48,11 @@ def  resolve_non_word_notes(text_paths):
     curr_dic = {}
     final_dic = {}
     num_ = 0
-    text_list = ["D3815_v056.txt","D3808_v055.txt","D3853_v057.txt", "D3889_v062.txt", 
-                 "D4035_v072.txt", "D4037_v073.txt", "D4039_v074.txt",
-                 "D4061_v077.txt", "D4090x_v079.txt", "D4119x_v089.txt", 
-                 "D4119y_v089.txt","D4274_v108.txt","D4358x_v115.txt"]
+    text_list = ["D4274_v108.txt"]
+    # text_list = ["D3815_v056.txt","D3808_v055.txt","D3853_v057.txt", "D3889_v062.txt", 
+    #              "D4035_v072.txt", "D4037_v073.txt", "D4039_v074.txt",
+    #              "D4061_v077.txt", "D4090x_v079.txt", "D4119x_v089.txt", 
+    #              "D4119y_v089.txt","D4274_v108.txt","D4358x_v115.txt"]
     for text_path in text_paths:
         # text_path = Path(f"./data/collated_text/D3808_v055.txt")
         if text_path.name in text_list:
