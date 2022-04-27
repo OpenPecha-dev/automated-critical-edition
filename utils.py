@@ -5,11 +5,11 @@ from antx import transfer
 
 
 def get_syls(text):
-    chunks = re.split('(་|།།|།|\n)',text)
+    chunks = re.split('(་|།།|།)',text)
     syls = []
     cur_syl = ''
     for chunk in chunks:
-        if re.search('་|།།|།|\n',chunk):
+        if re.search('་|།།|།',chunk):
             cur_syl += chunk
             syls.append(cur_syl)
             cur_syl = ''
@@ -47,10 +47,14 @@ def get_default_option(prev_chunk):
         syls = get_syls(prev_chunk)
         if syls:
             default_option = syls[-1]
+    default_option = clean_default_option(default_option)        
     return default_option
 
 def get_note_options(default_option, note_chunk):
-    note_chunk = re.sub('\(\d+\)', '', note_chunk)
+    note_chunk = re.sub('\(\d+\) ', '', note_chunk)
+    z = re.match("<.+?(\(.+\))>",note_chunk)
+    if z:
+        note_chunk = note_chunk.replace(z.group(1),'')
     if "+" in note_chunk:
         default_option = ""
     note_chunk = re.sub("\+", "", note_chunk)
@@ -103,21 +107,23 @@ def get_alt_options(default_option,note_options):
 
 def get_note_sample(prev_chunk, note_chunk, next_chunk,collated_text,prev_end):
     default_option = get_default_option(prev_chunk)
+    default_option_span = (prev_end+len(prev_chunk)-len(default_option),prev_end+len(prev_chunk))
     prev_chunk = update_left_context(default_option, prev_chunk, note_chunk)
     prev_context = get_context(prev_chunk, type_= 'left')
     next_context = get_context(next_chunk, type_= 'right')
     note_options = get_note_options(default_option, note_chunk)
     note_options = dict(sorted(note_options.items()))
     alt_options = get_alt_options(default_option,note_options)
-    note_span,prev_end = get_note_span(collated_text,note_chunk,prev_end)
+    note_span,prev_end,real_note = get_note_span(collated_text,note_chunk,prev_end)
     note = {
         "left_context":prev_context,
         "right_context":next_context,
-        "default_option":default_option.replace("\n",""),
-        "default_clone_option":default_option,
+        "default_option":default_option,
+        "default_option_span":default_option_span,
         "note_options":note_options,
         "alt_options":alt_options,
-        "span":note_span
+        "span":note_span,
+        "real_note":real_note
     }
     return note,prev_end
 
@@ -220,7 +226,7 @@ def get_note_span(collated_text,chunk,prev_end):
     for m in p.finditer(collated_text):
         start,end = m.span()
         if m.group() in chunk and prev_end <= start:
-            return m.span(),end
+            return m.span(),end,m.group()
 
 
 def get_default_word(collated_text, end_index, prev_end):
@@ -316,9 +322,13 @@ def resolve_title_notes(text_path):
             new_collated_text += page_
     return new_collated_text
 
+def clean_default_option(option):
+    if re.search("\d+-\d+",option):
+        option = re.sub("\d+\-\d+","",option)
+    return option  
 
 def remove_endline(collated_text):
-    text = re.sub(r"\n", " ", collated_text)
+    text = re.sub(r"\n", "", collated_text)
     return text
     
 # def tranfer_endline(source_text_path, target_text):
