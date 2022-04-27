@@ -55,19 +55,18 @@ def built_text():
     end = ""
     notes = get_notes(collated_text)
     for num,note in enumerate(notes,0):
-        _, prev_end = get_prev_note_span(notes, num)
         _,end = note["span"]
-        gen_text,char_walker=reform_text(note,char_walker,prev_end)
+        gen_text,char_walker=reform_text(note,char_walker)
         new_collated_text+=gen_text
     new_collated_text+=collated_text[end:]    
     return new_collated_text
 
 
-def reform_text(note,char_walker,prev_end):
+def reform_text(note,char_walker):
     gen_text = ""
     modern_word = None
-    start,end = note["span"]
-    defualt_word,default_word_start_index = get_default_word(collated_text,start,prev_end)
+    _,end = note["span"]
+    default_word_start_index,_ = note["default_option_span"] 
     alt_options = note['alt_options']
     if is_title_note(note) or not check_all_notes(note):
         gen_text=collated_text[char_walker:end]
@@ -138,7 +137,6 @@ def search(target_word,words):
                 index_plus += 1
                 index_minus -= 1
                 if words[index_plus] == target_word or words[index_minus] == target_word:
-                    print("PRESENT")
                     return True
             return False
         elif  tibetan_alp_val[words[middle][0]] > tibetan_alp_val[target_word[0]]:
@@ -176,7 +174,8 @@ def main():
 
 if __name__ == "__main__":
     text = Path("./test.txt").read_text(encoding="utf-8")
-    new_text = resolve_archaics(text)   
+    new_text = get_notes(text)
+    print(new_text)   
 
     
     
