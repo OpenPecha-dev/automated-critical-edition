@@ -318,7 +318,7 @@ def resolve_title_notes(text_path):
 
 
 def remove_endline(collated_text):
-    text = collated_text.replace("\n", " ")
+    text = re.sub(r"\n", " ", collated_text)
     return text
     
 # def tranfer_endline(source_text_path, target_text):
