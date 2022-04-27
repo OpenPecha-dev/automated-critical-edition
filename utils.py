@@ -220,6 +220,7 @@ def is_title_note(note):
                 else:
                     return True
     return False
+    
 
 def get_note_span(collated_text,chunk,prev_end):
     p = re.compile("\(.+?\) <.*?>")
@@ -229,45 +230,11 @@ def get_note_span(collated_text,chunk,prev_end):
             return m.span(),end,m.group()
 
 
-def get_default_word(collated_text, end_index, prev_end):
-    if prev_end == None:
-        prev_end = 0
-    if end_index == 0:
-        return None,None
-    elif ":" in collated_text[prev_end:end_index]:
-        span = collated_text[prev_end:end_index].find(":")
-        colon_pos = span + prev_end + 1
-        return collated_text[colon_pos:end_index],colon_pos
-    else:
-        index = end_index-1
-        start_index = ""
-        while index >= 0:
-            if re.search("(\s|\n|>)",collated_text[index]):
-                index_in = end_index-2
-                while collated_text[index_in] not in ["་","།","\n",">"]:
-                    index_in-=1
-                start_index = index_in+1
-                break
-            index-=1
-        return collated_text[start_index:end_index],start_index
-
-        
 def toyaml(dict):
     return yaml.safe_dump(dict, sort_keys=False, allow_unicode=True)
 
 def from_yaml(yml_path):
     return yaml.safe_load(yml_path.read_text(encoding="utf-8"))
-
-def get_default_word_start(collated_text,note):
-    start_index = ""
-    start,_ = note['span']
-    default_option = note['default_clone_option']
-    default_start = start-len(default_option)
-    if collated_text[default_start-1] == ":":
-        start_index = default_start-1
-    else:
-        start_index = default_start 
-    return start_index
 
 def get_text_id_and_vol_num(text_path):
     text_name = text_path.name[:-4]
