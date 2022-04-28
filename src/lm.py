@@ -28,6 +28,7 @@ class LSTMLanguageModel(LanguageModel):
     self.model, self.tokenizer = self.load_model(Path(path))
     self.vocab_inv = {v: k for k, v in self.tokenizer.word_index.items()}
     self.score_type = ScoreType.PROB
+    self.pre_tokenize = True
     
   @property
   def input_length(self):
@@ -86,6 +87,7 @@ class RoBERTaLanguageModel(LanguageModel):
     self.model = AutoModelForMaskedLM.from_pretrained(self.model_name)
     self.tokenizer = AutoTokenizer.from_pretrained(self.model_name)
     self.score_type = ScoreType.LOSS
+    self.pre_tokenize = False
     
   def score_sentence(self, sentence):
     tokenize_input = self.tokenizer.tokenize(sentence)
