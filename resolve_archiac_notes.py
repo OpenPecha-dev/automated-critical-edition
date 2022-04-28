@@ -68,22 +68,24 @@ def reform_text(note,char_walker):
     _,end = note["span"]
     default_word_start_index,_ = note["default_option_span"] 
     alt_options = note['alt_options']
-    if not check_all_notes(note):
+    if len(alt_options) == 0:
         gen_text=collated_text[char_walker:end]
     elif is_archaic_case(alt_options):
         modern_word = get_modern_word(alt_options)
         if modern_word != None:
-            print(note)
-            gen_text=collated_text[char_walker:default_word_start_index]+modern_word
+            gen_text=collated_text[char_walker:]+modern_word
         else:
-            gen_text=collated_text[char_walker:end] 
+            rpl_word = replace_tsek(alt_options[0]) if collated_text[end:end+1] != " " else alt_options[0]
+            gen_text=collated_text[char_walker:default_word_start_index]+rpl_word
     else:
         gen_text=collated_text[char_walker:end]    
     char_walker = end
-    """ if modern_word:
-        write_csv.write_csv(note,modern_word,source_file_name) """
     return gen_text,char_walker
 
+def replace_tsek(text):
+    if text[-1] == "།":
+        text = text[:-1]+"་"
+    return text    
 
 def normalize_word(word):
     puncts = ['།','་']
@@ -138,6 +140,7 @@ def search(target_word,words):
                 index_plus += 1
                 index_minus -= 1
                 if words[index_plus] == target_word or words[index_minus] == target_word:
+                    print("match")
                     return True
             return False
         elif  tibetan_alp_val[words[middle][0]] > tibetan_alp_val[target_word[0]]:
@@ -174,12 +177,10 @@ def main():
     #write_csv.convert_to_excel()
 
 if __name__ == "__main__":
-    text = Path("./test.txt").read_text(encoding="utf-8")
-    new_text = get_notes(text)
-    print(new_text)   
+    text = Path("./data/collated_text/D3871_v061.txt").read_text(encoding="utf-8")
+    new_text = remove_line_break(text)
+    new_text = resolve_archaics(new_text)
+    new_text = tranfer_line_break(Path("./data/collated_text/D3871_v061.txt"),new_text)
+    Path("./gentest.txt").write_text(new_text)
 
     
-    
-""" check the note iss
-default word other function
-get _prev_notes """
