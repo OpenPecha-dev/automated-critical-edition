@@ -58,12 +58,12 @@ def update_notes_number(automated_critical_text, text_path):
 def get_automated_critical_edition_text(text_path, update_note_number=False):
   title_resolved_text = resolve_title_notes(text_path)
   line_break_removed_text = remove_line_break(title_resolved_text)
-  sanskrit_note_resolved_text = resolve_sanskrit_notes(line_break_removed_text)
-  final_text = tranfer_line_break(text_path, sanskrit_note_resolved_text)
-  # automated_critical_edition_text = resolve_archaics(default_sanskrit_resolved_text)
+  # sanskrit_note_resolved_text = resolve_sanskrit_notes(line_break_removed_text)
+  archaics_note_resolved_text = resolve_archaics(line_break_removed_text)
+  automated_critical_edition_text = tranfer_line_break(text_path, archaics_note_resolved_text)
   if update_note_number:
-    final_text = update_notes_number(sanskrit_note_resolved_text, text_path)
-  Path(f"./cleaned/{text_path.name}").write_text(final_text, encoding='utf-8')
+    automated_critical_edition_text = update_notes_number(automated_critical_edition_text, text_path)
+  Path(f"./cleaned/{text_path.name}").write_text(automated_critical_edition_text, encoding='utf-8')
 
 
 

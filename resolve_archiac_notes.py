@@ -54,7 +54,7 @@ def built_text():
     char_walker = 0
     end = ""
     notes = get_notes(collated_text)
-    for num,note in enumerate(notes,0):
+    for _, note in enumerate(notes,0):
         _,end = note["span"]
         gen_text,char_walker=reform_text(note,char_walker)
         new_collated_text+=gen_text
@@ -68,11 +68,12 @@ def reform_text(note,char_walker):
     _,end = note["span"]
     default_word_start_index,_ = note["default_option_span"] 
     alt_options = note['alt_options']
-    if is_title_note(note) or not check_all_notes(note):
+    if not check_all_notes(note):
         gen_text=collated_text[char_walker:end]
     elif is_archaic_case(alt_options):
         modern_word = get_modern_word(alt_options)
         if modern_word != None:
+            print(note)
             gen_text=collated_text[char_walker:default_word_start_index]+modern_word
         else:
             gen_text=collated_text[char_walker:end] 
