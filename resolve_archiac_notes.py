@@ -68,7 +68,7 @@ def reform_text(note,char_walker):
     _,end = note["span"]
     default_word_start_index,_ = note["default_option_span"] 
     alt_options = note['alt_options']
-    if len(alt_options) == 0:
+    if is_sub_add_note(note):
         gen_text=collated_text[char_walker:end]
     elif is_archaic_case(alt_options):
         modern_word = get_modern_word(alt_options)
@@ -84,6 +84,12 @@ def reform_text(note,char_walker):
     char_walker = end
     return gen_text,char_walker
 
+def is_sub_add_note(note):
+    if "+" in note["real_note"] or "-" in note["real_note"]:
+        return True
+    else:
+        return False
+            
 def replace_tsek(repl_word,default_option):
     if repl_word[-1] == "།" and default_option[-1] == "་":
         repl_word = repl_word[:-1]+"་"
@@ -184,10 +190,10 @@ def main():
     #write_csv.convert_to_excel()
 
 if __name__ == "__main__":
-    text = Path("./data/collated_text/D4274_v108.txt").read_text(encoding="utf-8")
+    text = Path("./test.txt").read_text(encoding="utf-8")
     new_text = remove_line_break(text)
     new_text = resolve_archaics(new_text)
-    new_text = tranfer_line_break(Path("././data/collated_text/D4274_v108.txt"),new_text)
+    new_text = tranfer_line_break(Path("./test.txt"),new_text)
     Path("./gentest.txt").write_text(new_text)
 
     
