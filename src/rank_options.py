@@ -2,7 +2,14 @@ import configparser
 from pathlib import Path
 from typing import List
 
-from lm import LanguageModel, LSTMLanguageModel, GPT2LanguageModel, LanguageModelType
+from lm import (
+  LanguageModel,
+  LSTMLanguageModel,
+  GPT2LanguageModel,
+  RoBERTaLanguageModel,
+  LanguageModelType,
+  ScoreType
+)
 
 
 class OptionsRanker:
@@ -14,22 +21,27 @@ class OptionsRanker:
     self.lm = self._load_lm()
     
   def _load_lm(self) -> LanguageModel:
-    lm_type = self.config["ranker"]["lm_type"]
+    lm_type = LanguageModelType(self.config["ranker"]["lm_type"])
     lm_path = self.config[lm_type]["path"]
-    if lm_type == LanguageModelType.LSTMLanguageModel.value:
+    if lm_type == LanguageModelType.LSTMLanguageModel:
       return LSTMLanguageModel(path=lm_path)
-    elif lm_type == LanguageModelType.GPT2LanguageModel.value:
+    elif lm_type == LanguageModelType.GPT2LanguageModel:
       return GPT2LanguageModel(path=lm_path)
+    elif lm_type == LanguageModelType.RoBERTa:
+      return RoBERTaLanguageModel(path=lm_path)
     
   def rank(self, options: List[str], left_context: List[str], right_context: List[str]) -> List[str]:
     """return `options` in ranking order"""
     ranks = []
     for option in options:
       sentence = " ".join(left_context + [option] + right_context)
-      print(sentence)
       score = self.lm.score_sentence(sentence)
       ranks.append((option, score))
-    return sorted(ranks, key=lambda x: x[1], reverse=True)
+    return sorted(
+      ranks,
+      key=lambda x: x[1],
+      reverse=True if self.lm.score_type == ScoreType.PROB else False
+    )
   
   
 if __name__ == "__main__":
@@ -40,4 +52,4 @@ if __name__ == "__main__":
     right_context=["ཕོ་བྲང་", "ན"]
   )
   print(ranks)
-  
+ 
