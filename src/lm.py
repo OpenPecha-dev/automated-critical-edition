@@ -1,14 +1,21 @@
-from enum import Enum
+from enum import Enum, auto
 import pickle
 from pathlib import Path
 
 
 import numpy as np
 import tensorflow as tf
+import torch
+from transformers import AutoTokenizer, AutoModelForMaskedLM
 
 class LanguageModelType(str, Enum):
   LSTMLanguageModel = "lstm_lm"
   GPT2LanguageModel = "gpt2_lm"
+  RoBERTa = "roberta"
+  
+class ScoreType(Enum):
+  LOSS = auto()
+  PROB= auto()
 
 
 class LanguageModel:
@@ -20,6 +27,7 @@ class LSTMLanguageModel(LanguageModel):
   def __init__(self, path):
     self.model, self.tokenizer = self.load_model(Path(path))
     self.vocab_inv = {v: k for k, v in self.tokenizer.word_index.items()}
+    self.score_type = ScoreType.PROB
     
   @property
   def input_length(self):
@@ -69,4 +77,21 @@ class GPT2LanguageModel(LanguageModel):
   def score_sentence(sentence):
     print("coming soon")
     return []
-          
+  
+
+class RoBERTaLanguageModel(LanguageModel):
+  
+  def __init__(self, path):
+    self.model_name = path
+    self.model = AutoModelForMaskedLM.from_pretrained(self.model_name)
+    self.tokenizer = AutoTokenizer.from_pretrained(self.model_name)
+    self.score_type = ScoreType.LOSS
+    
+  def score_sentence(self, sentence):
+    tokenize_input = self.tokenizer.tokenize(sentence)
+    tokenize_input = [self.tokenizer.cls_token] + tokenize_input + [self.tokenizer.sep_token]
+    tensor_input = torch.tensor([self.tokenizer.convert_tokens_to_ids(tokenize_input)])
+    with torch.no_grad():
+        loss = self.model(tensor_input, labels=tensor_input)[0]
+    return np.exp(loss.detach().numpy())
+  
