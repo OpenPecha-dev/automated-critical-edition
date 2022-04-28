@@ -1,6 +1,6 @@
 import configparser
 from pathlib import Path
-from typing import List
+from typing import List, Union
 
 from lm import (
   LanguageModel,
@@ -30,11 +30,32 @@ class OptionsRanker:
     elif lm_type == LanguageModelType.RoBERTa:
       return RoBERTaLanguageModel(path=lm_path)
     
-  def rank(self, options: List[str], left_context: List[str], right_context: List[str]) -> List[str]:
+  def _check_input(self, left_context, right_context):
+    if self.lm.pre_tokenize:
+      if not isinstance(left_context, list) or not isinstance(right_context, list):
+        raise ValueError("`context` should be list of word")
+    else:
+      if not isinstance(left_context, str) or not isinstance(right_context, str):
+        raise ValueError("`context` should be string")
+        
+  def _create_sentence(self, option, left_context, right_context):
+    if self.lm.pre_tokenize:
+      return " ".join(left_context + [option] + right_context)
+    return left_context + option + right_context
+    
+    
+  def rank(
+    self,
+    options: List[str],
+    left_context: Union[List[str], str],
+    right_context: Union[List[str], str]
+  ) -> List[str]:
     """return `options` in ranking order"""
+    self._check_input(left_context, right_context)
     ranks = []
     for option in options:
-      sentence = " ".join(left_context + [option] + right_context)
+      sentence = self._create_sentence(option, left_context, right_context)
+      print(sentence)
       score = self.lm.score_sentence(sentence)
       ranks.append((option, score))
     return sorted(
@@ -48,8 +69,13 @@ if __name__ == "__main__":
   ranker = OptionsRanker()
   ranks = ranker.rank(
     options=["འི", "གི", "དི"],
-    left_context=["བདེ་ཆེན་", "པདྨ་",  "འཁྱིལ་བ"],
-    right_context=["ཕོ་བྲང་", "ན"]
+    left_context="བདེ་ཆེན་པདྨ་འཁྱིལ་བ",
+    right_context="ཕོ་བྲང་ན"
   )
+  # ranks = ranker.rank(
+  #   options=["འི", "གི", "དི"],
+  #   left_context=["བདེ་ཆེན་", "པདྨ་",  "འཁྱིལ་བ"],
+  #   right_context=["ཕོ་བྲང་", "ན"]
+  # )
   print(ranks)
  
