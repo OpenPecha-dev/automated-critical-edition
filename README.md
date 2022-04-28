@@ -8,6 +8,13 @@ cp src/config-example.ini src/config.ini
 ```
 
 2. Then rank the options
+
+Types of model and their sentence score metric
+|Model|Sentence Score Metric|
+---|---
+LSTM | Probability
+RoBERTa | Loss
+
 ```python
 
 from rank_options import OptionRanker
