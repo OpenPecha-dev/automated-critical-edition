@@ -2,7 +2,7 @@
 
 ## Options Ranking
 
-1. first create config file
+1. First create config file
 ```bash
 cp src/config-example.ini src/config.ini
 ```
