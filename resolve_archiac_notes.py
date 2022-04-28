@@ -73,19 +73,23 @@ def reform_text(note,char_walker):
     elif is_archaic_case(alt_options):
         modern_word = get_modern_word(alt_options)
         if modern_word != None:
+            rpl_word = replace_tsek(modern_word,note['default_option'])
             gen_text=collated_text[char_walker:]+modern_word
         else:
-            rpl_word = replace_tsek(alt_options[0]) if collated_text[end:end+1] != " " else alt_options[0]
+            rpl_word = replace_tsek(alt_options[0],note['default_option'])
             gen_text=collated_text[char_walker:default_word_start_index]+rpl_word
     else:
         gen_text=collated_text[char_walker:end]    
     char_walker = end
     return gen_text,char_walker
 
-def replace_tsek(text):
-    if text[-1] == "།":
-        text = text[:-1]+"་"
-    return text    
+def replace_tsek(repl_word,default_option):
+    if repl_word[-1] == "།" and default_option[-1] == "་":
+        repl_word = repl_word[:-1]+"་"
+    elif repl_word[-1] != "་" and default_option[-1] == "་":
+        repl_word+="་"
+    return repl_word    
+
 
 def normalize_word(word):
     puncts = ['།','་']
