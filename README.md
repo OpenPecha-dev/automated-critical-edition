@@ -1,6 +1,6 @@
 # automated-critical-edition
 
-## Ranking Options
+## Options Ranking
 
 1. first create config file
 ```bash
