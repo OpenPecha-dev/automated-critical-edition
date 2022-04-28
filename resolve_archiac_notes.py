@@ -43,6 +43,7 @@ tibetan_alp_val = {
     'ར':25,
     'ལ':26,
     'ཤ':27,
+    'ཥ':27,
     'ས':28,
     'ཧ':29,
     'ཨ':30,
@@ -53,36 +54,38 @@ def built_text():
     char_walker = 0
     end = ""
     notes = get_notes(collated_text)
-    for num,note in enumerate(notes,0):
-        _, prev_end = get_prev_note_span(notes, num)
+    for _, note in enumerate(notes,0):
         _,end = note["span"]
-        gen_text,char_walker=reform_text(note,char_walker,prev_end)
+        gen_text,char_walker=reform_text(note,char_walker)
         new_collated_text+=gen_text
     new_collated_text+=collated_text[end:]    
     return new_collated_text
 
 
-def reform_text(note,char_walker,prev_end):
+def reform_text(note,char_walker):
     gen_text = ""
     modern_word = None
-    start,end = note["span"]
-    defualt_word,default_word_start_index = get_default_word(collated_text,start,prev_end)
+    _,end = note["span"]
+    default_word_start_index,_ = note["default_option_span"] 
     alt_options = note['alt_options']
-    if is_title_note(note) or not check_all_notes(note):
+    if len(alt_options) == 0:
         gen_text=collated_text[char_walker:end]
     elif is_archaic_case(alt_options):
         modern_word = get_modern_word(alt_options)
         if modern_word != None:
-            gen_text=collated_text[char_walker:default_word_start_index]+modern_word
+            gen_text=collated_text[char_walker:]+modern_word
         else:
-            gen_text=collated_text[char_walker:end] 
+            rpl_word = replace_tsek(alt_options[0]) if collated_text[end:end+1] != " " else alt_options[0]
+            gen_text=collated_text[char_walker:default_word_start_index]+rpl_word
     else:
         gen_text=collated_text[char_walker:end]    
     char_walker = end
-    """ if modern_word:
-        write_csv.write_csv(note,modern_word,source_file_name) """
     return gen_text,char_walker
 
+def replace_tsek(text):
+    if text[-1] == "།":
+        text = text[:-1]+"་"
+    return text    
 
 def normalize_word(word):
     puncts = ['།','་']
@@ -126,6 +129,8 @@ def is_archaic_case(options):
 def search(target_word,words):
     low = 0
     high = len(words) - 1
+    if target_word[0] not in tibetan_alp_val:
+        return False
     while low <= high:
         middle = (low+high)//2
         if tibetan_alp_val[words[middle][0]] == tibetan_alp_val[target_word[0]]:
@@ -135,7 +140,7 @@ def search(target_word,words):
                 index_plus += 1
                 index_minus -= 1
                 if words[index_plus] == target_word or words[index_minus] == target_word:
-                    print("PRESENT")
+                    print("match")
                     return True
             return False
         elif  tibetan_alp_val[words[middle][0]] > tibetan_alp_val[target_word[0]]:
@@ -172,11 +177,10 @@ def main():
     #write_csv.convert_to_excel()
 
 if __name__ == "__main__":
-    text = Path("./test.txt").read_text(encoding="utf-8")
-    new_text = resolve_archaics(text)   
+    text = Path("./data/collated_text/D3871_v061.txt").read_text(encoding="utf-8")
+    new_text = remove_line_break(text)
+    new_text = resolve_archaics(new_text)
+    new_text = tranfer_line_break(Path("./data/collated_text/D3871_v061.txt"),new_text)
+    Path("./gentest.txt").write_text(new_text)
 
     
-    
-""" check the note iss
-default word other function
-get _prev_notes """

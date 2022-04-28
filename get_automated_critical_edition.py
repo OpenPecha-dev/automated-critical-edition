@@ -1,8 +1,8 @@
 import re
 from pathlib import Path
-from resolve_sanskrit_notes import resolve_default_sanskrit_notes
+from resolve_sanskrit_notes import resolve_sanskrit_notes
 from resolve_archiac_notes import resolve_archaics
-from utils import get_notes, get_text_id_and_vol_num
+from utils import *
 
 
 def get_tib_num(eng_num):
@@ -56,15 +56,17 @@ def update_notes_number(automated_critical_text, text_path):
       
   
 def get_automated_critical_edition_text(text_path, update_note_number=False):
-  collated_text = text_path.read_text(encoding='utf-8')
-  default_sanskrit_resolved_text = resolve_default_sanskrit_notes(collated_text)
-  automated_critical_edition_text = resolve_archaics(default_sanskrit_resolved_text)
+  title_resolved_text = resolve_title_notes(text_path)
+  line_break_removed_text = remove_line_break(title_resolved_text)
+  # sanskrit_note_resolved_text = resolve_sanskrit_notes(line_break_removed_text)
+  archaics_note_resolved_text = resolve_archaics(line_break_removed_text)
+  automated_critical_edition_text = tranfer_line_break(text_path, archaics_note_resolved_text)
   if update_note_number:
-    final_text = update_notes_number(automated_critical_edition_text, text_path)
-    Path(f"./cleaned/{text_path.name}").write_text(final_text, encoding='utf-8')
+    automated_critical_edition_text = update_notes_number(automated_critical_edition_text, text_path)
+  Path(f"./cleaned/{text_path.name}").write_text(automated_critical_edition_text, encoding='utf-8')
 
 
 
 if __name__ == "__main__":
   text_path = Path(f"./data/collated_text/D3871_v061.txt")
-  get_automated_critical_edition_text(text_path, True)
+  get_automated_critical_edition_text(text_path)
