@@ -162,7 +162,7 @@ def get_modern_word(options):
         if not is_archaic(option):
             normalize_option = normalize_word(option)
             if search(normalize_option,modern_words):
-                return True
+                return normalize_option
     return None
 
 
@@ -184,10 +184,10 @@ def main():
     #write_csv.convert_to_excel()
 
 if __name__ == "__main__":
-    text = Path("./test.txt").read_text(encoding="utf-8")
+    text = Path("./data/collated_text/D4274_v108.txt").read_text(encoding="utf-8")
     new_text = remove_line_break(text)
     new_text = resolve_archaics(new_text)
-    new_text = tranfer_line_break(Path("./test.txt"),new_text)
+    new_text = tranfer_line_break(Path("././data/collated_text/D4274_v108.txt"),new_text)
     Path("./gentest.txt").write_text(new_text)
 
     
