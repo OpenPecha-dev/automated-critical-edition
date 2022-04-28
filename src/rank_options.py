@@ -67,15 +67,15 @@ class OptionsRanker:
   
 if __name__ == "__main__":
   ranker = OptionsRanker()
-  # ranks = ranker.rank(
-  #   options=["འི", "གི", "དི"],
-  #   left_context="བདེ་ཆེན་པདྨ་འཁྱིལ་བ",
-  #   right_context="ཕོ་བྲང་ན"
-  # )
   ranks = ranker.rank(
     options=["འི", "གི", "དི"],
-    left_context=["བདེ་ཆེན་", "པདྨ་",  "འཁྱིལ་བ"],
-    right_context=["ཕོ་བྲང་", "ན"]
+    left_context="བདེ་ཆེན་པདྨ་འཁྱིལ་བ",
+    right_context="ཕོ་བྲང་ན"
   )
+  # ranks = ranker.rank(
+  #   options=["འི", "གི", "དི"],
+  #   left_context=["བདེ་ཆེན་", "པདྨ་",  "འཁྱིལ་བ"],
+  #   right_context=["ཕོ་བྲང་", "ན"]
+  # )
   print(ranks)
  
