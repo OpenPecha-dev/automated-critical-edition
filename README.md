@@ -25,7 +25,7 @@ print(ranks)
 # [('འི', 1.3756102224075983e-39), ('གི', 3.8162690334265747e-51), ('དི', 7.808966806052166e-57)]
 
 # for config.lm_type = roberta
-anks = ranker.rank(
+ranks = ranker.rank(
     options=["འི", "གི", "དི"],
     left_context="བདེ་ཆེན་པདྨ་འཁྱིལ་བ",
     right_context="ཕོ་བྲང་ན"
