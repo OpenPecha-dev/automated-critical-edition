@@ -144,7 +144,9 @@ def search(target_word,words):
             while  tibetan_alp_val[words[index_minus][0]] == tibetan_alp_val[target_word[0]] or tibetan_alp_val[words[index_plus][0]] == tibetan_alp_val[target_word[0]]:
                 index_plus += 1
                 index_minus -= 1
-                if words[index_plus] == target_word or words[index_minus] == target_word:
+                if index_plus >= len(words) or index_minus < 0:
+                    break
+                elif words[index_plus] == target_word or words[index_minus] == target_word:
                     print("match")
                     return True
             return False
