@@ -153,7 +153,6 @@ def search(target_word,words):
                 if index_plus >= len(words) or index_minus < 0:
                     break
                 elif words[index_plus] == target_word or words[index_minus] == target_word:
-                    print("match")
                     return True
             return False
         elif  tibetan_alp_val[words[middle][0]] > tibetan_alp_val[target_word[0]]:
@@ -180,20 +179,14 @@ def resolve_archaics(text):
     return build_text
 
 
-def main():
-    global source_file_name
-    sources = list(Path('data/collated_text').iterdir())
-    for source in sorted(sources):
-        source_file_name = source.stem
-        collated_text = Path(str(source)).read_text(encoding="utf-8")
-        resolve_archaics(collated_text)
-    #write_csv.convert_to_excel()
+# def main():
+#     global source_file_name
+#     sources = list(Path('data/collated_text').iterdir())
+#     for source in sorted(sources):
+#         source_file_name = source.stem
+#         collated_text = Path(str(source)).read_text(encoding="utf-8")
+#         resolve_archaics(collated_text)
+#     #write_csv.convert_to_excel()
 
-if __name__ == "__main__":
-    text = Path("./test.txt").read_text(encoding="utf-8")
-    new_text = remove_line_break(text)
-    new_text = resolve_archaics(new_text)
-    new_text = tranfer_line_break(Path("./test.txt"),new_text)
-    Path("./gentest.txt").write_text(new_text)
 
     
