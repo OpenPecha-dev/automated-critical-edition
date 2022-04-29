@@ -68,21 +68,28 @@ def reform_text(note,char_walker):
     _,end = note["span"]
     default_word_start_index,_ = note["default_option_span"] 
     alt_options = note['alt_options']
-    if len(alt_options) == 0:
+    if is_sub_add_note(note):
         gen_text=collated_text[char_walker:end]
     elif is_archaic_case(alt_options):
         modern_word = get_modern_word(alt_options)
+        prev_chunk = collated_text[char_walker:default_word_start_index-1] if collated_text[default_word_start_index-1] == ":" else collated_text[char_walker:default_word_start_index] 
         if modern_word != None:
             rpl_word = replace_tsek(modern_word,note['default_option'])
-            gen_text=collated_text[char_walker:]+modern_word
+            gen_text=prev_chunk+modern_word
         else:
             rpl_word = replace_tsek(alt_options[0],note['default_option'])
-            gen_text=collated_text[char_walker:default_word_start_index]+rpl_word
+            gen_text=prev_chunk+rpl_word
     else:
         gen_text=collated_text[char_walker:end]    
     char_walker = end
     return gen_text,char_walker
 
+def is_sub_add_note(note):
+    if "+" in note["real_note"] or "-" in note["real_note"]:
+        return True
+    else:
+        return False
+            
 def replace_tsek(repl_word,default_option):
     if repl_word[-1] == "།" and default_option[-1] == "་":
         repl_word = repl_word[:-1]+"་"
@@ -143,8 +150,9 @@ def search(target_word,words):
             while  tibetan_alp_val[words[index_minus][0]] == tibetan_alp_val[target_word[0]] or tibetan_alp_val[words[index_plus][0]] == tibetan_alp_val[target_word[0]]:
                 index_plus += 1
                 index_minus -= 1
-                if words[index_plus] == target_word or words[index_minus] == target_word:
-                    print("match")
+                if index_plus >= len(words) or index_minus < 0:
+                    break
+                elif words[index_plus] == target_word or words[index_minus] == target_word:
                     return True
             return False
         elif  tibetan_alp_val[words[middle][0]] > tibetan_alp_val[target_word[0]]:
@@ -159,7 +167,7 @@ def get_modern_word(options):
         if not is_archaic(option):
             normalize_option = normalize_word(option)
             if search(normalize_option,modern_words):
-                return True
+                return normalize_option
     return None
 
 
@@ -171,20 +179,14 @@ def resolve_archaics(text):
     return build_text
 
 
-def main():
-    global source_file_name
-    sources = list(Path('data/collated_text').iterdir())
-    for source in sorted(sources):
-        source_file_name = source.stem
-        collated_text = Path(str(source)).read_text(encoding="utf-8")
-        resolve_archaics(collated_text)
-    #write_csv.convert_to_excel()
+# def main():
+#     global source_file_name
+#     sources = list(Path('data/collated_text').iterdir())
+#     for source in sorted(sources):
+#         source_file_name = source.stem
+#         collated_text = Path(str(source)).read_text(encoding="utf-8")
+#         resolve_archaics(collated_text)
+#     #write_csv.convert_to_excel()
 
-if __name__ == "__main__":
-    text = Path("./data/collated_text/D3871_v061.txt").read_text(encoding="utf-8")
-    new_text = remove_line_break(text)
-    new_text = resolve_archaics(new_text)
-    new_text = tranfer_line_break(Path("./data/collated_text/D3871_v061.txt"),new_text)
-    Path("./gentest.txt").write_text(new_text)
 
     

@@ -69,7 +69,7 @@ def  resolve_non_word_notes(text_paths):
             if title_check == False:
                 check = check_all_notes(note)
                 if check :
-                    default_word, _ = get_default_word(sanskrit_resolved_text,start, prev_end)
+                    default_word = note['deafult_option']
                     note, default_non_word = check_default_for_non_word(default_word, note)
                     if default_non_word:
                         curr_dic[num_] = {

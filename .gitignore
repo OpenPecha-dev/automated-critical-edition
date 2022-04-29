@@ -82,3 +82,5 @@ celerybeat-schedule celerybeat.pid
 
 # my project
 config.ini
+
+/.env

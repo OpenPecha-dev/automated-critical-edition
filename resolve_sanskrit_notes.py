@@ -1,7 +1,9 @@
 from pathlib import Path
 from utils import *
 from botok.third_party.has_skrt_syl import has_skrt_syl
-    
+from botok import WordTokenizer
+
+wt = WordTokenizer()
   
 def resolve_default_sanskrit_notes(collated_text):
     """it parse all the notes of the collated text
@@ -26,6 +28,12 @@ def resolve_default_sanskrit_notes(collated_text):
                 else:
                     new_collated_text += collated_text[char_walker:default_start_index] + default_option
                 char_walker = end
+            elif check_for_sanskrit_syl(default_option):
+                if collated_text[default_start_index-1:default_start_index] == ":":
+                    new_collated_text += collated_text[char_walker:default_start_index-1] + default_option
+                else:
+                    new_collated_text += collated_text[char_walker:default_start_index] + default_option
+                char_walker = end
             else:
                 new_collated_text += collated_text[char_walker:end]
                 char_walker = end
@@ -38,20 +46,31 @@ def resolve_default_sanskrit_notes(collated_text):
                 new_collated_text += collated_text[end:]
     return new_collated_text
 
+def check_for_sanskrit_syl(note):
+    tokens = wt.tokenize(note)
+    for token in tokens:
+        if token.skrt:
+            return True
+    return False
 
 def get_replacement_note(note):
     replacement_notes = []
     for _, note_option in note['note_options'].items():
         if has_skrt_syl(note_option):
             replacement_notes.append(note_option)
+        elif check_for_sanskrit_syl(note_option):
+            replacement_notes.append(note_option)
     if len(replacement_notes) == 1:
         replacement_note = replacement_notes[0]
     elif len(replacement_notes) == 2:
         if replacement_notes[0] == replacement_notes[1]:
             replacement_note = replacement_notes[0]
+        else:
+            replacement_note = None
     elif len(replacement_notes) == 3:
         if replacement_notes[0] == replacement_notes[1] == replacement_notes[2]:
             replacement_note = replacement_notes[0]
+        replacement_note = None
     else:
         replacement_note = None
     
