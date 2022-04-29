@@ -65,9 +65,12 @@ def get_replacement_note(note):
     elif len(replacement_notes) == 2:
         if replacement_notes[0] == replacement_notes[1]:
             replacement_note = replacement_notes[0]
+        else:
+            replacement_note = None
     elif len(replacement_notes) == 3:
         if replacement_notes[0] == replacement_notes[1] == replacement_notes[2]:
             replacement_note = replacement_notes[0]
+        replacement_note = None
     else:
         replacement_note = None
     
