@@ -36,24 +36,36 @@ class Doc2VecTextSim(TextSimBase):
   
   def _get_text_embedding(self, text):
     tokenized_text = self._preprocess(text)
-    print(tokenized_text)
     return self.model.infer_vector(tokenized_text)
   
-  def compare(self, source_text: str, target_text: str):
-    source_text_embedding = self._get_text_embedding(source_text)
-    target_text_embedding = self._get_text_embedding(target_text)
+  def compare(self, text_a: str, text_b: str):
+    text_a_embedding = self._get_text_embedding(text_a)
+    text_b_embedding = self._get_text_embedding(text_b)
     result = cosine_similarity(
-      source_text_embedding.reshape(1,-1),
-      target_text_embedding.reshape(1,-1)
+      text_a_embedding.reshape(1,-1),
+      text_b_embedding.reshape(1,-1)
     )
-    return result[0]
+    return float(result[0][0])
+  
+def detokenize(text):
+  if isinstance(text, list):
+    return "".join(text)
+  else:
+    return text.replace(" ", "")
   
   
 if __name__ == "__main__":
+  text_pairs = [
+    ("ཡེ་ཤེས་ མེ་ ཡིས་ ཉོན་མོངས་ བསྲེག་", "ཡེ་ཤེས་ མེ་ ཡིས་ དྲི་མ་ སྲེག་"),
+    ("ཡེ་ཤེས་ མེ་ ཡིས་ ཉོན་མོངས་ བསྲེག་", "ཡེ་ཤེས་ མེ་ ཡིས་ ཉོན་མོངས་ བསྲེག་"),
+    ("སངས་རྒྱས་ རྣམས་ ནི་ མེད་པ ར་ བརྟགས་", "སངས་རྒྱས་ རྣམས་ ནི་ མེད་པ ར་ བཏགས་"),
+    ("ཡེ་ཤེས་ མེ་ ཡིས་ ཉོན་མོངས་ བསྲེག་", "སངས་རྒྱས་ རྣམས་ ནི་ མེད་པ ར་ བརྟགས་"),
+    ("ཡེ་ཤེས་ མེ་ ཡིས་ ཉོན་མོངས་ བསྲེག་", "ཡེ་ཤེས་ མེ་ ཡིས་ ཉོན་མོངས་ ཕེལ་"),
+    ("བསྲེག་", "ཕེལ་")
+  ]
+  
   text_sim = Doc2VecTextSim()
-  sim = text_sim.compare(
-    "ཡེ་ཤེས་ མེ་ ཡིས་ ཉོན་མོངས་ བསྲེག་",
-    "ཡེ་ཤེས་ མེ་ ཡིས་ དྲི་མ་ སྲེག་"
-  )
-  print(sim)
+  for text_a, text_b in text_pairs:
+    sim = text_sim.compare(text_a, text_b)
+    print(f"{detokenize(text_a)} <{round(sim, 3)}> {detokenize(text_b)}")
     
