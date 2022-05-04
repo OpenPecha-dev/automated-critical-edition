@@ -4,6 +4,31 @@ import yaml
 from antx import transfer
 
 
+
+def check_all_notes_option(note_options):
+    for _, note in note_options.items():
+        if not note:
+            return False
+    return True
+
+
+def get_default_note(ann_info):
+    pub_mapping = {
+        'པེ་': 'peking',
+        'པེ': 'peking',
+        'སྣར་': 'narthang',
+        'སྣར': 'narthang',
+        'སྡེ་': 'derge',
+        'སྡེ': 'derge',
+        'ཅོ་': 'chone',
+        'ཅོ': 'chone'
+    }
+    default_key = ann_info["default"]
+    default_pub = pub_mapping[default_key]
+    default_note = ann_info["options"][default_pub]
+    
+    return default_note
+
 def get_syls(text):
     chunks = re.split('(་|།།|།)',text)
     syls = []
