@@ -1,7 +1,6 @@
 import re
 from pathlib import Path
 from resolve_sanskrit_notes import resolve_sanskrit_notes
-from resolve_archiac_notes import resolve_archaics
 from utils import *
 
 
@@ -55,19 +54,12 @@ def update_notes_number(automated_critical_text, text_path):
   return final_page
       
   
-def get_automated_critical_edition_text(text_path, update_note_number=False):
-  title_resolved_text = resolve_title_notes(text_path)
-  line_break_removed_text = remove_line_break(title_resolved_text)
-  sanskrit_note_resolved_text = resolve_sanskrit_notes(line_break_removed_text)
-  archaics_note_resolved_text = resolve_archaics(sanskrit_note_resolved_text)
-  automated_critical_edition_text = tranfer_line_break(text_path, archaics_note_resolved_text)
-  if update_note_number:
-    automated_critical_edition_text = update_notes_number(automated_critical_edition_text, text_path)
-  Path(f"./cleaned/{text_path.name}").write_text(automated_critical_edition_text, encoding='utf-8')
+def get_automated_critical_edition_text(opf_path):
+  durchen_path = resolve_sanskrit_notes(opf_path)
 
 
 
 if __name__ == "__main__":
   pecha_id = "PFCFAE7FE"
   opf_path = Path(f"./demo_opf/{pecha_id}/{pecha_id}.opf/")
-  new_durchen = resolve_sanskrit_notes(opf_path)
+  get_automated_critical_edition_text(opf_path)
