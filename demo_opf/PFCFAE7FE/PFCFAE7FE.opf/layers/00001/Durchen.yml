@@ -15,7 +15,7 @@ annotations:
       narthang: སྟོ་ཏྲ
       derge: སྟ་བཾ
       chone: སྟ་བཾ
-    printable: true
+    printable: false
   dc8a86600e3348ffa82f683e40f7bc00:
     id: dc8a86600e3348ffa82f683e40f7bc00
     span:
@@ -1317,7 +1317,7 @@ annotations:
       narthang: ཀྲྀཥཱ་པཎྜི་
       derge: ཀྲྀཥཱ་པཎྜི་
       chone: ཀྲྀཥཱ་པཎྜི་
-    printable: true
+    printable: false
   1e6f80e1578349b1afa72bc732d7b988:
     id: 1e6f80e1578349b1afa72bc732d7b988
     span:

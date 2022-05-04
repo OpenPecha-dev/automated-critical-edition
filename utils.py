@@ -2,6 +2,7 @@ import re
 from typing import DefaultDict
 import yaml
 from antx import transfer
+from openpecha.utils import dump_yaml
 
 
 
@@ -10,6 +11,9 @@ def check_all_notes_option(note_options):
         if not note:
             return False
     return True
+
+def update_durchen(durchen, durchen_path):
+    dump_yaml(durchen, durchen_path)
 
 
 def get_default_note(ann_info):
