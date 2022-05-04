@@ -68,5 +68,6 @@ def get_automated_critical_edition_text(text_path, update_note_number=False):
 
 
 if __name__ == "__main__":
-  text_path = Path(f"./data/collated_text/D4274_v108.txt")
-  get_automated_critical_edition_text(text_path)
+  pecha_id = "PFCFAE7FE"
+  opf_path = Path(f"./demo_opf/{pecha_id}/{pecha_id}.opf/")
+  new_durchen = resolve_sanskrit_notes(opf_path)
