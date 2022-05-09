@@ -1,0 +1,6 @@
+README.md
+setup.py
+automated_critical_edition.egg-info/PKG-INFO
+automated_critical_edition.egg-info/SOURCES.txt
+automated_critical_edition.egg-info/dependency_links.txt
+automated_critical_edition.egg-info/top_level.txt

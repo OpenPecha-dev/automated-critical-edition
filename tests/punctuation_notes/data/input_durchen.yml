@@ -1,0 +1,102 @@
+id: 640ea37ee7a048d8a60c9a0f06c28848
+annotation_type: Durchen
+revision: '00001'
+annotations:
+  42a1e0e4ccc1471e9489b04de7227f18:
+    id: 42a1e0e4ccc1471e9489b04de7227f18
+    span:
+      start: 67
+      end: 73
+      errors: {}
+    metadata: {}
+    default: derge
+    options:
+      peking: ''
+      narthang: ''
+      derge: ༄༅༅། །
+      chone: ༄༅༅། །
+    printable: true
+  dc8a86600e3348ffa82f683e40f7bc00:
+    id: dc8a86600e3348ffa82f683e40f7bc00
+    span:
+      start: 115
+      end: 123
+      errors: {}
+    metadata: {}
+    default: derge
+    options:
+      peking: ''
+      narthang: ''
+      derge: འཕགས་པ་
+      chone: འཕགས་པ་
+    printable: true
+  9bb95c6acc56476b8af2754b271a64df:
+    id: 9bb95c6acc56476b8af2754b271a64df
+    span:
+      start: 269
+      end: 273
+      errors: {}
+    metadata: {}
+    default: derge
+    options:
+      peking: ལོ
+      narthang: ལོ
+      derge: འདུད
+      chone: འདུད
+    printable: true
+  d8d7f78ad44f4fcd9a469bb9acecf9ca:
+    id: d8d7f78ad44f4fcd9a469bb9acecf9ca
+    span:
+      start: 579
+      end: 583
+      errors: {}
+    metadata: {}
+    default: derge
+    options:
+      peking: ། །
+      narthang: ། །
+      derge: རྣམ་
+      chone: རྣམ་
+    printable: true
+  25bbb0f7bee9428c865b8e21e8733878:
+    id: 25bbb0f7bee9428c865b8e21e8733878
+    span:
+      start: 786
+      end: 791
+      errors: {}
+    metadata: {}
+    default: derge
+    options:
+      peking: ། །
+      narthang: ། །
+      derge: །། །།
+      chone: །། །།
+    printable: true
+  38f0bfa48d4c4e4abf9ebff33259cb20:
+    id: 38f0bfa48d4c4e4abf9ebff33259cb20
+    span:
+      start: 8932
+      end: 8935
+      errors: {}
+    metadata: {}
+    default: derge
+    options:
+      peking: རྒྱས་པར་
+      narthang: རྒྱས་པར་
+      derge: བར་
+      chone: བར་
+    printable: true
+  1e6f80e1578349b1afa72bc732d7b988:
+    id: 1e6f80e1578349b1afa72bc732d7b988
+    span:
+      start: 12114
+      end: 12116
+      errors: {}
+    metadata: {}
+    default: derge
+    options:
+      peking: །
+      narthang: །
+      derge: ' '
+      chone: ' '
+    printable: true

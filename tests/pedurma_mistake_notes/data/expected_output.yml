@@ -1,0 +1,88 @@
+id: 640ea37ee7a048d8a60c9a0f06c28848
+annotation_type: Durchen
+revision: '00001'
+annotations:
+  42a1e0e4ccc1471e9489b04de7227f18:
+    id: 42a1e0e4ccc1471e9489b04de7227f18
+    span:
+      start: 67
+      end: 73
+      errors: {}
+    metadata: {}
+    default: derge
+    options:
+      peking: སྟོ་ཏྲ
+      narthang: སྟོ་ཏྲ
+      derge: སྟོ་ཏྲ
+      chone: སྟོ་ཏྲ
+    printable: False
+  dc8a86600e3348ffa82f683e40f7bc00:
+    id: dc8a86600e3348ffa82f683e40f7bc00
+    span:
+      start: 115
+      end: 123
+      errors: {}
+    metadata: {}
+    default: derge
+    options:
+      peking: ''
+      narthang: ''
+      derge: འཕགས་པ་
+      chone: འཕགས་པ་
+    printable: true
+  9bb95c6acc56476b8af2754b271a64df:
+    id: 9bb95c6acc56476b8af2754b271a64df
+    span:
+      start: 269
+      end: 273
+      errors: {}
+    metadata: {}
+    default: derge
+    options:
+      peking: ལོ
+      narthang: ལོ
+      derge: ལོ
+      chone: ལོ
+    printable: False
+  d8d7f78ad44f4fcd9a469bb9acecf9ca:
+    id: d8d7f78ad44f4fcd9a469bb9acecf9ca
+    span:
+      start: 579
+      end: 583
+      errors: {}
+    metadata: {}
+    default: derge
+    options:
+      peking: རྣམས་
+      narthang: རྣམས་
+      derge: རྣམ་
+      chone: རྣམ་
+    printable: true
+  25bbb0f7bee9428c865b8e21e8733878:
+    id: 25bbb0f7bee9428c865b8e21e8733878
+    span:
+      start: 786
+      end: 791
+      errors: {}
+    metadata: {}
+    default: derge
+    options:
+      peking: གཏོད་
+      narthang: གཏོད་
+      derge: གཏོད་
+      chone: གཏོད་
+    printable: False
+  6b72431b26b04867a0e5d30553debf88:
+    id: 6b72431b26b04867a0e5d30553debf88
+    span:
+      start: 1069
+      end: 1073
+      errors: {}
+    metadata: {}
+    default: derge
+    options:
+      peking: མཐའ་
+      narthang: མཐའ་
+      derge: མཐར་
+      chone: མཐར་
+    printable: true

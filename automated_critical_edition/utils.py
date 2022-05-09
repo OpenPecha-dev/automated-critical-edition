@@ -63,7 +63,7 @@ def get_context(chunk, type_):
     return context.strip()
 
 def clean_note(note_text):
-    noise_anns = ['«པེ་»', '«སྣར་»', '«སྡེ་»', '«ཅོ་»', '\(\d+\) ', ':']
+    noise_anns = ['«པེ་»', '«སྣར་»', '«སྡེ་»', '«ཅོ་»', r'\(\d+\) ', ':']
     for noise_ann in noise_anns:
         note_text = re.sub(noise_ann, '', note_text)
     return note_text
@@ -80,13 +80,13 @@ def get_default_option(prev_chunk):
     return default_option
 
 def get_note_options(default_option, note_chunk):
-    note_chunk = re.sub('\(\d+\) ', '', note_chunk)
-    z = re.match("<.+?(\(.+\))>",note_chunk)
+    note_chunk = re.sub(r'\(\d+\) ', '', note_chunk)
+    z = re.match(r"<.+?(\(.+\))>",note_chunk)
     if z:
         note_chunk = note_chunk.replace(z.group(1),'')
     if "+" in note_chunk:
         default_option = ""
-    note_chunk = re.sub("\+", "", note_chunk)
+    note_chunk = re.sub(r"\+", "", note_chunk)
     pub_mapping = {
         '«པེ་»': 'peking',
         '«པེ»': 'peking',
@@ -159,14 +159,14 @@ def get_note_sample(prev_chunk, note_chunk, next_chunk,collated_text,prev_end):
 def get_notes(collated_text):
     cur_text_notes = []
     prev_end = 0
-    chunks = re.split('(\(\d+\) <.+?>)', collated_text)
+    chunks = re.split(r'(\(\d+\) <.+?>)', collated_text)
     prev_chunk = chunks[0]
     for chunk_walker, chunk in enumerate(chunks):
         try:
             next_chunk = chunks[chunk_walker+1]
         except:
             next_chunk = ''
-        if re.search('\(\d+\) <.+?>', chunk):
+        if re.search(r'\(\d+\) <.+?>', chunk):
             note,prev_end  = get_note_sample(prev_chunk, chunk, next_chunk,collated_text,prev_end)
             cur_text_notes.append(note)
             continue
@@ -175,7 +175,7 @@ def get_notes(collated_text):
 
 def get_notes_samples(collated_text, note_samples, text_id):
     collated_text = collated_text.replace('\n', '')
-    collated_text = re.sub('\d+-\d+', '', collated_text)
+    collated_text = re.sub(r'\d+-\d+', '', collated_text)
     cur_text_notes = get_notes(collated_text)
     for cur_text_note, note_options in cur_text_notes:
         if note_samples.get(cur_text_note, {}):
@@ -252,7 +252,7 @@ def is_title_note(note):
     
 
 def get_note_span(collated_text,chunk,prev_end):
-    p = re.compile("\(.+?\) <.*?>")
+    p = re.compile(r"\(.+?\) <.*?>")
     for m in p.finditer(collated_text):
         start,end = m.span()
         if m.group() in chunk and prev_end <= start:
@@ -309,8 +309,8 @@ def resolve_title_notes(text_path):
     return new_collated_text
 
 def clean_default_option(option):
-    if re.search("\d+-\d+",option):
-        option = re.sub("\d+\-\d+","",option)
+    if re.search(r"\d+-\d+",option):
+        option = re.sub(r"\d+\-\d+","",option)
     return option  
 
 def remove_line_break(collated_text):

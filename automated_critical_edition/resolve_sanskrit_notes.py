@@ -1,6 +1,6 @@
 from __future__ import annotations
 from pathlib import Path
-from utils import *
+from automated_critical_edition.utils import *
 from botok.third_party.has_skrt_syl import has_skrt_syl
 from botok import WordTokenizer
 from openpecha.utils import load_yaml

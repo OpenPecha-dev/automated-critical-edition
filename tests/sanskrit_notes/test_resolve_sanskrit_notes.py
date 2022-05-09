@@ -1,5 +1,5 @@
 from pathlib import Path
-from resolve_sanskrit_notes import resolve_default_sanskrit_notes
+from automated_critical_edition.resolve_sanskrit_notes import resolve_default_sanskrit_notes
 
 
 
