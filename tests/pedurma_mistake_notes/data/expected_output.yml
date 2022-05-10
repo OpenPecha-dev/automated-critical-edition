@@ -11,11 +11,27 @@ annotations:
     metadata: {}
     default: derge
     options:
-      peking: སྟོ་ཏྲ
-      narthang: སྟོ་ཏྲ
-      derge: སྟོ་ཏྲ
-      chone: སྟོ་ཏྲ
-    printable: False
+      peking: 
+        note: སྟོ་ཏྲ
+        probability: null
+        apparatus:
+         - ALL_NOTE_SAME
+      narthang:
+        note: སྟོ་ཏྲ
+        probability: null
+        apparatus:
+         - ALL_NOTE_SAME
+      derge:
+        note: སྟོ་ཏྲ
+        probability: null
+        apparatus:
+         - ALL_NOTE_SAME
+      chone:
+        note: སྟོ་ཏྲ
+        probability: null
+        apparatus:
+         - ALL_NOTE_SAME
+    printable: false
   dc8a86600e3348ffa82f683e40f7bc00:
     id: dc8a86600e3348ffa82f683e40f7bc00
     span:
@@ -25,10 +41,22 @@ annotations:
     metadata: {}
     default: derge
     options:
-      peking: ''
-      narthang: ''
-      derge: འཕགས་པ་
-      chone: འཕགས་པ་
+      peking:
+        note: ''
+        probability: null
+        apparatus: null
+      narthang:
+        note: ''
+        probability: null
+        apparatus: null
+      derge:
+        note: འཕགས་པ་
+        probability: null
+        apparatus: null
+      chone:
+        note: འཕགས་པ་
+        probability: null
+        apparatus: null
     printable: true
   9bb95c6acc56476b8af2754b271a64df:
     id: 9bb95c6acc56476b8af2754b271a64df
@@ -39,11 +67,27 @@ annotations:
     metadata: {}
     default: derge
     options:
-      peking: ལོ
-      narthang: ལོ
-      derge: ལོ
-      chone: ལོ
-    printable: False
+      peking:
+        note: ལོ
+        probability: null
+        apparatus:
+         - ALL_NOTE_SAME
+      narthang:
+        note: ལོ
+        probability: null
+        apparatus:
+         - ALL_NOTE_SAME
+      derge:
+        note: ལོ
+        probability: null
+        apparatus:
+         - ALL_NOTE_SAME
+      chone:
+        note: ལོ
+        probability: null
+        apparatus:
+         - ALL_NOTE_SAME
+    printable: false
   d8d7f78ad44f4fcd9a469bb9acecf9ca:
     id: d8d7f78ad44f4fcd9a469bb9acecf9ca
     span:
@@ -53,10 +97,22 @@ annotations:
     metadata: {}
     default: derge
     options:
-      peking: རྣམས་
-      narthang: རྣམས་
-      derge: རྣམ་
-      chone: རྣམ་
+      peking:
+        note: རྣམས་
+        probability: null
+        apparatus: null
+      narthang:
+        note: རྣམས་
+        probability: null
+        apparatus: null
+      derge:
+        note: རྣམ་
+        probability: null
+        apparatus: null
+      chone:
+        note: རྣམ་
+        probability: null
+        apparatus: null
     printable: true
   25bbb0f7bee9428c865b8e21e8733878:
     id: 25bbb0f7bee9428c865b8e21e8733878
@@ -67,11 +123,23 @@ annotations:
     metadata: {}
     default: derge
     options:
-      peking: གཏོད་
-      narthang: གཏོད་
-      derge: གཏོད་
-      chone: གཏོད་
-    printable: False
+      peking:
+        note: བཏོད་
+        probability: null
+        apparatus: null
+      narthang:
+        note: གཏོད་
+        probability: null
+        apparatus: null
+      derge:
+        note: གཏོད་
+        probability: null
+        apparatus: null
+      chone:
+        note: གཏོད་
+        probability: null
+        apparatus: null
+    printable: true
   6b72431b26b04867a0e5d30553debf88:
     id: 6b72431b26b04867a0e5d30553debf88
     span:
@@ -81,8 +149,20 @@ annotations:
     metadata: {}
     default: derge
     options:
-      peking: མཐའ་
-      narthang: མཐའ་
-      derge: མཐར་
-      chone: མཐར་
+      peking:
+        note: མཐའ་
+        probability: null
+        apparatus: null
+      narthang:
+        note: མཐའ་
+        probability: null
+        apparatus: null
+      derge:
+        note: མཐར་
+        probability: null
+        apparatus: null
+      chone:
+        note: མཐར་
+        probability: null
+        apparatus: null
     printable: true

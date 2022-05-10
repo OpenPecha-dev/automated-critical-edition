@@ -4,19 +4,30 @@ from openpecha.core.pecha import OpenPechaFS
 from automated_critical_edition.utils import update_durchen
 
 
-def is_punct(note):
+def is_punct(note_info):
     puncts = ["། །", "།། །།", "།།", "༄༅༅། །", "།"]
     for punct in puncts:
-        if note == punct:
+        if note_info['note'] == punct:
             return True
     return False
 
 
 def is_punctuation_note(note_options):
-    for pub, note in note_options.items():
-        if is_punct(note):
+    for pub, note_info in note_options.items():
+        if is_punct(note_info):
             return True
     return False
+
+def update_apparatus(note_options, method):
+    for pub, note_info in note_options.items():
+        if note_info['apparatus']:
+            cur_note_apparatus = note_info['apparatus']
+        else:
+            cur_note_apparatus = []
+        if is_punct(note_info):
+            cur_note_apparatus.append(method)
+            note_options[pub]['apparatus'] = cur_note_apparatus
+    return note_options
 
 
 def make_punctuation_note_unprintable(durchen_layer):
@@ -24,6 +35,8 @@ def make_punctuation_note_unprintable(durchen_layer):
         note_options = annotation['options']
         if is_punctuation_note(note_options):
             durchen_layer['annotations'][uuid]['printable'] = False
+        updated_note_options = update_apparatus(note_options, method='PUNCT')
+        durchen_layer['annotations'][uuid]['options'] = updated_note_options
     return durchen_layer
 
 def resolve_punctuation_notes(opf_path):
