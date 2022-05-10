@@ -85,3 +85,4 @@ config.ini
 
 /.env
 *.egg
+*.egg-info
