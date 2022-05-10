@@ -86,3 +86,4 @@ config.ini
 /.env
 *.egg
 *.egg-info
+__pycache__/
