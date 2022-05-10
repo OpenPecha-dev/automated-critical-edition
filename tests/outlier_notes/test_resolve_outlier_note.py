@@ -1,7 +1,7 @@
 from pathlib import Path
 
 from automated_critical_edition.utils import from_yaml
-from automated_critical_edition.resolve_outlier import make_outlier_note_unprintable
+from automated_critical_edition.detect_outlier import make_outlier_note_unprintable
 
 def test_resolve_outlier_note():
     durchen_layer = from_yaml(Path('./tests/outlier_notes/data/input_durchen.yml'))

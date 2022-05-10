@@ -7,7 +7,7 @@ import requests
 import yaml
 from botok.tokenizers.wordtokenizer import WordTokenizer
 from utils import *
-from resolve_archiac_notes import tibetan_alp_val,normalize_word
+from automated_critical_edition.detect_archiac_notes import tibetan_alp_val,normalize_word
 from pathlib import Path
 
 lekshi_gurkhang_url = 'https://raw.githubusercontent.com/Esukhia/Tibetan-archaic2modern-word/main/arch_modern.yml'

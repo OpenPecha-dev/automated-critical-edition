@@ -13,14 +13,14 @@ def get_note(durchen_ann, note_walker):
     }
     note_md = f"[^{note_walker}]:"
     default_pub = durchen_ann['default']
-    default_note = durchen_ann['options'][default_pub]
+    default_note = durchen_ann['options'][default_pub]['note']
     alt_note = ""
-    for pub, note in durchen_ann['options'].items():
+    for pub, note_info in durchen_ann['options'].items():
         tib_pub = tib_names[pub]
-        if note != default_note:
-            if alt_note != note:
-                note_md += f" {note} *{tib_pub}* "
-                alt_note = note
+        if note_info['note'] != default_note:
+            if alt_note != note_info['note']:
+                note_md += f" {note_info['note']} *{tib_pub}* "
+                alt_note = note_info['note']
             else:
                 note_md += f" *{tib_pub}* "
     note_md += "\n"
