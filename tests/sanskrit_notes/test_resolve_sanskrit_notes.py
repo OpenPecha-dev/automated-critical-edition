@@ -1,5 +1,5 @@
 from pathlib import Path
-from automated_critical_edition.resolve_sanskrit_notes import resolve_sanskrit_notes
+from automated_critical_edition.detect_sanskrit_notes import resolve_sanskrit_notes
 from openpecha.utils import load_yaml
 
 

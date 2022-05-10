@@ -84,3 +84,5 @@ celerybeat-schedule celerybeat.pid
 config.ini
 
 /.env
+*.egg
+*.egg-info

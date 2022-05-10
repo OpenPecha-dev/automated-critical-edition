@@ -1,5 +1,5 @@
 from pathlib import Path
-from automated_critical_edition.resolve_archiac_notes import resolve_archaics
+from automated_critical_edition.detect_archiac_notes import resolve_archaics
 from openpecha.utils import load_yaml
 
 

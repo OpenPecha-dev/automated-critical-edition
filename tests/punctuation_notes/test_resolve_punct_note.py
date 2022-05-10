@@ -1,10 +1,10 @@
 from pathlib import Path
 
 from automated_critical_edition.utils import from_yaml
-from automated_critical_edition.resolve_punctuation_note import make_punctuation_note_unprintable
+from automated_critical_edition.detect_punctuation_note import make_punctuation_note_unprintable
 
 
-def test_resolve_outlier_note():
+def test_resolve_punct_note():
     durchen_layer = from_yaml(Path('./tests/punctuation_notes/data/input_durchen.yml'))
     expected_durchen_layer = from_yaml(Path('./tests/punctuation_notes/data/expected_output.yml'))
 
