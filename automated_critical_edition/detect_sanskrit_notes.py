@@ -73,6 +73,7 @@ def resolve_sanskrit_optional_notes(durchen):
     durchen["annotations"].update(anns)
     return durchen
 
+
 def resolve_sanskrit_notes(opf_path):
     pecha = OpenPechaFS(opf_path)
     base_names = get_base_names(opf_path)
@@ -81,8 +82,4 @@ def resolve_sanskrit_notes(opf_path):
         durchen_path = pecha.layers_path / base_name / "Durchen.yml"
         default_resolved_durchen = resolve_default_sanskrit_notes(durchen_layer)
         sanskrit_resolved_durchen = resolve_sanskrit_optional_notes(default_resolved_durchen)
-<<<<<<< HEAD
         update_durchen(sanskrit_resolved_durchen, durchen_path)
-=======
-    return sanskrit_resolved_durchen
->>>>>>> 0120473e433636eb73e0ac74595258adb9f2a3ae
