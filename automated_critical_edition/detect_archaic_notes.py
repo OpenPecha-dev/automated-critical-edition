@@ -133,7 +133,7 @@ def resolve_annotations(durchen):
                         continue
                     elif modern_word_pub == ann_info['default']:
                         ann_info['printable']= False
-                        ann_info['options'][modern_word_pub]["apparatus"] = ["ARCHIAC"]
+                        ann_info['options'][modern_word_pub]["apparatus"] = ["archaic"]
                     else:
                         offset = check_offset(ann_info, modern_word_pub)
                         if offset == 0:
@@ -141,7 +141,7 @@ def resolve_annotations(durchen):
                         else:
                             ann_info['printable']= False
                             ann_info['default'] = modern_word_pub
-                            ann_info['options'][modern_word_pub]["apparatus"] = ["ARCHIAC"]
+                            ann_info['options'][modern_word_pub]["apparatus"] = ["archaic"]
                             anns = update_durchen_offset(offset, anns, ann_id) 
     durchen['annotations'].update(anns)
     return durchen
@@ -162,5 +162,5 @@ def resolve_archaics(layers_path, base_path):
         global archaic_words,modern_words
         archaic_words,modern_words = get_archaic_modern_words()
         durchen = resolve_annotations(durchen)
-        new_base = get_base(durchen, load_yaml(durchen_path), base_text, "ARCHIAC")
+        new_base = get_base(durchen, load_yaml(durchen_path), base_text, "archaic")
     return new_base, durchen
