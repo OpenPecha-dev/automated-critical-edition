@@ -153,7 +153,7 @@ annotations:
         note: མཿཙཎྜ་
         probability: null
         apparatus:
-        - sanskrit
+        - SANSKRIT
       chone:
         note: མཿཙཎྜ་
         probability: null
@@ -180,7 +180,7 @@ annotations:
         note: ཎ་
         probability: null
         apparatus:
-        - sanskrit
+        - SANSKRIT
       chone:
         note: ཎ་
         probability: null
@@ -207,7 +207,7 @@ annotations:
         note: ནཱ་
         probability: null
         apparatus:
-        - sanskrit
+        - SANSKRIT
       chone:
         note: ནཱ་
         probability: null
@@ -234,7 +234,7 @@ annotations:
         note: དྷ་ར་དྷ་
         probability: null
         apparatus:
-        - sanskrit
+        - SANSKRIT
       chone:
         note: དྷ་ར་དྷ་
         probability: null
@@ -260,12 +260,13 @@ annotations:
       derge:
         note: དྷཱ་ར་ཡ་དྷཱ་
         probability: null
-        apparatus: null
+        apparatus:
+        - SANSKRIT
       chone:
         note: དྷཱ་ར་ཡ་དྷཱ་
         probability: null
         apparatus: null
-    printable: true
+    printable: false
   e818f12b49bc43aa9126777314129d4c:
     id: e818f12b49bc43aa9126777314129d4c
     span:
@@ -287,7 +288,7 @@ annotations:
         note: དཱ་རུ་ཎ་དཱ་རུ་ཎ་
         probability: null
         apparatus:
-        - sanskrit
+        - SANSKRIT
       chone:
         note: དཱ་རུ་ཎ་དཱ་རུ་ཎ་
         probability: null
@@ -392,7 +393,7 @@ annotations:
         note: ' དཱུར་'
         probability: null
         apparatus:
-        - sanskrit
+        - SANSKRIT
       chone:
         note: ' དཱུར་'
         probability: null
@@ -419,7 +420,7 @@ annotations:
         note: སྭཔྣ་
         probability: null
         apparatus:
-        - sanskrit
+        - SANSKRIT
       chone:
         note: སྭཔྣ་
         probability: null
@@ -446,7 +447,7 @@ annotations:
         note: བི་
         probability: null
         apparatus:
-        - sanskrit
+        - SANSKRIT
       chone:
         note: བི་
         probability: null
@@ -473,7 +474,7 @@ annotations:
         note: ཛྭཱ་
         probability: null
         apparatus:
-        - sanskrit
+        - SANSKRIT
       chone:
         note: ཛྭཱ་
         probability: null

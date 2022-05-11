@@ -10,8 +10,3 @@ def test_resolve_sanskrit_notes():
     resolved_sanskrit_durchen = resolve_sanskrit_notes(layers_path)
     expected_durchen_output = load_yaml(Path(f"./tests/sanskrit_notes/data/expected_durchen_output.yml"))
     assert resolved_sanskrit_durchen == expected_durchen_output
-
-
-if __name__ == "__main__":
-    test_resolve_sanskrit_notes()
-    # dump_yaml(durchen, Path(f"./test_resolve.yml"))
