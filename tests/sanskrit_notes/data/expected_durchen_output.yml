@@ -445,12 +445,13 @@ annotations:
       derge:
         note: བི་
         probability: null
-        apparatus: null
+        apparatus:
+        - sanskrit
       chone:
         note: བི་
         probability: null
         apparatus: null
-    printable: true
+    printable: false
   1b92b46a5e8448fbb7bc1c79aa2ad577:
     id: 1b92b46a5e8448fbb7bc1c79aa2ad577
     span:
