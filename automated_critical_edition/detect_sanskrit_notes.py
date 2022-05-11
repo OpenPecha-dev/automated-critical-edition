@@ -4,6 +4,9 @@ from automated_critical_edition.utils import check_all_notes_option, update_durc
 from botok.third_party.has_skrt_syl import has_skrt_syl
 from botok import WordTokenizer
 from openpecha.utils import load_yaml
+from openpecha.core.pecha import OpenPechaFS
+from automated_critical_edition.docx_serializer import get_base_names
+from automated_critical_edition.utils import update_durchen
 
 wt = WordTokenizer()
 
@@ -55,11 +58,12 @@ def resolve_sanskrit_optional_notes(durchen):
     durchen["annotations"].update(anns)
     return durchen
 
-def resolve_sanskrit_notes(layers_path):
-    vol_paths = list(Path(layers_path).iterdir())
-    for vol_path in vol_paths:
-        durchen_path = Path(f"{vol_path}/Durchen.yml")
-        durchen = load_yaml(durchen_path)
-        default_resolved_durchen = resolve_default_sanskrit_notes(durchen)
+def resolve_sanskrit_notes(opf_path):
+    pecha = OpenPechaFS(opf_path)
+    base_names = get_base_names(opf_path)
+    for base_name in base_names:
+        durchen_layer = pecha.read_layers_file(base_name, "Durchen")
+        durchen_path = pecha.layers_path / base_name / "Durchen.yml"
+        default_resolved_durchen = resolve_default_sanskrit_notes(durchen_layer)
         sanskrit_resolved_durchen = resolve_sanskrit_optional_notes(default_resolved_durchen)
-    return sanskrit_resolved_durchen
+        update_durchen(sanskrit_resolved_durchen, durchen_path)
