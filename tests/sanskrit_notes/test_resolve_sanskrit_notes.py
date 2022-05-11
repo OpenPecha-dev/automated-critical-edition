@@ -1,6 +1,7 @@
+from cgi import test
 from pathlib import Path
 from automated_critical_edition.detect_sanskrit_notes import resolve_sanskrit_notes
-from openpecha.utils import load_yaml
+from openpecha.utils import load_yaml, dump_yaml
 
 
 
@@ -11,3 +12,6 @@ def test_resolve_sanskrit_notes():
     assert resolved_sanskrit_durchen == expected_durchen_output
 
 
+if __name__ == "__main__":
+    test_resolve_sanskrit_notes()
+    # dump_yaml(durchen, Path(f"./test_resolve.yml"))

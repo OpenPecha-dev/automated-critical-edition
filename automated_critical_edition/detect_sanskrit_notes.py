@@ -1,7 +1,6 @@
 from __future__ import annotations
 from pathlib import Path
-from automated_critical_edition.utils import check_all_notes_option, update_durchen_offset
-from botok.third_party.has_skrt_syl import has_skrt_syl
+from automated_critical_edition.utils import check_all_notes_option
 from botok import WordTokenizer
 from openpecha.utils import load_yaml
 
@@ -9,12 +8,15 @@ wt = WordTokenizer()
 
 def check_for_sanskrit_syl_using_botok(note):
     tokens = wt.tokenize(note)
+    tokens_len = len(tokens)
     num = 0
     for token in tokens:
         if token.skrt:
            num += 1
+        elif token.chunk_type == "PUNCT":
+            tokens_len -= 1
             
-    if len(tokens) == num or num > len(tokens)/2:
+    if tokens_len == num or num > tokens_len/2:
         return True
     else:
         return False
@@ -63,3 +65,8 @@ def resolve_sanskrit_notes(layers_path):
         default_resolved_durchen = resolve_default_sanskrit_notes(durchen)
         sanskrit_resolved_durchen = resolve_sanskrit_optional_notes(default_resolved_durchen)
     return sanskrit_resolved_durchen
+
+
+if __name__ == "__main__":
+    layers_path = Path("./layers/")
+    durchen = resolve_sanskrit_notes(layers_path)
