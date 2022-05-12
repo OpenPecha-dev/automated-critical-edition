@@ -22,7 +22,7 @@ def get_note(durchen_ann, note_walker):
                 note_md += f" {note_info['note']} *{tib_pub}* "
                 alt_note = note_info['note']
             else:
-                note_md += f" *{tib_pub}* "
+                note_md += f"  *{tib_pub}* "
     note_md += "\n"
     return note_md
 
