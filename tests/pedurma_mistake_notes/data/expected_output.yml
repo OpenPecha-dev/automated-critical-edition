@@ -14,22 +14,22 @@ annotations:
       peking: 
         note: སྟོ་ཏྲ
         probability: null
-        apparatus:
+        features:
          - ALL_NOTE_SAME
       narthang:
         note: སྟོ་ཏྲ
         probability: null
-        apparatus:
+        features:
          - ALL_NOTE_SAME
       derge:
         note: སྟོ་ཏྲ
         probability: null
-        apparatus:
+        features:
          - ALL_NOTE_SAME
       chone:
         note: སྟོ་ཏྲ
         probability: null
-        apparatus:
+        features:
          - ALL_NOTE_SAME
     printable: false
   dc8a86600e3348ffa82f683e40f7bc00:
@@ -44,19 +44,19 @@ annotations:
       peking:
         note: ''
         probability: null
-        apparatus: null
+        features: null
       narthang:
         note: ''
         probability: null
-        apparatus: null
+        features: null
       derge:
         note: འཕགས་པ་
         probability: null
-        apparatus: null
+        features: null
       chone:
         note: འཕགས་པ་
         probability: null
-        apparatus: null
+        features: null
     printable: true
   9bb95c6acc56476b8af2754b271a64df:
     id: 9bb95c6acc56476b8af2754b271a64df
@@ -70,22 +70,22 @@ annotations:
       peking:
         note: ལོ
         probability: null
-        apparatus:
+        features:
          - ALL_NOTE_SAME
       narthang:
         note: ལོ
         probability: null
-        apparatus:
+        features:
          - ALL_NOTE_SAME
       derge:
         note: ལོ
         probability: null
-        apparatus:
+        features:
          - ALL_NOTE_SAME
       chone:
         note: ལོ
         probability: null
-        apparatus:
+        features:
          - ALL_NOTE_SAME
     printable: false
   d8d7f78ad44f4fcd9a469bb9acecf9ca:
@@ -100,19 +100,19 @@ annotations:
       peking:
         note: རྣམས་
         probability: null
-        apparatus: null
+        features: null
       narthang:
         note: རྣམས་
         probability: null
-        apparatus: null
+        features: null
       derge:
         note: རྣམ་
         probability: null
-        apparatus: null
+        features: null
       chone:
         note: རྣམ་
         probability: null
-        apparatus: null
+        features: null
     printable: true
   25bbb0f7bee9428c865b8e21e8733878:
     id: 25bbb0f7bee9428c865b8e21e8733878
@@ -126,19 +126,19 @@ annotations:
       peking:
         note: བཏོད་
         probability: null
-        apparatus: null
+        features: null
       narthang:
         note: གཏོད་
         probability: null
-        apparatus: null
+        features: null
       derge:
         note: གཏོད་
         probability: null
-        apparatus: null
+        features: null
       chone:
         note: གཏོད་
         probability: null
-        apparatus: null
+        features: null
     printable: true
   6b72431b26b04867a0e5d30553debf88:
     id: 6b72431b26b04867a0e5d30553debf88
@@ -152,17 +152,17 @@ annotations:
       peking:
         note: མཐའ་
         probability: null
-        apparatus: null
+        features: null
       narthang:
         note: མཐའ་
         probability: null
-        apparatus: null
+        features: null
       derge:
         note: མཐར་
         probability: null
-        apparatus: null
+        features: null
       chone:
         note: མཐར་
         probability: null
-        apparatus: null
+        features: null
     printable: true

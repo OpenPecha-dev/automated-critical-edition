@@ -18,15 +18,15 @@ def is_punctuation_note(note_options):
             return True
     return False
 
-def update_apparatus(note_options, method):
+def update_features(note_options, method):
     for pub, note_info in note_options.items():
-        if note_info['apparatus']:
-            cur_note_apparatus = note_info['apparatus']
+        if note_info['features']:
+            cur_note_features = note_info['features']
         else:
-            cur_note_apparatus = []
+            cur_note_features = []
         if is_punct(note_info):
-            cur_note_apparatus.append(method)
-            note_options[pub]['apparatus'] = cur_note_apparatus
+            cur_note_features.append(method)
+            note_options[pub]['features'] = cur_note_features
     return note_options
 
 
@@ -35,7 +35,7 @@ def make_punctuation_note_unprintable(durchen_layer):
         note_options = annotation['options']
         if is_punctuation_note(note_options):
             durchen_layer['annotations'][uuid]['printable'] = False
-        updated_note_options = update_apparatus(note_options, method='PUNCT')
+        updated_note_options = update_features(note_options, method='PUNCT')
         durchen_layer['annotations'][uuid]['options'] = updated_note_options
     return durchen_layer
 

@@ -10,14 +10,14 @@ def is_all_note_same(note_options, default_note):
             return False
     return True
 
-def update_apparatus(note_options, method):
+def update_features(note_options, method):
     for pub, note_info in note_options.items():
-        if note_info['apparatus']:
-            cur_note_apparatus = note_info['apparatus']
+        if note_info['features']:
+            cur_note_features = note_info['features']
         else:
-            cur_note_apparatus = []
-        cur_note_apparatus.append(method)
-        note_options[pub]['apparatus'] = cur_note_apparatus
+            cur_note_features = []
+        cur_note_features.append(method)
+        note_options[pub]['features'] = cur_note_features
     return note_options
 
 def resolve_all_same_notes(durchen_layer):
@@ -27,7 +27,7 @@ def resolve_all_same_notes(durchen_layer):
         note_options = annotation['options']
         if is_all_note_same(note_options, default_note):
             durchen_layer['annotations'][uuid]['printable'] = False
-            updated_note_options = update_apparatus(note_options, method='ALL_NOTE_SAME')
+            updated_note_options = update_features(note_options, method='ALL_NOTE_SAME')
             durchen_layer['annotations'][uuid]['options'] = updated_note_options
     return durchen_layer
 

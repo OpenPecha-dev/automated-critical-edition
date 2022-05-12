@@ -10,14 +10,14 @@ from automated_critical_edition.utils import update_durchen
 
 wt = WordTokenizer()
 
-def update_apparatus(ann_info):
+def update_features(ann_info):
     default = ann_info['default']
-    if ann_info["options"][default]['apparatus']:
-        curr_apparatus = [ann_info["options"][default]['apparatus']]
+    if ann_info["options"][default]['features']:
+        curr_features = [ann_info["options"][default]['features']]
     else:
-        curr_apparatus = []
-    curr_apparatus.append("SANSKRIT")
-    ann_info['options'][default]['apparatus'] = curr_apparatus
+        curr_features = []
+    curr_features.append("SANSKRIT")
+    ann_info['options'][default]['features'] = curr_features
     return ann_info
 
 def check_for_sanskrit_syl_using_botok(note):
@@ -47,7 +47,7 @@ def resolve_default_sanskrit_notes(durchen):
             default_note = ann_info['options'][default_pub]['note']
             if check_for_sanskrit_syl_using_botok(default_note):
                 anns[ann_id]["printable"] = False
-                ann_info = update_apparatus(ann_info)
+                ann_info = update_features(ann_info)
                 anns[ann_id].update(ann_info)
     durchen["annotations"].update(anns)
     return durchen
@@ -67,7 +67,7 @@ def resolve_sanskrit_optional_notes(durchen):
                             pub_types.append(pub_type)
                 if len(pub_types) >= 1:
                     anns[ann_id]["printable"] = False
-                    ann_info = update_apparatus(ann_info)
+                    ann_info = update_features(ann_info)
                     anns[ann_id].update(ann_info)
                 
     durchen["annotations"].update(anns)

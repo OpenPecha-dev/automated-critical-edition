@@ -133,7 +133,7 @@ def resolve_annotations(durchen):
                         continue
                     elif modern_word_pub == ann_info['default']:
                         ann_info['printable']= False
-                        ann_info['options'][modern_word_pub]["apparatus"] = ["archaic"]
+                        ann_info['options'][modern_word_pub]["features"] = ["archaic"]
                     else:
                         offset = check_offset(ann_info, modern_word_pub)
                         if offset == 0:
@@ -141,7 +141,7 @@ def resolve_annotations(durchen):
                         else:
                             ann_info['printable']= False
                             ann_info['default'] = modern_word_pub
-                            ann_info['options'][modern_word_pub]["apparatus"] = ["archaic"]
+                            ann_info['options'][modern_word_pub]["features"] = ["archaic"]
                             anns = update_durchen_offset(offset, anns, ann_id) 
     durchen['annotations'].update(anns)
     return durchen

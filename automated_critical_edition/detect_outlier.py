@@ -16,7 +16,7 @@ def is_outlier_note(note_options):
             return True
     return False
 
-def update_apparatus(note_options, method):
+def update_features(note_options, method):
     outlier_note = ''
     notes = get_all_note_text(note_options)
     for note in notes:
@@ -24,13 +24,13 @@ def update_apparatus(note_options, method):
             outlier_note = note
     if outlier_note:
         for pub, note_info in note_options.items():
-            if note_info['apparatus']:
-                cur_note_apparatus = note_info['apparatus']
+            if note_info['features']:
+                cur_note_features = note_info['features']
             else:
-                cur_note_apparatus = []
+                cur_note_features = []
             if note_info['note'] == outlier_note:
-                cur_note_apparatus.append(method)
-                note_options[pub]['apparatus'] = cur_note_apparatus
+                cur_note_features.append(method)
+                note_options[pub]['features'] = cur_note_features
     return note_options
 
 def make_outlier_note_unprintable(durchen_layer):
@@ -38,7 +38,7 @@ def make_outlier_note_unprintable(durchen_layer):
         note_options = annotation['options']
         if is_outlier_note(note_options):
             durchen_layer['annotations'][uuid]['printable'] = False
-        updated_note_options = update_apparatus(note_options, method='OUTLIER')
+        updated_note_options = update_features(note_options, method='OUTLIER')
         durchen_layer['annotations'][uuid]['options'] = updated_note_options
     return durchen_layer
 
