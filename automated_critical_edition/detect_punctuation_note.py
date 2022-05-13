@@ -23,7 +23,7 @@ def update_features(note_options, method):
             cur_note_features = note_info['features']
         else:
             cur_note_features = []
-        if is_punct(note_info):
+        if is_punct(note_info) and method not in cur_note_features:
             cur_note_features.append(method)
             note_options[pub]['features'] = cur_note_features
     return note_options

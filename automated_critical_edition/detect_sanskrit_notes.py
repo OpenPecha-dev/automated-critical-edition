@@ -11,7 +11,8 @@ def update_features(ann_info):
         curr_features = [ann_info["options"][default]['features']]
     else:
         curr_features = []
-    curr_features.append("SANSKRIT")
+    if "SANSKRIT" not in curr_features:
+        curr_features.append("SANSKRIT")
     ann_info['options'][default]['features'] = curr_features
     return ann_info
 

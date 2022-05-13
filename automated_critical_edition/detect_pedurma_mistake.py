@@ -15,8 +15,9 @@ def update_features(note_options, method):
             cur_note_features = note_info['features']
         else:
             cur_note_features = []
-        cur_note_features.append(method)
-        note_options[pub]['features'] = cur_note_features
+        if method not in cur_note_features:
+            cur_note_features.append(method)
+            note_options[pub]['features'] = cur_note_features
     return note_options
 
 def resolve_all_same_notes(durchen_layer):
