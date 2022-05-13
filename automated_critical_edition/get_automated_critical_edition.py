@@ -1,5 +1,6 @@
 import re
 from pathlib import Path
+from automated_critical_edition.detect_archaic_notes import resolve_archaics
 from automated_critical_edition.detect_sanskrit_notes import resolve_sanskrit_notes
 from automated_critical_edition.detect_outlier import resolve_outlier_notes
 from automated_critical_edition.detect_punctuation_note import resolve_punctuation_notes
@@ -12,6 +13,7 @@ def get_automated_critical_edition_text(opf_path):
   resolve_outlier_notes(opf_path)
   resolve_punctuation_notes(opf_path)
   resolve_pedurma_mistake_note(opf_path)
+  resolve_archaics(opf_path)
   opf_to_docx(opf_path, output_dir=Path("./data/docx/"))
 
 

@@ -1,12 +1,7 @@
-from __future__ import annotations
-from pathlib import Path
 from automated_critical_edition.utils import check_all_notes_option
 from botok import WordTokenizer
-from botok.third_party.has_skrt_syl import has_skrt_syl
-from openpecha.utils import load_yaml
 from openpecha.core.pecha import OpenPechaFS
-from automated_critical_edition.docx_serializer import get_base_names
-from automated_critical_edition.utils import update_durchen
+from automated_critical_edition.utils import update_durchen, get_base_names
 
 wt = WordTokenizer()
 

@@ -15,6 +15,16 @@ def check_all_notes_option(note_options):
 def update_durchen(durchen, durchen_path):
     dump_yaml(durchen, durchen_path)
 
+def update_base(opf_path, base_name, new_base):
+    (opf_path / "base" / f"{base_name}.txt").write_text(new_base, encoding='utf-8')
+
+def get_base_names(opf_path):
+    base_names = []
+    for base_path in list((opf_path / "base").iterdir()):
+        base_names.append(base_path.stem)
+    return base_names
+
+
 
 def get_default_note(ann_info):
     pub_mapping = {
@@ -377,7 +387,7 @@ def get_base(new_durchen, old_durchen, base_text, note_type):
     for ann_id, ann_info in anns.items():
         if ann_info['printable'] == False:
             default_pub = ann_info['default']
-            if note_type in ann_info['options'][default_pub]['apparatus']:
+            if ann_info['options'][default_pub]['features'] and note_type in ann_info['options'][default_pub]['features']:
                 start = ann_info["span"]['start']
                 end = int(start + diff_dic[ann_id]['diff'])
                 note = ann_info['options'][default_pub]['note']

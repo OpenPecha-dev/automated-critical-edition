@@ -3,6 +3,7 @@ from pathlib import Path
 
 from pypandoc import convert_text
 from openpecha.core.pecha import OpenPechaFS
+from automated_critical_edition.utils import get_base_names
 
 def get_note(durchen_ann, note_walker):
     tib_names = {
@@ -67,13 +68,6 @@ def get_collated_text_md(durchen_layer, base_text):
     collated_text_md = reformat_collated_text(collated_text_md)
     collated_text_md += footnotes
     return collated_text_md
-
-
-def get_base_names(opf_path):
-    base_names = []
-    for base_path in list((opf_path / "base").iterdir()):
-        base_names.append(base_path.stem)
-    return base_names
 
 
 def opf_to_docx(opf_path, output_dir):

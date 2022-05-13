@@ -1,7 +1,6 @@
-from automated_critical_edition.docx_serializer import get_base_names
 from openpecha.core.pecha import OpenPechaFS
 
-from automated_critical_edition.utils import update_durchen
+from automated_critical_edition.utils import update_durchen, get_base_names
 
 
 def is_all_note_same(note_options, default_note):

@@ -1,6 +1,7 @@
 from pathlib import Path
 from botok.tokenizers.wordtokenizer import WordTokenizer
-from automated_critical_edition.utils import check_all_notes_option, get_base, update_durchen_offset
+from automated_critical_edition.utils import check_all_notes_option, get_base, update_durchen_offset, get_base_names, update_durchen, update_base
+from openpecha.core.pecha import OpenPechaFS
 from openpecha.utils import load_yaml
 
 wt = WordTokenizer()
@@ -92,7 +93,7 @@ def remove_particles(text):
     return particle_free_text
 
 
-def is_archaic(word):
+def is_archaic(word, archaic_words):
     normalized_word = normalize_word(word)
     if normalized_word == "":
         return False
@@ -101,39 +102,43 @@ def is_archaic(word):
     return False
 
         
-def get_modern_word(options):
+def get_modern_word(options, archaic_words, modern_words):
     pubs = []
     for pub, option in options.items():
-        if not is_archaic(option['note']):
+        if not is_archaic(option['note'], archaic_words):
             normalize_option = normalize_word(option['note'])
             if normalize_option == "":
                 return None
-            if search(normalize_option,modern_words):
+            if search(normalize_option, modern_words):
                 return pub
             else:
                 pubs.append(pub)
-    return pubs[0]
+    if pubs:
+        return pubs[0]
+    else:
+        return None
 
-def is_archaic_case(options):
+def is_archaic_case(options, archaic_words):
     for _, option in options.items():
-        if is_archaic(option['note']):
+        if is_archaic(option['note'], archaic_words):
             return True
     return False
 
 def resolve_annotations(durchen):
+    archaic_words,modern_words = get_archaic_modern_words()
     anns = durchen['annotations']
     for ann_id, ann_info in anns.items():
         options = ann_info['options']
         if ann_info['printable'] == True:
             all_notes = check_all_notes_option(options)
             if all_notes:
-                if is_archaic_case(options):
-                    modern_word_pub = get_modern_word(options)
+                if is_archaic_case(options, archaic_words):
+                    modern_word_pub = get_modern_word(options, archaic_words, modern_words)
                     if modern_word_pub == None:
                         continue
                     elif modern_word_pub == ann_info['default']:
                         ann_info['printable']= False
-                        ann_info['options'][modern_word_pub]["features"] = ["archaic"]
+                        ann_info['options'][modern_word_pub]["features"] = ["ARCHAIC"]
                     else:
                         offset = check_offset(ann_info, modern_word_pub)
                         if offset == 0:
@@ -141,7 +146,7 @@ def resolve_annotations(durchen):
                         else:
                             ann_info['printable']= False
                             ann_info['default'] = modern_word_pub
-                            ann_info['options'][modern_word_pub]["features"] = ["archaic"]
+                            ann_info['options'][modern_word_pub]["features"] = ["ARCHAIC"]
                             anns = update_durchen_offset(offset, anns, ann_id) 
     durchen['annotations'].update(anns)
     return durchen
@@ -153,14 +158,26 @@ def get_archaic_modern_words():
     modern_words = load_yaml(Path("./res/modern_words.yml"))
     return archaic_words,modern_words
 
-def resolve_archaics(layers_path, base_path):
-    base_text = Path(base_path).read_text(encoding='utf-8')
-    vol_paths = list(Path(layers_path).iterdir())
-    for vol_path in vol_paths:
-        durchen_path = Path(f"{vol_path}/Durchen.yml")
-        durchen = load_yaml(durchen_path)
-        global archaic_words,modern_words
-        archaic_words,modern_words = get_archaic_modern_words()
-        durchen = resolve_annotations(durchen)
-        new_base = get_base(durchen, load_yaml(durchen_path), base_text, "archaic")
-    return new_base, durchen
+# def resolve_archaics(layers_path, base_path):
+#     base_text = Path(base_path).read_text(encoding='utf-8')
+#     vol_paths = list(Path(layers_path).iterdir())
+#     for vol_path in vol_paths:
+#         durchen_path = Path(f"{vol_path}/Durchen.yml")
+#         durchen = load_yaml(durchen_path)
+#         global archaic_words,modern_words
+#         archaic_words,modern_words = get_archaic_modern_words()
+#         durchen = resolve_annotations(durchen)
+#         new_base = get_base(durchen, load_yaml(durchen_path), base_text, "archaic")
+#     return new_base, durchen
+
+def resolve_archaics(opf_path):
+    pecha = OpenPechaFS(opf_path)
+    base_names = get_base_names(opf_path)
+    for base_name in base_names:
+        base_text = pecha.read_base_file(base_name)
+        durchen_layer = pecha.read_layers_file(base_name, "Durchen")
+        durchen_path = pecha.layers_path / base_name / "Durchen.yml"
+        archaic_detected_durchen = resolve_annotations(durchen_layer)
+        new_base = get_base(archaic_detected_durchen, load_yaml(durchen_path), base_text, "ARCHAIC")
+        update_durchen(archaic_detected_durchen, durchen_path)
+        update_base(opf_path, base_name, new_base)
