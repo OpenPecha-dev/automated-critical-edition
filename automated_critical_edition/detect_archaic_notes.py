@@ -158,17 +158,6 @@ def get_archaic_modern_words():
     modern_words = load_yaml(Path("./res/modern_words.yml"))
     return archaic_words,modern_words
 
-# def resolve_archaics(layers_path, base_path):
-#     base_text = Path(base_path).read_text(encoding='utf-8')
-#     vol_paths = list(Path(layers_path).iterdir())
-#     for vol_path in vol_paths:
-#         durchen_path = Path(f"{vol_path}/Durchen.yml")
-#         durchen = load_yaml(durchen_path)
-#         global archaic_words,modern_words
-#         archaic_words,modern_words = get_archaic_modern_words()
-#         durchen = resolve_annotations(durchen)
-#         new_base = get_base(durchen, load_yaml(durchen_path), base_text, "archaic")
-#     return new_base, durchen
 
 def resolve_archaics(opf_path):
     pecha = OpenPechaFS(opf_path)

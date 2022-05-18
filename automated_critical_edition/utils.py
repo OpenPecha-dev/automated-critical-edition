@@ -368,28 +368,41 @@ def update_durchen_offset(offset, anns, _id):
                 ann_info['span']['end'] = int(end + offset)
     return anns
 
-def get_diff_dic(durchen):
-    curr_dic = {}
-    diff_dic = {}
-    anns = durchen['annotations']
-    for ann_id, ann_info in anns.items():
-        curr_dic[ann_id]= {
-            "diff": int(ann_info['span']['end']) - int(ann_info['span']['start'])
-        }
-        diff_dic.update(curr_dic)
-        curr_dic = {}
-    return diff_dic
+def get_next_start(num, anns):
+    if num == len(anns):
+        next_start = None
+    else:
+        for ann_num,(_, ann_info) in enumerate(anns.items(), 1):
+            if ann_num == num+1:
+                next_start = ann_info['span']['start']
+    return next_start
 
 
 def get_base(new_durchen, old_durchen, base_text, note_type):
-    diff_dic = get_diff_dic(old_durchen)
+    new_base_text = ""
     anns = new_durchen['annotations']
-    for ann_id, ann_info in anns.items():
-        if ann_info['printable'] == False:
-            default_pub = ann_info['default']
-            if ann_info['options'][default_pub]['features'] and note_type in ann_info['options'][default_pub]['features']:
-                start = ann_info["span"]['start']
-                end = int(start + diff_dic[ann_id]['diff'])
-                note = ann_info['options'][default_pub]['note']
-                base_text = base_text[0:start] + note + base_text[end:]
-    return base_text
+    for ann_num, (ann_id, ann_info) in enumerate(anns.items(), 1):
+        default_pub = ann_info['default']
+        if ann_info['options'][default_pub]['features'] and note_type in ann_info['options'][default_pub]['features']:
+            start = ann_info["span"]['start']
+            end = old_durchen['annotations'][ann_id]['span']['end']
+            note = ann_info['options'][default_pub]['note']
+            next_start = get_next_start(ann_num, old_durchen['annotations'])
+            if ann_num == 1:
+                new_base_text += base_text[0:start] + note + base_text[end:next_start]
+            elif ann_num == len(anns):
+                new_base_text += note + base_text[end:]
+            else:
+                new_base_text += note + base_text[end:next_start]
+        else:
+            start = old_durchen['annotations'][ann_id]['span']['start']
+            end = old_durchen['annotations'][ann_id]["span"]['end']
+            note = old_durchen['annotations'][ann_id]['options'][default_pub]['note']
+            next_start = get_next_start(ann_num, old_durchen['annotations'])
+            if ann_num == 1:
+                new_base_text += base_text[0:start] + note + base_text[end:next_start]
+            elif ann_num == len(anns):
+                new_base_text += note + base_text[end:]
+            else:
+                new_base_text += note + base_text[end:next_start]                
+    return new_base_text

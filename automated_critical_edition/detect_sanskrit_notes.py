@@ -18,19 +18,10 @@ def update_features(ann_info):
 
 def check_for_sanskrit_syl_using_botok(note):
     tokens = wt.tokenize(note)
-    tokens_len = len(tokens)
-    num = 0
     for token in tokens:
         if token.skrt:
-            # return True
-           num += 1
-        elif token.chunk_type == "PUNCT":
-            tokens_len -= 1
-            
-    if tokens_len == num or num >= tokens_len/2:
-        return True
-    else:
-        return False
+            return True
+    return False
 
 
 def resolve_default_sanskrit_notes(durchen):

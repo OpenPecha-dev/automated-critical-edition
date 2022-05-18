@@ -214,7 +214,7 @@ annotations:
     id: 954017d460e642d9bdb7a9bfe4309747
     span:
       start: 1808
-      end: 1817
+      end: 1816
       errors: {}
     metadata: {}
     default: derge
@@ -239,8 +239,8 @@ annotations:
   10c4d4c069da4d23aaf5fc0a713ebbf3:
     id: 10c4d4c069da4d23aaf5fc0a713ebbf3
     span:
-      start: 1837
-      end: 1850
+      start: 1836
+      end: 1848
       errors: {}
     metadata: {}
     default: derge
@@ -265,8 +265,8 @@ annotations:
   14ced65d84b04ff39ff0f8b2a896c2e4:
     id: 14ced65d84b04ff39ff0f8b2a896c2e4
     span:
-      start: 1863
-      end: 1869
+      start: 1861
+      end: 1867
       errors: {}
     metadata: {}
     default: peking
@@ -292,8 +292,8 @@ annotations:
   e818f12b49bc43aa9126777314129d4c:
     id: e818f12b49bc43aa9126777314129d4c
     span:
-      start: 1875
-      end: 1892
+      start: 1867
+      end: 1883
       errors: {}
     metadata: {}
     default: derge
@@ -318,8 +318,8 @@ annotations:
   d1ca92088a4447ec86b05bb95541d33d:
     id: d1ca92088a4447ec86b05bb95541d33d
     span:
-      start: 2026
-      end: 2031
+      start: 2017
+      end: 2022
       errors: {}
     metadata: {}
     default: derge
@@ -344,8 +344,8 @@ annotations:
   354dcf93c3cc481fa5f72b64f5ebc5d4:
     id: 354dcf93c3cc481fa5f72b64f5ebc5d4
     span:
-      start: 2045
-      end: 2049
+      start: 2042
+      end: 2046
       errors: {}
     metadata: {}
     default: peking
@@ -371,8 +371,8 @@ annotations:
   8607a9528f8c477f9137b462ebde677c:
     id: 8607a9528f8c477f9137b462ebde677c
     span:
-      start: 2298
-      end: 2302
+      start: 2288
+      end: 2292
       errors: {}
     metadata: {}
     default: derge
@@ -397,8 +397,8 @@ annotations:
   7d61785c2924415196ad056e6083a1e7:
     id: 7d61785c2924415196ad056e6083a1e7
     span:
-      start: 2308
-      end: 2314
+      start: 2298
+      end: 2304
       errors: {}
     metadata: {}
     default: derge
@@ -423,8 +423,8 @@ annotations:
   8864c08141bc4924a6b230bc44e263c4:
     id: 8864c08141bc4924a6b230bc44e263c4
     span:
-      start: 2361
-      end: 2366
+      start: 2351
+      end: 2356
       errors: {}
     metadata: {}
     default: derge
@@ -446,11 +446,37 @@ annotations:
         probability: null
         features: null
     printable: true
+  1da10f65468846b3842c89f0cedcc717:
+    id: 1da10f65468846b3842c89f0cedcc717
+    span:
+      start: 2368
+      end: 2371
+      errors: {}
+    metadata: {}
+    default: derge
+    options:
+      peking:
+        note: བྷི།
+        probability: null
+        features: null
+      narthang:
+        note: བྷི།
+        probability: null
+        features: null
+      derge:
+        note: བི་
+        probability: null
+        features: null
+      chone:
+        note: བི་
+        probability: null
+        features: null
+    printable: true
   ec7b26ca38064a998077af8ead749fba:
     id: ec7b26ca38064a998077af8ead749fba
     span:
-      start: 2375
-      end: 2379
+      start: 2372
+      end: 2376
       errors: {}
     metadata: {}
     default: narthang
@@ -473,37 +499,11 @@ annotations:
         probability: null
         features: null
     printable: false
-  1da10f65468846b3842c89f0cedcc717:
-    id: 1da10f65468846b3842c89f0cedcc717
-    span:
-      start: 2385
-      end: 2388
-      errors: {}
-    metadata: {}
-    default: derge
-    options:
-      peking:
-        note: བྷི།
-        probability: null
-        features: null
-      narthang:
-        note: བྷི།
-        probability: null
-        features: null
-      derge:
-        note: བི་
-        probability: null
-        features: null
-      chone:
-        note: བི་
-        probability: null
-        features: null
-    printable: true
   1b92b46a5e8448fbb7bc1c79aa2ad577:
     id: 1b92b46a5e8448fbb7bc1c79aa2ad577
     span:
-      start: 2398
-      end: 2402
+      start: 2391
+      end: 2395
       errors: {}
     metadata: {}
     default: derge
@@ -528,8 +528,8 @@ annotations:
   10c7605169644546b8e65086007cd35e:
     id: 10c7605169644546b8e65086007cd35e
     span:
-      start: 2416
-      end: 2420
+      start: 2413
+      end: 2417
       errors: {}
     metadata: {}
     default: peking

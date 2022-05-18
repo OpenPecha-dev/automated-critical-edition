@@ -214,7 +214,7 @@ annotations:
     id: 954017d460e642d9bdb7a9bfe4309747
     span:
       start: 1808
-      end: 1817
+      end: 1816
       errors: {}
     metadata: {}
     default: derge
@@ -239,8 +239,8 @@ annotations:
   10c4d4c069da4d23aaf5fc0a713ebbf3:
     id: 10c4d4c069da4d23aaf5fc0a713ebbf3
     span:
-      start: 1837
-      end: 1850
+      start: 1836
+      end: 1848
       errors: {}
     metadata: {}
     default: derge
@@ -265,8 +265,8 @@ annotations:
   14ced65d84b04ff39ff0f8b2a896c2e4:
     id: 14ced65d84b04ff39ff0f8b2a896c2e4
     span:
-      start: 1863
-      end: 1865
+      start: 1861
+      end: 1863
       errors: {}
     metadata: {}
     default: derge
@@ -291,8 +291,8 @@ annotations:
   e818f12b49bc43aa9126777314129d4c:
     id: e818f12b49bc43aa9126777314129d4c
     span:
-      start: 1871
-      end: 1888
+      start: 1863
+      end: 1879
       errors: {}
     metadata: {}
     default: derge
@@ -317,8 +317,8 @@ annotations:
   d1ca92088a4447ec86b05bb95541d33d:
     id: d1ca92088a4447ec86b05bb95541d33d
     span:
-      start: 2022
-      end: 2027
+      start: 2013
+      end: 2018
       errors: {}
     metadata: {}
     default: derge
@@ -343,8 +343,8 @@ annotations:
   354dcf93c3cc481fa5f72b64f5ebc5d4:
     id: 354dcf93c3cc481fa5f72b64f5ebc5d4
     span:
-      start: 2041
-      end: 2043
+      start: 2038
+      end: 2040
       errors: {}
     metadata: {}
     default: derge
@@ -369,8 +369,8 @@ annotations:
   8607a9528f8c477f9137b462ebde677c:
     id: 8607a9528f8c477f9137b462ebde677c
     span:
-      start: 2292
-      end: 2296
+      start: 2282
+      end: 2286
       errors: {}
     metadata: {}
     default: derge
@@ -395,8 +395,8 @@ annotations:
   7d61785c2924415196ad056e6083a1e7:
     id: 7d61785c2924415196ad056e6083a1e7
     span:
-      start: 2302
-      end: 2308
+      start: 2292
+      end: 2298
       errors: {}
     metadata: {}
     default: derge
@@ -421,8 +421,8 @@ annotations:
   8864c08141bc4924a6b230bc44e263c4:
     id: 8864c08141bc4924a6b230bc44e263c4
     span:
-      start: 2355
-      end: 2360
+      start: 2345
+      end: 2350
       errors: {}
     metadata: {}
     default: derge
@@ -444,11 +444,37 @@ annotations:
         probability: null
         features: null
     printable: true
+  1da10f65468846b3842c89f0cedcc717:
+    id: 1da10f65468846b3842c89f0cedcc717
+    span:
+      start: 2362
+      end: 2365
+      errors: {}
+    metadata: {}
+    default: derge
+    options:
+      peking:
+        note: བྷི།
+        probability: null
+        features: null
+      narthang:
+        note: བྷི།
+        probability: null
+        features: null
+      derge:
+        note: བི་
+        probability: null
+        features: null
+      chone:
+        note: བི་
+        probability: null
+        features: null
+    printable: true
   ec7b26ca38064a998077af8ead749fba:
     id: ec7b26ca38064a998077af8ead749fba
     span:
-      start: 2369
-      end: 2374
+      start: 2366
+      end: 2371
       errors: {}
     metadata: {}
     default: derge
@@ -470,37 +496,11 @@ annotations:
         probability: null
         features: null
     printable: true
-  1da10f65468846b3842c89f0cedcc717:
-    id: 1da10f65468846b3842c89f0cedcc717
-    span:
-      start: 2380
-      end: 2383
-      errors: {}
-    metadata: {}
-    default: derge
-    options:
-      peking:
-        note: བྷི།
-        probability: null
-        features: null
-      narthang:
-        note: བྷི།
-        probability: null
-        features: null
-      derge:
-        note: བི་
-        probability: null
-        features: null
-      chone:
-        note: བི་
-        probability: null
-        features: null
-    printable: true
   1b92b46a5e8448fbb7bc1c79aa2ad577:
     id: 1b92b46a5e8448fbb7bc1c79aa2ad577
     span:
-      start: 2393
-      end: 2397
+      start: 2386
+      end: 2390
       errors: {}
     metadata: {}
     default: derge
@@ -525,8 +525,8 @@ annotations:
   10c7605169644546b8e65086007cd35e:
     id: 10c7605169644546b8e65086007cd35e
     span:
-      start: 2411
-      end: 2413
+      start: 2408
+      end: 2410
       errors: {}
     metadata: {}
     default: derge

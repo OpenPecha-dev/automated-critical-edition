@@ -1,4 +1,5 @@
 from pathlib import Path
+import re
 from automated_critical_edition.detect_archaic_notes import resolve_annotations
 from automated_critical_edition.utils import get_base
 from openpecha.utils import load_yaml, dump_yaml
@@ -14,4 +15,4 @@ def test_resolve_archaic_notes():
     expected_durchen_output = load_yaml(Path(f"./tests/archaic_notes/data/expected_durchen.yml"))
     assert resolved_archaic_durchen == expected_durchen_output
     assert new_base == expected_base_text
-    
+
