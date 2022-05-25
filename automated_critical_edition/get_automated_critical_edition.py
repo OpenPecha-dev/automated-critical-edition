@@ -13,7 +13,7 @@ def get_automated_critical_edition_text(opf_path):
   resolve_outlier_notes(opf_path)
   resolve_punctuation_notes(opf_path)
   resolve_pedurma_mistake_note(opf_path)
-  resolve_archaics(opf_path)
+  # resolve_archaics(opf_path)
   opf_to_docx(opf_path, output_dir=Path("./data/docx/"))
 
 

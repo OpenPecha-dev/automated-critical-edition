@@ -4,7 +4,7 @@ from automated_critical_edition.utils import update_durchen, get_base_names
 
 
 def is_punct(note_info):
-    puncts = ["། །", "།། །།", "།།", "༄༅༅། །", "།"]
+    puncts = ["། །", "།། །།", "།།", "༄༅༅། །", "།", "ཿ"]
     for punct in puncts:
         if note_info['note'] == punct:
             return True

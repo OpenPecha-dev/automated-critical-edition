@@ -1,12 +1,7 @@
 from openpecha.core.pecha import OpenPechaFS
 
-from automated_critical_edition.utils import update_durchen, get_base_names
+from automated_critical_edition.utils import update_durchen, get_base_names, get_all_note_text
 
-def get_all_note_text(note_options):
-    note_texts = []
-    for pub, note_info in note_options.items():
-        note_texts.append(note_info['note'])
-    return note_texts
 
 def is_outlier_note(note_options):
     notes = get_all_note_text(note_options)

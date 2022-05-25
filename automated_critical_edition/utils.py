@@ -24,6 +24,11 @@ def get_base_names(opf_path):
         base_names.append(base_path.stem)
     return base_names
 
+def get_all_note_text(note_options):
+    note_texts = []
+    for pub, note_info in note_options.items():
+        note_texts.append(note_info['note'])
+    return note_texts
 
 
 def get_default_note(ann_info):
