@@ -3,6 +3,7 @@ from openpecha.core.pecha import OpenPechaFS
 from automated_critical_edition.utils import update_durchen, get_base_names, get_all_note_text
 from botok import BoString
 from botok.vars import CharMarkers
+from botok.tokenizers.wordtokenizer import WordTokenizer
 import requests
 
 
@@ -19,24 +20,37 @@ def is_punct(string):
 def preprocess_notes(notes):
     normalized_notes = []
     for note in notes:
-        if not is_punct(note[-1]):
+        if not is_punct(note[-1]) and note[-1] != "་":
             note += '་'
         else:
-            note[-1] = '་'
+            note = note[:-1] + '་'
         normalized_notes.append(note)
     return normalized_notes
 
 def get_similarity(normalized_notes):
     r = requests.post(url='https://hf.space/embed/openpecha/word_vectors_classical_bo/+/api/predict/', json={"data": [normalized_notes[0],normalized_notes[1]]})
     similarity_info = r.json()
-    return similarity_info
+    if similarity_info.get('data', []):
+        cosine_similarity = float(similarity_info['data'][0])
+    else:
+        cosine_similarity = 0.0
+    return cosine_similarity
 
-def is_similar_note(note_options):
+def has_verb(notes, wt):
+    for note in notes:
+        tokens = wt.tokenize(note)
+        for token in tokens:
+            if token.pos == "VERB":
+                return True
+    return False
+
+
+def is_similar_note(note_options, wt):
     notes = get_all_note_text(note_options)
     unique_notes = set(notes)
     if len(unique_notes) == 2:
         normalized_notes = preprocess_notes(unique_notes)
-        if has_verb_notes(normalized_notes) and get_similarity(normalized_notes) > 0.7:
+        if not has_verb(normalized_notes, wt) and get_similarity(normalized_notes) > 0.7:
             return True
     return False
 
@@ -46,12 +60,13 @@ def update_features(note_options, method):
     return note_options
 
 def make_similar_note_unprintable(durchen_layer):
+    wt = WordTokenizer()
     for uuid, annotation in durchen_layer['annotations'].items():
         note_options = annotation['options']
-        if annotation['printable'] and is_similar_note(note_options):
+        if annotation['printable'] and is_similar_note(note_options, wt):
             durchen_layer['annotations'][uuid]['printable'] = False
-        updated_note_options = update_features(note_options, method='SIMILAR')
-        durchen_layer['annotations'][uuid]['options'] = updated_note_options
+            updated_note_options = update_features(note_options, method='SIMILAR')
+            durchen_layer['annotations'][uuid]['options'] = updated_note_options
     return durchen_layer
 
 def resolve_similar_notes(opf_path):
