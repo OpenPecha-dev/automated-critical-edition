@@ -1,7 +1,8 @@
 from pathlib import Path
+from pickle import TRUE
 from pyexpat import features
 from botok.tokenizers.wordtokenizer import WordTokenizer
-from utils import check_all_notes_option, from_yaml, get_base, toyaml, update_durchen_offset, get_base_names, update_durchen, update_base
+from utils import from_yaml, get_base, toyaml, get_base_names, update_durchen, update_base
 from openpecha.core.pecha import OpenPechaFS
 from openpecha.utils import load_yaml
 import csv
@@ -9,7 +10,7 @@ from copy import deepcopy
 
 
 def check_alternatives(options):
-    with open("./res/sorted_dic.csv") as file:
+    with open("./res/alternatives.csv") as file:
         csvreader = csv.reader(file)
         for row in csvreader:
             if mod_options := is_alternative(row,options):
@@ -29,7 +30,7 @@ def is_alternative(row,options):
             for _,opt_info in options.items():
                 note = opt_info["note"]
                 if note in row:
-                    alt = "alternative"
+                    alt = "ALTERNATIVE"
                     if opt_info["features"]:
                         opt_info["features"].append(alt)
                     else:
@@ -46,25 +47,20 @@ def resolve_annotations(durchen):
         if ann_info["printable"] != True:
             continue
         if new_options := check_alternatives(options):
-            is_printable =True
+            is_printable = None
             ann_info["options"] = deepcopy(new_options)
             features = [opt_info["features"] for _,opt_info in new_options.items()]
             for feature in features:
-                if "alternative" not in feature:
-                    is_printable = False
+                if not feature or "ALTERNATIVE" not in feature:
+                    is_printable = True
                     break
             if is_printable:
-                ann_info["printable"] = is_printable
-
+                ann_info["printable"] = True
+            else:
+                ann_info["printable"] = False
 
     return durchen
 
-def resolve_alternatives():
-    path = Path("tests/archaic_notes/data/expected_durchen.yml")
-    yml = from_yaml(path)
-    new_yml = resolve_annotations(yml)
-    new_yml = toyaml(new_yml)
-    Path("./new_yml.yml").write_text(new_yml)
 
 def resolve_alternatives(opf_path):
     pecha = OpenPechaFS(opf_path)
@@ -78,6 +74,3 @@ def resolve_alternatives(opf_path):
         update_durchen(alternatives_durchen, durchen_path)
         update_base(opf_path, base_name, new_base)
 
-
-if __name__ == "__main__":
-    resolve_alternatives()        
