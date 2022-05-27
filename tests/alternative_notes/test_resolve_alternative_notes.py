@@ -1,6 +1,5 @@
 from pathlib import Path
 from automated_critical_edition.detect_alternative_notes import resolve_annotations,toyaml
-from automated_critical_edition.utils import get_base
 from openpecha.utils import load_yaml, dump_yaml
 
 

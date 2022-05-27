@@ -44,13 +44,11 @@ annotations:
       peking:
         note: སྦེ་ཁ་
         probability: null
-        features:
-        - ALTERNATIVE
+        features: null
       narthang:
         note: སྦེ་ཀ་
         probability: null
-        features:
-        - ALTERNATIVE
+        features: null
       derge:
         note: ཀྱིས་
         probability: null
