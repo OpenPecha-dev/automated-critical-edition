@@ -124,7 +124,7 @@ def is_archaic_case(options, archaic_words):
             return True
     return False
 
-def resolve_annotations(durchen):
+def resolve_durchen_notes(durchen):
     archaic_words,modern_words = get_archaic_modern_words()
     anns = durchen['annotations']
     for ann_id, ann_info in anns.items():
@@ -166,7 +166,7 @@ def resolve_archaics(opf_path):
         base_text = pecha.read_base_file(base_name)
         durchen_layer = pecha.read_layers_file(base_name, "Durchen")
         durchen_path = pecha.layers_path / base_name / "Durchen.yml"
-        archaic_detected_durchen = resolve_annotations(durchen_layer)
+        archaic_detected_durchen = resolve_durchen_notes(durchen_layer)
         new_base = get_base(archaic_detected_durchen, load_yaml(durchen_path), base_text, "ARCHAIC")
         update_durchen(archaic_detected_durchen, durchen_path)
         update_base(opf_path, base_name, new_base)
