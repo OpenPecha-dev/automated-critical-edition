@@ -28,7 +28,7 @@ def preprocess_notes(notes):
     return normalized_notes
 
 def get_similarity(normalized_notes):
-    r = requests.post(url='https://hf.space/embed/openpecha/word_vectors_classical_bo/+/api/predict/', json={"data": [normalized_notes[0],normalized_notes[1]]})
+    r = requests.post(url='https://hf.space/embed/openpecha/word_vectors_literary_bo/+/api/predict/', json={"data": [normalized_notes[0],normalized_notes[1]]})
     similarity_info = r.json()
     if similarity_info.get('data', []):
         cosine_similarity = float(similarity_info['data'][0])
