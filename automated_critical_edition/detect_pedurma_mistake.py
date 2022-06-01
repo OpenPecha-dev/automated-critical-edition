@@ -25,7 +25,7 @@ def resolve_all_same_notes(durchen_layer):
         default_pub = annotation['default']
         default_note = annotation['options'][default_pub]['note']
         note_options = annotation['options']
-        if is_all_note_same(note_options, default_note):
+        if annotation['printable'] and is_all_note_same(note_options, default_note):
             durchen_layer['annotations'][uuid]['printable'] = False
             updated_note_options = update_features(note_options, method='ALL_NOTE_SAME')
             durchen_layer['annotations'][uuid]['options'] = updated_note_options

@@ -30,7 +30,7 @@ def update_features(note_options, method):
 def make_outlier_note_unprintable(durchen_layer):
     for uuid, annotation in durchen_layer['annotations'].items():
         note_options = annotation['options']
-        if is_outlier_note(note_options):
+        if annotation['printable'] and is_outlier_note(note_options):
             durchen_layer['annotations'][uuid]['printable'] = False
         updated_note_options = update_features(note_options, method='OUTLIER')
         durchen_layer['annotations'][uuid]['options'] = updated_note_options
@@ -38,9 +38,11 @@ def make_outlier_note_unprintable(durchen_layer):
 
 def resolve_outlier_notes(opf_path):
     pecha = OpenPechaFS(opf_path)
-    base_names = get_base_names(opf_path)
-    for base_name in base_names:
-        durchen_layer = pecha.read_layers_file(base_name, "Durchen")
-        durchen_path = pecha.layers_path / base_name / "Durchen.yml"
-        outlier_note_resolved_durchen = make_outlier_note_unprintable(durchen_layer)
-        update_durchen(outlier_note_resolved_durchen, durchen_path)
+    text_id = pecha.meta.source_metadata['text_id']
+    if "D" in text_id:
+        base_names = get_base_names(opf_path)
+        for base_name in base_names:
+            durchen_layer = pecha.read_layers_file(base_name, "Durchen")
+            durchen_path = pecha.layers_path / base_name / "Durchen.yml"
+            outlier_note_resolved_durchen = make_outlier_note_unprintable(durchen_layer)
+            update_durchen(outlier_note_resolved_durchen, durchen_path)

@@ -32,7 +32,7 @@ def update_features(note_options, method):
 def make_punctuation_note_unprintable(durchen_layer):
     for uuid, annotation in durchen_layer['annotations'].items():
         note_options = annotation['options']
-        if is_punctuation_note(note_options):
+        if annotation['printable'] and is_punctuation_note(note_options):
             durchen_layer['annotations'][uuid]['printable'] = False
         updated_note_options = update_features(note_options, method='PUNCT')
         durchen_layer['annotations'][uuid]['options'] = updated_note_options

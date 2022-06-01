@@ -1,3 +1,4 @@
+
 from openpecha.core.pecha import OpenPechaFS
 
 from automated_critical_edition.utils import update_durchen, get_base_names, get_all_note_text
@@ -20,19 +21,22 @@ def is_punct(string):
 def preprocess_notes(notes):
     normalized_notes = []
     for note in notes:
-        if not is_punct(note[-1]) and note[-1] != "་":
+        if note and not is_punct(note[-1]) and note[-1] != "་":
             note += '་'
-        else:
+        elif note:
             note = note[:-1] + '་'
         normalized_notes.append(note)
     return normalized_notes
 
 def get_similarity(normalized_notes):
-    r = requests.post(url='https://hf.space/embed/openpecha/word_vectors_literary_bo/+/api/predict/', json={"data": [normalized_notes[0],normalized_notes[1]]})
-    similarity_info = r.json()
-    if similarity_info.get('data', []):
-        cosine_similarity = float(similarity_info['data'][0])
-    else:
+    try:
+        r = requests.post(url='https://hf.space/embed/openpecha/word_vectors_literary_bo/+/api/predict/', json={"data": [normalized_notes[0],normalized_notes[1]]})
+        similarity_info = r.json()
+        if similarity_info.get('data', []):
+            cosine_similarity = float(similarity_info['data'][0])
+        else:
+            cosine_similarity = 0.0
+    except:
         cosine_similarity = 0.0
     return cosine_similarity
 
@@ -44,13 +48,27 @@ def has_verb(notes, wt):
                 return True
     return False
 
+def rm_empty_notes(notes):
+    proper_notes = []
+    for note in notes:
+        if note:
+            proper_notes.append(note)
+    return proper_notes
+
+def is_particle(notes, wt):
+    for note in notes:
+        tokens = wt.tokenize(note)
+        if len(tokens) == 1 and tokens[0].pos == "PART":
+            return True
+    return False
 
 def is_similar_note(note_options, wt):
     notes = get_all_note_text(note_options)
+    notes = rm_empty_notes(notes)
     unique_notes = set(notes)
     if len(unique_notes) == 2:
         normalized_notes = preprocess_notes(unique_notes)
-        if not has_verb(normalized_notes, wt) and get_similarity(normalized_notes) > 0.7:
+        if not has_verb(normalized_notes, wt) and not is_particle(normalized_notes, wt) and get_similarity(normalized_notes) > 0.7:
             return True
     return False
 

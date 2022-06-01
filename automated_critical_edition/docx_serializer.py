@@ -81,7 +81,7 @@ def opf_to_docx(opf_path, output_dir):
         collated_text_md = get_collated_text_md(durchen_layer, base_text)
         output_path = output_dir / f"{text_id}_{base_name}.docx"
         convert_text(
-            collated_text_md, "docx", "markdown", outputfile=str(output_path)
+            collated_text_md, "docx", "markdown", outputfile=str(output_path), extra_args=["-M2GB", "+RTS", "-K64m", "-RTS"]
         )
     return output_path
 

@@ -1,5 +1,5 @@
 from botok import WordTokenizer
-# from openpecha.core.pecha import OpenPechaFS
+from openpecha.core.pecha import OpenPechaFS
 from automated_critical_edition.utils import update_durchen, get_base_names
 from pathlib import Path
 
