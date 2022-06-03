@@ -254,20 +254,20 @@ annotations:
       peking:
         note: བདེར་གཤེགས་
         probability: null
-        features: null
+        features: SIMILAR
       narthang:
         note: བདེར་གཤེགས་
         probability: null
-        features: null
+        features: SIMILAR
       derge:
         note: བདེ་གཤེགས་
         probability: null
-        features: null
+        features: SIMILAR
       chone:
         note: བདེ་གཤེགས་
         probability: null
-        features: null
-    printable: true
+        features: SIMILAR
+    printable: false
   c0fd5376567a48af976bea0d97af923b:
     id: c0fd5376567a48af976bea0d97af923b
     span:
@@ -2037,20 +2037,20 @@ annotations:
       peking:
         note: ཁྱེད་
         probability: null
-        features: null
+        features: SIMILAR
       narthang:
         note: ཁྱེད་
         probability: null
-        features: null
+        features: SIMILAR
       derge:
         note: ཁྱོད་
         probability: null
-        features: null
+        features: SIMILAR
       chone:
         note: ཁྱོད་
         probability: null
-        features: null
-    printable: true
+        features: SIMILAR
+    printable: false
   28a4522cef2f4243b037140ea88f9879:
     id: 28a4522cef2f4243b037140ea88f9879
     span:
@@ -2195,20 +2195,20 @@ annotations:
       peking:
         note: ཁྱེད་
         probability: null
-        features: null
+        features: SIMILAR
       narthang:
         note: ཁྱེད་
         probability: null
-        features: null
+        features: SIMILAR
       derge:
         note: ཁྱོད་
         probability: null
-        features: null
+        features: SIMILAR
       chone:
         note: ཁྱོད་
         probability: null
-        features: null
-    printable: true
+        features: SIMILAR
+    printable: false
   4783e1295e4144eea90abfd540272e8e:
     id: 4783e1295e4144eea90abfd540272e8e
     span:
@@ -5452,20 +5452,20 @@ annotations:
       peking:
         note: སྐད་ཅིག་
         probability: null
-        features: null
+        features: SIMILAR
       narthang:
         note: སྐད་ཅིག་
         probability: null
-        features: null
+        features: SIMILAR
       derge:
         note: སྐད་ཅིག་མ་
         probability: null
-        features: null
+        features: SIMILAR
       chone:
         note: སྐད་ཅིག་མ་
         probability: null
-        features: null
-    printable: true
+        features: SIMILAR
+    printable: false
   88f1d12996e446aabc2c4afc1b7cf92c:
     id: 88f1d12996e446aabc2c4afc1b7cf92c
     span:
@@ -6605,20 +6605,20 @@ annotations:
       peking:
         note: བསག་
         probability: null
-        features: null
+        features: SIMILAR
       narthang:
         note: བསག་
         probability: null
-        features: null
+        features: SIMILAR
       derge:
         note: གསག་
         probability: null
-        features: null
+        features: SIMILAR
       chone:
         note: གསག་
         probability: null
-        features: null
-    printable: true
+        features: SIMILAR
+    printable: false
   f4d3dfcfebc3469b8fc3ec29ae42e9ed:
     id: f4d3dfcfebc3469b8fc3ec29ae42e9ed
     span:
@@ -9512,20 +9512,20 @@ annotations:
       peking:
         note: དབུལ་
         probability: null
-        features: null
+        features: SIMILAR
       narthang:
         note: དབུལ་
         probability: null
-        features: null
+        features: SIMILAR
       derge:
         note: འབུལ་
         probability: null
-        features: null
+        features: SIMILAR
       chone:
         note: འབུལ་
         probability: null
-        features: null
-    printable: true
+        features: SIMILAR
+    printable: false
   a94b2d554ac144ea83dc0501cf6024ba:
     id: a94b2d554ac144ea83dc0501cf6024ba
     span:
@@ -9905,20 +9905,20 @@ annotations:
       peking:
         note: དབུལ་
         probability: null
-        features: null
+        features: SIMILAR
       narthang:
         note: དབུལ་
         probability: null
-        features: null
+        features: SIMILAR
       derge:
         note: འབུལ་
         probability: null
-        features: null
+        features: SIMILAR
       chone:
         note: འབུལ་
         probability: null
-        features: null
-    printable: true
+        features: SIMILAR
+    printable: false
   bf83c23324c84ac2895d38cc5e7d43b6:
     id: bf83c23324c84ac2895d38cc5e7d43b6
     span:
@@ -9957,20 +9957,20 @@ annotations:
       peking:
         note: དབུལ་
         probability: null
-        features: null
+        features: SIMILAR
       narthang:
         note: དབུལ་
         probability: null
-        features: null
+        features: SIMILAR
       derge:
         note: འབུལ་
         probability: null
-        features: null
+        features: SIMILAR
       chone:
         note: འབུལ་
         probability: null
-        features: null
-    printable: true
+        features: SIMILAR
+    printable: false
   74d12d5467e04ce79042ce8b04b9ede5:
     id: 74d12d5467e04ce79042ce8b04b9ede5
     span:
@@ -10010,20 +10010,20 @@ annotations:
       peking:
         note: དབུལ་
         probability: null
-        features: null
+        features: SIMILAR
       narthang:
         note: དབུལ་
         probability: null
-        features: null
+        features: SIMILAR
       derge:
         note: འབུལ་
         probability: null
-        features: null
+        features: SIMILAR
       chone:
         note: འབུལ་
         probability: null
-        features: null
-    printable: true
+        features: SIMILAR
+    printable: false
   1686dcf482144bd09e770da9229b5cb9:
     id: 1686dcf482144bd09e770da9229b5cb9
     span:
@@ -20284,20 +20284,20 @@ annotations:
       peking:
         note: བཀྲིས་པ་
         probability: null
-        features: null
+        features: SIMILAR
       narthang:
         note: བཀྲིས་པ་
         probability: null
-        features: null
+        features: SIMILAR
       derge:
         note: དཀྲིས་པ་
         probability: null
-        features: null
+        features: SIMILAR
       chone:
         note: དཀྲིས་པ་
         probability: null
-        features: null
-    printable: true
+        features: SIMILAR
+    printable: false
   605ef305e6004083a7d613de75402ea8:
     id: 605ef305e6004083a7d613de75402ea8
     span:
@@ -22378,20 +22378,20 @@ annotations:
       peking:
         note: གཉིས་ཀ་
         probability: null
-        features: null
+        features: SIMILAR
       narthang:
         note: གཉིས་ཀ་
         probability: null
-        features: null
+        features: SIMILAR
       derge:
         note: གཉི་ག་
         probability: null
-        features: null
+        features: SIMILAR
       chone:
         note: གཉི་ག་
         probability: null
-        features: null
-    printable: true
+        features: SIMILAR
+    printable: false
   6f76752118d14fcf9981d1b1258d18aa:
     id: 6f76752118d14fcf9981d1b1258d18aa
     span:
@@ -22404,20 +22404,20 @@ annotations:
       peking:
         note: མདོ་
         probability: null
-        features: null
+        features: SIMILAR
       narthang:
         note: མདོ་
         probability: null
-        features: null
+        features: SIMILAR
       derge:
         note: མདོ་སྡེ་
         probability: null
-        features: null
+        features: SIMILAR
       chone:
         note: མདོ་སྡེ་
         probability: null
-        features: null
-    printable: true
+        features: SIMILAR
+    printable: false
   7d9246d35d9c481784a9725ab99c1f54:
     id: 7d9246d35d9c481784a9725ab99c1f54
     span:
@@ -23869,20 +23869,20 @@ annotations:
       peking:
         note: བརྡེག་པ་
         probability: null
-        features: null
+        features: SIMILAR
       narthang:
         note: བརྡེག་པ་
         probability: null
-        features: null
+        features: SIMILAR
       derge:
         note: བརྡེགས་པ་
         probability: null
-        features: null
+        features: SIMILAR
       chone:
         note: བརྡེགས་པ་
         probability: null
-        features: null
-    printable: true
+        features: SIMILAR
+    printable: false
   9d5fba7be09a44169f877f8aa316b516:
     id: 9d5fba7be09a44169f877f8aa316b516
     span:
@@ -24397,20 +24397,20 @@ annotations:
       peking:
         note: ཀླད་པ་
         probability: null
-        features: null
+        features: SIMILAR
       narthang:
         note: ཀླད་པ་
         probability: null
-        features: null
+        features: SIMILAR
       derge:
         note: གླད་པ་
         probability: null
-        features: null
+        features: SIMILAR
       chone:
         note: གླད་པ་
         probability: null
-        features: null
-    printable: true
+        features: SIMILAR
+    printable: false
   4a9188196a3247f68d96f0d012a90ff5:
     id: 4a9188196a3247f68d96f0d012a90ff5
     span:
@@ -24946,20 +24946,20 @@ annotations:
       peking:
         note: ཕྱོགས་
         probability: null
-        features: null
+        features: SIMILAR
       narthang:
         note: ཕྱོགས་
         probability: null
-        features: null
+        features: SIMILAR
       derge:
         note: ས་ཕྱོགས་
         probability: null
-        features: null
+        features: SIMILAR
       chone:
         note: ས་ཕྱོགས་
         probability: null
-        features: null
-    printable: true
+        features: SIMILAR
+    printable: false
   aa1dfe9f4cc54d79bd4c8ef02ac58a41:
     id: aa1dfe9f4cc54d79bd4c8ef02ac58a41
     span:
@@ -26304,20 +26304,20 @@ annotations:
       peking:
         note: དམྱལ་བ་པ་
         probability: null
-        features: null
+        features: SIMILAR
       narthang:
         note: དམྱལ་བ་པ་
         probability: null
-        features: null
+        features: SIMILAR
       derge:
         note: དམྱལ་བ་
         probability: null
-        features: null
+        features: SIMILAR
       chone:
         note: དམྱལ་བ་
         probability: null
-        features: null
-    printable: true
+        features: SIMILAR
+    printable: false
   9b711f895f2f4c75afa8c508d7f667d6:
     id: 9b711f895f2f4c75afa8c508d7f667d6
     span:
@@ -30965,20 +30965,20 @@ annotations:
       peking:
         note: དབུལ་
         probability: null
-        features: null
+        features: SIMILAR
       narthang:
         note: དབུལ་
         probability: null
-        features: null
+        features: SIMILAR
       derge:
         note: འབུལ་
         probability: null
-        features: null
+        features: SIMILAR
       chone:
         note: འབུལ་
         probability: null
-        features: null
-    printable: true
+        features: SIMILAR
+    printable: false
   25b64fcde356412ca1c602c95f56f6e3:
     id: 25b64fcde356412ca1c602c95f56f6e3
     span:
@@ -38478,20 +38478,20 @@ annotations:
       peking:
         note: ལམ་ལོག་པ་
         probability: null
-        features: null
+        features: SIMILAR
       narthang:
         note: ལམ་ལོག་པ་
         probability: null
-        features: null
+        features: SIMILAR
       derge:
         note: ལམ་གོལ་བ་
         probability: null
-        features: null
+        features: SIMILAR
       chone:
         note: ལམ་གོལ་བ་
         probability: null
-        features: null
-    printable: true
+        features: SIMILAR
+    printable: false
   4762717427884f9d925fab49697e1226:
     id: 4762717427884f9d925fab49697e1226
     span:
@@ -42169,20 +42169,20 @@ annotations:
       peking:
         note: ཉམ་ཆུང་
         probability: null
-        features: null
+        features: SIMILAR
       narthang:
         note: ཉམ་ཆུང་
         probability: null
-        features: null
+        features: SIMILAR
       derge:
         note: ཉམ་ཆུང་བ་
         probability: null
-        features: null
+        features: SIMILAR
       chone:
         note: ཉམ་ཆུང་བ་
         probability: null
-        features: null
-    printable: true
+        features: SIMILAR
+    printable: false
   e3ca69d42a1743ac92f0e6459ad154b9:
     id: e3ca69d42a1743ac92f0e6459ad154b9
     span:
@@ -44373,20 +44373,20 @@ annotations:
       peking:
         note: དབུལ་
         probability: null
-        features: null
+        features: SIMILAR
       narthang:
         note: དབུལ་
         probability: null
-        features: null
+        features: SIMILAR
       derge:
         note: འབུལ་
         probability: null
-        features: null
+        features: SIMILAR
       chone:
         note: འབུལ་
         probability: null
-        features: null
-    printable: true
+        features: SIMILAR
+    printable: false
   025f218d31aa455c8fbb71f48eb2ea87:
     id: 025f218d31aa455c8fbb71f48eb2ea87
     span:
@@ -52003,20 +52003,20 @@ annotations:
       peking:
         note: འདི་དག་
         probability: null
-        features: null
+        features: SIMILAR
       narthang:
         note: འདི་དག་
         probability: null
-        features: null
+        features: SIMILAR
       derge:
         note: དེ་དག་
         probability: null
-        features: null
+        features: SIMILAR
       chone:
         note: དེ་དག་
         probability: null
-        features: null
-    printable: true
+        features: SIMILAR
+    printable: false
   fea342b5aec34594930a9c6521c37011:
     id: fea342b5aec34594930a9c6521c37011
     span:
@@ -56604,20 +56604,20 @@ annotations:
       peking:
         note: མི་དགེ་
         probability: null
-        features: null
+        features: SIMILAR
       narthang:
         note: མི་དགེ་
         probability: null
-        features: null
+        features: SIMILAR
       derge:
         note: མི་དགེ་བ་
         probability: null
-        features: null
+        features: SIMILAR
       chone:
         note: མི་དགེ་བ་
         probability: null
-        features: null
-    printable: true
+        features: SIMILAR
+    printable: false
   1e5e47018e53406cb327df7ac3d8dedd:
     id: 1e5e47018e53406cb327df7ac3d8dedd
     span:
@@ -56708,20 +56708,20 @@ annotations:
       peking:
         note: དབུལ་
         probability: null
-        features: null
+        features: SIMILAR
       narthang:
         note: དབུལ་
         probability: null
-        features: null
+        features: SIMILAR
       derge:
         note: འབུལ་
         probability: null
-        features: null
+        features: SIMILAR
       chone:
         note: འབུལ་
         probability: null
-        features: null
-    printable: true
+        features: SIMILAR
+    printable: false
   c82d4e105caf4c3591f091ce5024afd9:
     id: c82d4e105caf4c3591f091ce5024afd9
     span:
@@ -59299,20 +59299,20 @@ annotations:
       peking:
         note: བརྡེག་པ་
         probability: null
-        features: null
+        features: SIMILAR
       narthang:
         note: བརྡེག་པ་
         probability: null
-        features: null
+        features: SIMILAR
       derge:
         note: བརྡེགས་པ་
         probability: null
-        features: null
+        features: SIMILAR
       chone:
         note: བརྡེགས་པ་
         probability: null
-        features: null
-    printable: true
+        features: SIMILAR
+    printable: false
   6fb8718fe89343a892ca21e16d9a7bb3:
     id: 6fb8718fe89343a892ca21e16d9a7bb3
     span:
@@ -59770,20 +59770,20 @@ annotations:
       peking:
         note: ལྟ་
         probability: null
-        features: null
+        features: SIMILAR
       narthang:
         note: ལྟ་
         probability: null
-        features: null
+        features: SIMILAR
       derge:
         note: ལྟར་
         probability: null
-        features: null
+        features: SIMILAR
       chone:
         note: ལྟར་
         probability: null
-        features: null
-    printable: true
+        features: SIMILAR
+    printable: false
   8b122aa92c8443d1a0ecc7d9572de3b6:
     id: 8b122aa92c8443d1a0ecc7d9572de3b6
     span:
@@ -63976,20 +63976,20 @@ annotations:
       peking:
         note: གཉིས་ཀ་
         probability: null
-        features: null
+        features: SIMILAR
       narthang:
         note: གཉིས་ཀ་
         probability: null
-        features: null
+        features: SIMILAR
       derge:
         note: གཉི་ག་
         probability: null
-        features: null
+        features: SIMILAR
       chone:
         note: གཉི་ག་
         probability: null
-        features: null
-    printable: true
+        features: SIMILAR
+    printable: false
   237e75a68e4942549fd559bd4cf04d13:
     id: 237e75a68e4942549fd559bd4cf04d13
     span:
@@ -68692,20 +68692,20 @@ annotations:
       peking:
         note: འཁར་རྔ་
         probability: null
-        features: null
+        features: SIMILAR
       narthang:
         note: འཁར་རྔ་
         probability: null
-        features: null
+        features: SIMILAR
       derge:
         note: རྫ་རྔ་
         probability: null
-        features: null
+        features: SIMILAR
       chone:
         note: རྫ་རྔ་
         probability: null
-        features: null
-    printable: true
+        features: SIMILAR
+    printable: false
   2572c772e2d14009954f645092880edb:
     id: 2572c772e2d14009954f645092880edb
     span:
@@ -68823,20 +68823,20 @@ annotations:
       peking:
         note: བརྡུང་
         probability: null
-        features: null
+        features: SIMILAR
       narthang:
         note: བརྡུང་
         probability: null
-        features: null
+        features: SIMILAR
       derge:
         note: རྡུང་
         probability: null
-        features: null
+        features: SIMILAR
       chone:
         note: རྡུང་
         probability: null
-        features: null
-    printable: true
+        features: SIMILAR
+    printable: false
   cf36d20356bf4fd4bb23abc34c7854c4:
     id: cf36d20356bf4fd4bb23abc34c7854c4
     span:
@@ -69036,20 +69036,20 @@ annotations:
       peking:
         note: གླད་པ་
         probability: null
-        features: null
+        features: SIMILAR
       narthang:
         note: གླད་པ་
         probability: null
-        features: null
+        features: SIMILAR
       derge:
         note: ཀླད་པ་
         probability: null
-        features: null
+        features: SIMILAR
       chone:
         note: ཀླད་པ་
         probability: null
-        features: null
-    printable: true
+        features: SIMILAR
+    printable: false
   96a5cbbe22004578860d2396e7be6236:
     id: 96a5cbbe22004578860d2396e7be6236
     span:
@@ -73593,20 +73593,20 @@ annotations:
       peking:
         note: བརླན་
         probability: null
-        features: null
+        features: SIMILAR
       narthang:
         note: བརླན་
         probability: null
-        features: null
+        features: SIMILAR
       derge:
         note: རླན་
         probability: null
-        features: null
+        features: SIMILAR
       chone:
         note: རླན་
         probability: null
-        features: null
-    printable: true
+        features: SIMILAR
+    printable: false
   b4fdd0607802477dbd36faa022a73295:
     id: b4fdd0607802477dbd36faa022a73295
     span:
@@ -73619,20 +73619,20 @@ annotations:
       peking:
         note: འཚམས་
         probability: null
-        features: null
+        features: SIMILAR
       narthang:
         note: འཚམས་
         probability: null
-        features: null
+        features: SIMILAR
       derge:
         note: མཚམས་
         probability: null
-        features: null
+        features: SIMILAR
       chone:
         note: མཚམས་
         probability: null
-        features: null
-    printable: true
+        features: SIMILAR
+    printable: false
   aad5487f2d7942abbb6ffc3fb1efaf9a:
     id: aad5487f2d7942abbb6ffc3fb1efaf9a
     span:
@@ -73697,20 +73697,20 @@ annotations:
       peking:
         note: འཚམས་
         probability: null
-        features: null
+        features: SIMILAR
       narthang:
         note: འཚམས་
         probability: null
-        features: null
+        features: SIMILAR
       derge:
         note: མཚམས་
         probability: null
-        features: null
+        features: SIMILAR
       chone:
         note: མཚམས་
         probability: null
-        features: null
-    printable: true
+        features: SIMILAR
+    printable: false
   e01cd917a24e4b59b0aac11d122636e2:
     id: e01cd917a24e4b59b0aac11d122636e2
     span:
@@ -74037,20 +74037,20 @@ annotations:
       peking:
         note: འཚམས་
         probability: null
-        features: null
+        features: SIMILAR
       narthang:
         note: འཚམས་
         probability: null
-        features: null
+        features: SIMILAR
       derge:
         note: མཚམས་
         probability: null
-        features: null
+        features: SIMILAR
       chone:
         note: མཚམས་
         probability: null
-        features: null
-    printable: true
+        features: SIMILAR
+    printable: false
   5b39a2d651024c06b8e63fd1eb6b729a:
     id: 5b39a2d651024c06b8e63fd1eb6b729a
     span:
@@ -81177,20 +81177,20 @@ annotations:
       peking:
         note: གཉིས་ཀ་
         probability: null
-        features: null
+        features: SIMILAR
       narthang:
         note: གཉིས་ཀ་
         probability: null
-        features: null
+        features: SIMILAR
       derge:
         note: གཉི་ག་
         probability: null
-        features: null
+        features: SIMILAR
       chone:
         note: གཉི་ག་
         probability: null
-        features: null
-    printable: true
+        features: SIMILAR
+    printable: false
   c8160f318eda43a78bb9fb3967e85ad6:
     id: c8160f318eda43a78bb9fb3967e85ad6
     span:
@@ -83633,20 +83633,20 @@ annotations:
       peking:
         note: ཁྱོད་
         probability: null
-        features: null
+        features: SIMILAR
       narthang:
         note: ཁྱོད་
         probability: null
-        features: null
+        features: SIMILAR
       derge:
         note: ཁྱེད་
         probability: null
-        features: null
+        features: SIMILAR
       chone:
         note: ཁྱེད་
         probability: null
-        features: null
-    printable: true
+        features: SIMILAR
+    printable: false
   d2b085b2304f4bea8bd19e92b0a1e5d4:
     id: d2b085b2304f4bea8bd19e92b0a1e5d4
     span:
@@ -83659,20 +83659,20 @@ annotations:
       peking:
         note: ཁྱོད་
         probability: null
-        features: null
+        features: SIMILAR
       narthang:
         note: ཁྱོད་
         probability: null
-        features: null
+        features: SIMILAR
       derge:
         note: ཁྱེད་
         probability: null
-        features: null
+        features: SIMILAR
       chone:
         note: ཁྱེད་
         probability: null
-        features: null
-    printable: true
+        features: SIMILAR
+    printable: false
   2a0b872f1f9a47bc91bd3f5ddb9e0a14:
     id: 2a0b872f1f9a47bc91bd3f5ddb9e0a14
     span:
@@ -83873,20 +83873,20 @@ annotations:
       peking:
         note: ཁྱེད་
         probability: null
-        features: null
+        features: SIMILAR
       narthang:
         note: ཁྱེད་
         probability: null
-        features: null
+        features: SIMILAR
       derge:
         note: ཁྱོད་
         probability: null
-        features: null
+        features: SIMILAR
       chone:
         note: ཁྱོད་
         probability: null
-        features: null
-    printable: true
+        features: SIMILAR
+    printable: false
   dc3e9d9c4f83438c9096e82a2121ad32:
     id: dc3e9d9c4f83438c9096e82a2121ad32
     span:
@@ -88523,20 +88523,20 @@ annotations:
       peking:
         note: བེམ་པོ་
         probability: null
-        features: null
+        features: SIMILAR
       narthang:
         note: བེམ་པོ་
         probability: null
-        features: null
+        features: SIMILAR
       derge:
         note: བེམས་པོ་
         probability: null
-        features: null
+        features: SIMILAR
       chone:
         note: བེམས་པོ་
         probability: null
-        features: null
-    printable: true
+        features: SIMILAR
+    printable: false
   10261c7309284c3ba18c82cfac6abb00:
     id: 10261c7309284c3ba18c82cfac6abb00
     span:
@@ -92285,20 +92285,20 @@ annotations:
       peking:
         note: གཡོན་ཅན་
         probability: null
-        features: null
+        features: SIMILAR
       narthang:
         note: གཡོན་ཅན་
         probability: null
-        features: null
+        features: SIMILAR
       derge:
         note: གཡོ་ཅན་
         probability: null
-        features: null
+        features: SIMILAR
       chone:
         note: གཡོ་ཅན་
         probability: null
-        features: null
-    printable: true
+        features: SIMILAR
+    printable: false
   343bf2eb4ae640b4a8a61a48c2cf6b81:
     id: 343bf2eb4ae640b4a8a61a48c2cf6b81
     span:
@@ -92545,20 +92545,20 @@ annotations:
       peking:
         note: རང་
         probability: null
-        features: null
+        features: SIMILAR
       narthang:
         note: རང་
         probability: null
-        features: null
+        features: SIMILAR
       derge:
         note: རང་རང་
         probability: null
-        features: null
+        features: SIMILAR
       chone:
         note: རང་རང་
         probability: null
-        features: null
-    printable: true
+        features: SIMILAR
+    printable: false
   880e9aa3d6794a84868e3740584e3b01:
     id: 880e9aa3d6794a84868e3740584e3b01
     span:
@@ -92965,20 +92965,20 @@ annotations:
       peking:
         note: གསག་
         probability: null
-        features: null
+        features: SIMILAR
       narthang:
         note: གསག་
         probability: null
-        features: null
+        features: SIMILAR
       derge:
         note: བསག་
         probability: null
-        features: null
+        features: SIMILAR
       chone:
         note: བསག་
         probability: null
-        features: null
-    printable: true
+        features: SIMILAR
+    printable: false
   94a9bf9031214f5399a668484a7a3bb2:
     id: 94a9bf9031214f5399a668484a7a3bb2
     span:
@@ -99048,20 +99048,20 @@ annotations:
       peking:
         note: དེ་དག་
         probability: null
-        features: null
+        features: SIMILAR
       narthang:
         note: དེ་དག་
         probability: null
-        features: null
+        features: SIMILAR
       derge:
         note: འདི་དག་
         probability: null
-        features: null
+        features: SIMILAR
       chone:
         note: འདི་དག་
         probability: null
-        features: null
-    printable: true
+        features: SIMILAR
+    printable: false
   601b904a0d9c4fe2b6ea3457d9806091:
     id: 601b904a0d9c4fe2b6ea3457d9806091
     span:
@@ -100496,20 +100496,20 @@ annotations:
       peking:
         note: ཁྱེད་
         probability: null
-        features: null
+        features: SIMILAR
       narthang:
         note: ཁྱེད་
         probability: null
-        features: null
+        features: SIMILAR
       derge:
         note: ཁྱོད་
         probability: null
-        features: null
+        features: SIMILAR
       chone:
         note: ཁྱོད་
         probability: null
-        features: null
-    printable: true
+        features: SIMILAR
+    printable: false
   8592ae465bd9431e8d1338732142bdf9:
     id: 8592ae465bd9431e8d1338732142bdf9
     span:
@@ -105585,20 +105585,20 @@ annotations:
       peking:
         note: བརླབས་
         probability: null
-        features: null
+        features: SIMILAR
       narthang:
         note: བརླབས་
         probability: null
-        features: null
+        features: SIMILAR
       derge:
         note: བརླབ་
         probability: null
-        features: null
+        features: SIMILAR
       chone:
         note: བརླབ་
         probability: null
-        features: null
-    printable: true
+        features: SIMILAR
+    printable: false
   50748fed8bc24b64a892fba2ed028242:
     id: 50748fed8bc24b64a892fba2ed028242
     span:
@@ -105611,20 +105611,20 @@ annotations:
       peking:
         note: བརླབས་
         probability: null
-        features: null
+        features: SIMILAR
       narthang:
         note: བརླབས་
         probability: null
-        features: null
+        features: SIMILAR
       derge:
         note: བརླབ་
         probability: null
-        features: null
+        features: SIMILAR
       chone:
         note: བརླབ་
         probability: null
-        features: null
-    printable: true
+        features: SIMILAR
+    printable: false
   ac3665fc73264182bb881c00bce7325f:
     id: ac3665fc73264182bb881c00bce7325f
     span:
@@ -107205,20 +107205,20 @@ annotations:
       peking:
         note: མདུན་ས་
         probability: null
-        features: null
+        features: SIMILAR
       narthang:
         note: མདུན་ས་
         probability: null
-        features: null
+        features: SIMILAR
       derge:
         note: འདུན་ས་
         probability: null
-        features: null
+        features: SIMILAR
       chone:
         note: འདུན་ས་
         probability: null
-        features: null
-    printable: true
+        features: SIMILAR
+    printable: false
   69181de3bee3498e83c4a82b0eaeb565:
     id: 69181de3bee3498e83c4a82b0eaeb565
     span:
