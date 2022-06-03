@@ -12,19 +12,19 @@ annotations:
     default: derge
     options:
       peking:
-        note: སྟི་ག་
+        note: སྟར་ཀ་
         probability: null
         features: null
       narthang:
-        note: སྟི་ག་
+        note: སྟར་ཀ་
         probability: null
         features: null
       derge:
-        note: སྟི་ཀ་
+        note: སྟར་ཁ་
         probability: null
         features: null
       chone:
-        note: སྟི་ཀ་
+        note: སྟར་ཁ་
         probability: null
         features: null
     printable: true

@@ -1,9 +1,10 @@
 import csv
-from utils import get_base_names, update_durchen,toyaml
+#from utils import get_base_names, update_durchen,toyaml
 from openpecha.core.pecha import OpenPechaFS
 from openpecha.utils import load_yaml
 from pathlib import Path
 import sqlite3
+import yaml
 
 
 def is_alternatives(options):
@@ -17,10 +18,10 @@ def is_alternatives(options):
 
     if not rows:
         return False
+        
     for row in rows:
         row_set = set(row)
         if distinct_notes.issubset(row_set):
-            print(row_set)
             return True 
 
     return False    
@@ -59,9 +60,10 @@ def resolve_alternatives(opf_path):
         update_durchen(alternatives_durchen, durchen_path)
 
 
+
 if __name__ == "__main__":
     test_file = Path("./tests/alternative_notes/data/input_durchen.yml")
     yml = load_yaml(test_file)
     durchen = resolve_annotations(yml)
-    new_yml = toyaml(durchen)
-    Path("./res.yml").write_text(new_yml)
+    #new_yml = toyaml(durchen)
+    #Path("./res.yml").write_text(new_yml)
