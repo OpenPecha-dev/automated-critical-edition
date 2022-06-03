@@ -1,9 +1,32 @@
 import re
+import logging
 from typing import DefaultDict
 import yaml
 from antx import transfer
 from openpecha.utils import dump_yaml
+from gensim.models import KeyedVectors
 
+logging.basicConfig(filename="./res/oov_list.log", level=logging.INFO)
+
+word_vectors_path = "./res/word2vec.wordvectors"
+wv = KeyedVectors.load(str(word_vectors_path), mmap='r')
+
+def get_oov_word(error, words):
+    words = {"A": words[0], "B": words[1]}
+    key = str(error).split()[1].strip()[1:-1]
+    return key
+
+def find_similarity(wordA, wordB):
+    try:
+        sim = wv.similarity(wordA, wordB)
+    except Exception as e:
+        
+        sim = 0.0
+        oov_word = get_oov_word(e, [wordA, wordB])
+        logging.info(f"{oov_word}")
+        return sim
+
+    return max([float(sim), 0.0])
 
 
 def check_all_notes_option(note_options):

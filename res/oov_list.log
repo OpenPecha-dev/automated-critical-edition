@@ -1,0 +1,4 @@
+INFO:gensim.utils:loading KeyedVectors object from ./res
+INFO:gensim.utils:loading KeyedVectors object from ./res/word2vec.wordvectors
+INFO:gensim.utils:loading vectors from ./res/word2vec.wordvectors.vectors.npy with mmap=r
+INFO:gensim.utils:KeyedVectors lifecycle event {'fname': './res/word2vec.wordvectors', 'datetime': '2022-06-03T10:45:52.167763', 'gensim': '4.2.0', 'python': '3.8.10 (default, Mar 15 2022, 12:22:08) \n[GCC 9.4.0]', 'platform': 'Linux-5.13.0-44-generic-x86_64-with-glibc2.29', 'event': 'loaded'}
