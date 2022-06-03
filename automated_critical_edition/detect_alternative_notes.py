@@ -7,7 +7,7 @@ from pathlib import Path
 
 
 def is_alternatives(options):
-    with open("./res/alternatives.csv") as file:
+    with open("./res/alternatives.csv", encoding="utf-8") as file:
         csvreader = csv.reader(file)
         for row in csvreader:
             if check_alternative(row,options):

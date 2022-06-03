@@ -67,6 +67,7 @@ def get_text_report(opf_path):
 
 if __name__ == "__main__":
     opf_paths  = list(Path('./data/opfs').iterdir())
+    opf_paths = [Path('./data/opfs/shanti_deva/O1DB7D939')]
     for opf_path in opf_paths:
         opf_id = opf_path.stem
         text_id, text_report = get_text_report(opf_path)
