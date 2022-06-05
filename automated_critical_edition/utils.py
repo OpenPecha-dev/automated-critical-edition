@@ -36,7 +36,10 @@ def get_pos(word):
     con = sqlite3.connect("./res/pos.sqlite")
     cur = con.cursor()
     cur.execute(f"SELECT def FROM word_pos WHERE word=?",(word,))
-    pos = cur.fetchall()[0][0]
+    try:
+        pos = cur.fetchall()[0][0]
+    except:
+        pos = None
     if not pos:
         return None
     return pos
