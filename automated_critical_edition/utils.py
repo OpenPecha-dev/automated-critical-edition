@@ -4,7 +4,7 @@ import logging
 from typing import DefaultDict
 import yaml
 from antx import transfer
-from openpecha.utils import dump_yaml
+from openpecha.utils import dump_yaml,load_yaml
 from gensim.models import KeyedVectors
 
 logging.basicConfig(filename="./res/oov_list.log", level=logging.INFO)
