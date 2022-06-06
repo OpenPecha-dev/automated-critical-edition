@@ -156,7 +156,8 @@ annotations:
       chone:
         note: དྲིལ
         probability: null
-        features: null
+        features:
+        - OUTLIER
     printable: true
   4122b5cc95954295add9f9a2eb9d328e:
     id: 4122b5cc95954295add9f9a2eb9d328e
@@ -222,20 +223,24 @@ annotations:
       peking:
         note: ཏོག་རྩེ་
         probability: null
-        features: null
+        features:
+        - ALTERNATIVE
       narthang:
         note: ཏོག་རྩེ་
         probability: null
-        features: null
+        features:
+        - ALTERNATIVE
       derge:
         note: ཏོག་ཙེ་
         probability: null
-        features: null
+        features:
+        - ALTERNATIVE
       chone:
         note: ཏོག་ཙེ་
         probability: null
-        features: null
-    printable: true
+        features:
+        - ALTERNATIVE
+    printable: false
   bf7066bc66d74fe6bb6bb7ba81fa413f:
     id: bf7066bc66d74fe6bb6bb7ba81fa413f
     span:
@@ -278,7 +283,8 @@ annotations:
       narthang:
         note: ནམ་མཁའ་
         probability: null
-        features: null
+        features:
+        - OUTLIER
       derge:
         note: ནམ་མཁས་
         probability: null
@@ -287,7 +293,7 @@ annotations:
         note: ནམ་མཁས་
         probability: null
         features: null
-    printable: true
+    printable: false
   eccc548345384041bbe5158c59456af0:
     id: eccc548345384041bbe5158c59456af0
     span:
@@ -404,7 +410,8 @@ annotations:
       peking:
         note: རྫོངས་
         probability: null
-        features: null
+        features:
+        - OUTLIER
       narthang:
         note: རྫོང་
         probability: null
@@ -417,7 +424,7 @@ annotations:
         note: རྫོང་
         probability: null
         features: null
-    printable: true
+    printable: false
   01f5bd6fedbb45fa91e425dda30d27e9:
     id: 01f5bd6fedbb45fa91e425dda30d27e9
     span:
@@ -642,7 +649,8 @@ annotations:
       narthang:
         note: བསྒོམས་པ་
         probability: null
-        features: null
+        features:
+        - OUTLIER
       derge:
         note: སྒོམ་པ་
         probability: null
@@ -746,7 +754,8 @@ annotations:
       narthang:
         note: བཞི་
         probability: null
-        features: null
+        features:
+        - OUTLIER
       derge:
         note: གཞི་
         probability: null
@@ -755,7 +764,7 @@ annotations:
         note: གཞི་
         probability: null
         features: null
-    printable: true
+    printable: false
   2791422e980c4d2aa2479bd1df1187aa:
     id: 2791422e980c4d2aa2479bd1df1187aa
     span:

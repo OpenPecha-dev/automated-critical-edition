@@ -14,17 +14,21 @@ annotations:
       peking:
         note: པདྨའི་
         probability: null
-        features: null
+        features:
+        - SANSKRIT
       narthang:
         note: པདྨ་
         probability: null
-        features: null
+        features:
+        - SANSKRIT
       derge:
         note: པདྨའི་
         probability: null
-        features: null
+        features:
+        - SANSKRIT
       chone:
         note: པདྨའི་
         probability: null
-        features: null
-    printable: true
+        features:
+        - SANSKRIT
+    printable: false

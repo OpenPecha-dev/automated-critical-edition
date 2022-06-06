@@ -182,8 +182,9 @@ annotations:
       chone:
         note: མཉམ་བཞག་
         probability: null
-        features: null
-    printable: true
+        features:
+        - OUTLIER
+    printable: false
   bf5c1bdece1249ef9c70a414946d5bf7:
     id: bf5c1bdece1249ef9c70a414946d5bf7
     span:
@@ -208,8 +209,9 @@ annotations:
       chone:
         note: པ་ཡི
         probability: null
-        features: null
-    printable: true
+        features:
+        - OUTLIER
+    printable: false
   ba3ec9d650b74e338915d535ce78e81d:
     id: ba3ec9d650b74e338915d535ce78e81d
     span:
@@ -274,7 +276,8 @@ annotations:
       peking:
         note: གཟུགས་
         probability: null
-        features: null
+        features:
+        - OUTLIER
       narthang:
         note: གཟེགས་
         probability: null
@@ -287,7 +290,7 @@ annotations:
         note: གཟེགས་
         probability: null
         features: null
-    printable: true
+    printable: false
   42ace0ccaf3648f8b174bf55cc0cebcd:
     id: 42ace0ccaf3648f8b174bf55cc0cebcd
     span:
@@ -430,7 +433,8 @@ annotations:
       peking:
         note: བསྟན་པར་
         probability: null
-        features: null
+        features:
+        - OUTLIER
       narthang:
         note: བརྟན་པར་
         probability: null
@@ -443,7 +447,7 @@ annotations:
         note: བརྟན་པར་
         probability: null
         features: null
-    printable: true
+    printable: false
   cedc869704694dabbe7c0790ea78fc80:
     id: cedc869704694dabbe7c0790ea78fc80
     span:

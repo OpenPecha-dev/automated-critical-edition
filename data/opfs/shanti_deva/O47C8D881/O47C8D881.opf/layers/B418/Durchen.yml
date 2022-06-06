@@ -14,20 +14,24 @@ annotations:
       peking:
         note: ཕག་
         probability: null
-        features: null
+        features:
+        - ALL_NOTE_SAME
       narthang:
         note: ཕག་
         probability: null
-        features: null
+        features:
+        - ALL_NOTE_SAME
       derge:
         note: ཕག་
         probability: null
-        features: null
+        features:
+        - ALL_NOTE_SAME
       chone:
         note: ཕག་
         probability: null
-        features: null
-    printable: true
+        features:
+        - ALL_NOTE_SAME
+    printable: false
   ddd6081875754dbfb8713412cf7c4a3d:
     id: ddd6081875754dbfb8713412cf7c4a3d
     span:
@@ -118,17 +122,21 @@ annotations:
       peking:
         note: ཊི་ཀ་
         probability: null
-        features: null
+        features:
+        - SANSKRIT
       narthang:
         note: ཊ་ཀི་
         probability: null
-        features: null
+        features:
+        - SANSKRIT
       derge:
         note: ཊ་ཀི་
         probability: null
-        features: null
+        features:
+        - SANSKRIT
       chone:
         note: ཊ་ཀི་
         probability: null
-        features: null
-    printable: true
+        features:
+        - SANSKRIT
+    printable: false

@@ -18,7 +18,8 @@ annotations:
       narthang:
         note: གསལ་བར་
         probability: null
-        features: null
+        features:
+        - OUTLIER
       derge:
         note: བསལ་བར་
         probability: null
@@ -27,7 +28,7 @@ annotations:
         note: བསལ་བར་
         probability: null
         features: null
-    printable: true
+    printable: false
   9bed8daf4df347b8bd070868b86738c1:
     id: 9bed8daf4df347b8bd070868b86738c1
     span:
@@ -174,7 +175,8 @@ annotations:
       narthang:
         note: བཟངས
         probability: null
-        features: null
+        features:
+        - OUTLIER
       derge:
         note: བཟང་
         probability: null
@@ -183,7 +185,7 @@ annotations:
         note: བཟང་
         probability: null
         features: null
-    printable: true
+    printable: false
   4f6965a13e4f4847963b6bc8fdaf1ca5:
     id: 4f6965a13e4f4847963b6bc8fdaf1ca5
     span:
@@ -278,7 +280,8 @@ annotations:
       narthang:
         note: བདག་གི་
         probability: null
-        features: null
+        features:
+        - OUTLIER
       derge:
         note: བདག་གིས་
         probability: null
@@ -287,7 +290,7 @@ annotations:
         note: བདག་གིས་
         probability: null
         features: null
-    printable: true
+    printable: false
   8699c4386f394c289643e0252e210c57:
     id: 8699c4386f394c289643e0252e210c57
     span:
@@ -300,7 +303,8 @@ annotations:
       peking:
         note: བསམས་པ་
         probability: null
-        features: null
+        features:
+        - OUTLIER
       narthang:
         note: བརྩམས་པ་
         probability: null
@@ -313,7 +317,7 @@ annotations:
         note: བརྩམས་པ་
         probability: null
         features: null
-    printable: true
+    printable: false
   0b945d830ec0477daf1b2c33e034a120:
     id: 0b945d830ec0477daf1b2c33e034a120
     span:
@@ -330,7 +334,8 @@ annotations:
       narthang:
         note: དག་
         probability: null
-        features: null
+        features:
+        - OUTLIER
       derge:
         note: བདག་
         probability: null
@@ -339,7 +344,7 @@ annotations:
         note: བདག་
         probability: null
         features: null
-    printable: true
+    printable: false
   6288821dc3cb4ceab5831504aa0c2fd2:
     id: 6288821dc3cb4ceab5831504aa0c2fd2
     span:
@@ -356,7 +361,8 @@ annotations:
       narthang:
         note: ནམས་ཀྱི
         probability: null
-        features: null
+        features:
+        - OUTLIER
       derge:
         note: ནམས་ཀྱིས
         probability: null
@@ -365,7 +371,7 @@ annotations:
         note: ནམས་ཀྱིས
         probability: null
         features: null
-    printable: true
+    printable: false
   f8ec0558000144a5b4318a3b0def6a02:
     id: f8ec0558000144a5b4318a3b0def6a02
     span:
@@ -382,7 +388,8 @@ annotations:
       narthang:
         note: ཏུ་བདེ་བ་
         probability: null
-        features: null
+        features:
+        - OUTLIER
       derge:
         note: དུ་བདེ་ལས་
         probability: null
@@ -460,7 +467,8 @@ annotations:
       narthang:
         note: ཡས་ཀྱི
         probability: null
-        features: null
+        features:
+        - OUTLIER
       derge:
         note: ཡས་ཀྱིས
         probability: null
@@ -469,7 +477,7 @@ annotations:
         note: ཡས་ཀྱིས
         probability: null
         features: null
-    printable: true
+    printable: false
   fe2fd8b6ab644113864e8bf287d19dbc:
     id: fe2fd8b6ab644113864e8bf287d19dbc
     span:
@@ -538,7 +546,8 @@ annotations:
       narthang:
         note: གསུང་ཆེན་
         probability: null
-        features: null
+        features:
+        - OUTLIER
       derge:
         note: བསུང་ཆེ་
         probability: null
@@ -547,7 +556,7 @@ annotations:
         note: བསུང་ཆེ་
         probability: null
         features: null
-    printable: true
+    printable: false
   3cf44fb2b2fd43aebc124cfd92de2f64:
     id: 3cf44fb2b2fd43aebc124cfd92de2f64
     span:
@@ -616,7 +625,8 @@ annotations:
       narthang:
         note: ཡིན་པས་
         probability: null
-        features: null
+        features:
+        - OUTLIER
       derge:
         note: ཡིན་སྙམ་
         probability: null
@@ -642,7 +652,8 @@ annotations:
       narthang:
         note: འབར་བར་
         probability: null
-        features: null
+        features:
+        - OUTLIER
       derge:
         note: འབར་བ་
         probability: null
@@ -651,7 +662,7 @@ annotations:
         note: འབར་བ་
         probability: null
         features: null
-    printable: true
+    printable: false
   d1dd07cf165a4135a833d45216339dfd:
     id: d1dd07cf165a4135a833d45216339dfd
     span:
@@ -824,7 +835,8 @@ annotations:
       narthang:
         note: གིས་ཞབས་ཀྱི་
         probability: null
-        features: null
+        features:
+        - OUTLIER
       derge:
         note: གི་ཞབས་ཀྱི་
         probability: null
@@ -876,7 +888,8 @@ annotations:
       narthang:
         note: སྤྱན་མ་
         probability: null
-        features: null
+        features:
+        - OUTLIER
       derge:
         note: སྤྱན་དབུལ་
         probability: null
@@ -885,7 +898,7 @@ annotations:
         note: སྤྱན་དབུལ་
         probability: null
         features: null
-    printable: true
+    printable: false
   71a5ca1e94e048a08d075ef707524e87:
     id: 71a5ca1e94e048a08d075ef707524e87
     span:
@@ -898,20 +911,20 @@ annotations:
       peking:
         note: ཀུ་ཅོ་
         probability: null
-        features: null
+        features: SIMILAR
       narthang:
         note: ཀུ་ཅོ་
         probability: null
-        features: null
+        features: SIMILAR
       derge:
         note: ཅ་ཅོ་
         probability: null
-        features: null
+        features: SIMILAR
       chone:
         note: ཅ་ཅོ་
         probability: null
-        features: null
-    printable: true
+        features: SIMILAR
+    printable: false
   75305bf890454bc2914b71408857fa92:
     id: 75305bf890454bc2914b71408857fa92
     span:
@@ -928,7 +941,8 @@ annotations:
       narthang:
         note: ཞིམ་པ་
         probability: null
-        features: null
+        features:
+        - OUTLIER
       derge:
         note: ཞིམ་ངད་
         probability: null
@@ -937,7 +951,7 @@ annotations:
         note: ཞིམ་ངད་
         probability: null
         features: null
-    printable: true
+    printable: false
   79c08738a8c54e439b00a4a362389d97:
     id: 79c08738a8c54e439b00a4a362389d97
     span:
@@ -1110,7 +1124,8 @@ annotations:
       narthang:
         note: གཉེན་
         probability: null
-        features: null
+        features:
+        - OUTLIER
       derge:
         note: མཉེན་
         probability: null
@@ -1119,7 +1134,7 @@ annotations:
         note: མཉེན་
         probability: null
         features: null
-    printable: true
+    printable: false
   20599d0e6d3c4536853c09f807de2149:
     id: 20599d0e6d3c4536853c09f807de2149
     span:
@@ -1162,7 +1177,8 @@ annotations:
       narthang:
         note: དག་པར་
         probability: null
-        features: null
+        features:
+        - OUTLIER
       derge:
         note: དགའ་བར་
         probability: null
@@ -1171,7 +1187,7 @@ annotations:
         note: དགའ་བར་
         probability: null
         features: null
-    printable: true
+    printable: false
   c1a7954fa1dd47bd8814c07fe4dd788b:
     id: c1a7954fa1dd47bd8814c07fe4dd788b
     span:
@@ -1210,20 +1226,24 @@ annotations:
       peking:
         note: བར་
         probability: null
-        features: null
+        features:
+        - ALL_NOTE_SAME
       narthang:
         note: བར་
         probability: null
-        features: null
+        features:
+        - ALL_NOTE_SAME
       derge:
         note: བར་
         probability: null
-        features: null
+        features:
+        - ALL_NOTE_SAME
       chone:
         note: བར་
         probability: null
-        features: null
-    printable: true
+        features:
+        - ALL_NOTE_SAME
+    printable: false
   f9003b16be824a1088a9fb6aea2eefc7:
     id: f9003b16be824a1088a9fb6aea2eefc7
     span:
@@ -1266,7 +1286,8 @@ annotations:
       narthang:
         note: ཆུ་
         probability: null
-        features: null
+        features:
+        - OUTLIER
       derge:
         note: ཆུང་
         probability: null
@@ -1275,7 +1296,7 @@ annotations:
         note: ཆུང་
         probability: null
         features: null
-    printable: true
+    printable: false
   40046b0f058c4d64ab624e8893840f53:
     id: 40046b0f058c4d64ab624e8893840f53
     span:
@@ -1292,7 +1313,8 @@ annotations:
       narthang:
         note: རབ་རྣམས་ཀྱི་ཐོ་
         probability: null
-        features: null
+        features:
+        - OUTLIER
       derge:
         note: རབས་རྣམས་ནི་མཐོ་
         probability: null
@@ -1344,7 +1366,8 @@ annotations:
       narthang:
         note: པ་ཡི
         probability: null
-        features: null
+        features:
+        - OUTLIER
       derge:
         note: པ་ཡིས
         probability: null
@@ -1353,7 +1376,7 @@ annotations:
         note: པ་ཡིས
         probability: null
         features: null
-    printable: true
+    printable: false
   74ce507ef6a64a6499bcee3d49fd350e:
     id: 74ce507ef6a64a6499bcee3d49fd350e
     span:
@@ -1760,7 +1783,8 @@ annotations:
       narthang:
         note: དུ་ཅིའི་
         probability: null
-        features: null
+        features:
+        - OUTLIER
       derge:
         note: འང་
         probability: null
@@ -1769,7 +1793,7 @@ annotations:
         note: འང་
         probability: null
         features: null
-    printable: true
+    printable: false
   caf01516b3da4553b92df530cdd44f03:
     id: caf01516b3da4553b92df530cdd44f03
     span:
@@ -1812,7 +1836,8 @@ annotations:
       narthang:
         note: སྙེད་
         probability: null
-        features: null
+        features:
+        - OUTLIER
       derge:
         note: རྙེད་
         probability: null
@@ -1821,7 +1846,7 @@ annotations:
         note: རྙེད་
         probability: null
         features: null
-    printable: true
+    printable: false
   4797931d99474dd7a427c279a2d8d8b9:
     id: 4797931d99474dd7a427c279a2d8d8b9
     span:
