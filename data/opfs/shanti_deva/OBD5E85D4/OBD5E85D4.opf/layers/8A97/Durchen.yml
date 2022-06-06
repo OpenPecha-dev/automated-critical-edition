@@ -22897,20 +22897,20 @@ annotations:
       peking:
         note: རྩེགས་
         probability: null
-        features: null
+        features: SIMILAR
       narthang:
         note: རྩེགས་
         probability: null
-        features: null
+        features: SIMILAR
       derge:
         note: བརྩེགས་
         probability: null
-        features: null
+        features: SIMILAR
       chone:
         note: བརྩེགས་
         probability: null
-        features: null
-    printable: true
+        features: SIMILAR
+    printable: false
   b3348a249f46405ab96946b3a770fe05:
     id: b3348a249f46405ab96946b3a770fe05
     span:
