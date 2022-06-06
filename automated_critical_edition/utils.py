@@ -1,9 +1,10 @@
 import re
+import sqlite3
 import logging
 from typing import DefaultDict
 import yaml
 from antx import transfer
-from openpecha.utils import dump_yaml
+from openpecha.utils import dump_yaml,load_yaml
 from gensim.models import KeyedVectors
 
 logging.basicConfig(filename="./res/oov_list.log", level=logging.INFO)
@@ -11,10 +12,12 @@ logging.basicConfig(filename="./res/oov_list.log", level=logging.INFO)
 word_vectors_path = "./res/word2vec.wordvectors"
 wv = KeyedVectors.load(str(word_vectors_path), mmap='r')
 
+##SIMILARITY UTILS
 def get_oov_word(error, words):
     words = {"A": words[0], "B": words[1]}
     key = str(error).split()[1].strip()[1:-1]
     return key
+
 
 def find_similarity(wordA, wordB):
     try:
@@ -27,6 +30,19 @@ def find_similarity(wordA, wordB):
         return sim
 
     return max([float(sim), 0.0])
+
+
+def get_pos(word):
+    con = sqlite3.connect("./res/pos.sqlite")
+    cur = con.cursor()
+    cur.execute(f"SELECT def FROM word_pos WHERE word=?",(word,))
+    try:
+        pos = cur.fetchall()[0][0]
+    except:
+        pos = None
+    if not pos:
+        return None
+    return pos
 
 
 def check_all_notes_option(note_options):

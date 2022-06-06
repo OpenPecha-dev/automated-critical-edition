@@ -93,20 +93,20 @@ annotations:
       peking:
         note: དབུལ
         probability: null
-        features: SIMILAR
+        features: null
       narthang:
         note: དབུལ
         probability: null
-        features: SIMILAR
+        features: null
       derge:
         note: འབུལ
         probability: null
-        features: SIMILAR
+        features: null
       chone:
         note: འབུལ
         probability: null
-        features: SIMILAR
-    printable: false
+        features: null
+    printable: true
   25bbb0f7bee9428c865b8e21e8733878:
     id: 25bbb0f7bee9428c865b8e21e8733878
     span:

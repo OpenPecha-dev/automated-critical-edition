@@ -1,11 +1,10 @@
 
 from openpecha.core.pecha import OpenPechaFS
 
-from automated_critical_edition.utils import update_durchen, get_base_names, get_all_note_text, find_similarity
+from automated_critical_edition.utils import update_durchen, get_base_names, get_all_note_text, find_similarity, get_pos
 from botok import BoString
 from botok.vars import CharMarkers
 from botok.tokenizers.wordtokenizer import WordTokenizer
-import requests
 
 
 def is_punct(string):
@@ -35,6 +34,8 @@ def has_verb(notes, wt):
         for token in tokens:
             if token.pos == "VERB":
                 return True
+        if " བྱ་ཚིག " == get_pos(note):
+            return True
     return False
 
 def rm_empty_notes(notes):

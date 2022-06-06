@@ -1,24 +1,30 @@
 import csv
-
-from automated_critical_edition.utils import get_base_names, update_durchen
+#from utils import get_base_names, update_durchen,toyaml
 from openpecha.core.pecha import OpenPechaFS
 from openpecha.utils import load_yaml
 from pathlib import Path
+import sqlite3
+import yaml
 
 
 def is_alternatives(options):
-    with open("./res/alternatives.csv", encoding="utf-8") as file:
-        csvreader = csv.reader(file)
-        for row in csvreader:
-            if check_alternative(row,options):
-                return True
-
-        
-def check_alternative(row,options):
     distinct_notes = has_two_distinct_notes(options)
-    row_set = set(row)
-    if distinct_notes.issubset(row_set):
-        return True  
+    sqliteConnection = sqlite3.connect('./res/alternatives.sqlite')
+    cursor = sqliteConnection.cursor()
+    cursor.execute(f"SELECT word1,word2 FROM alt_word WHERE word1=? or word1=?",(list(distinct_notes)[0],list(distinct_notes)[1]))
+    rows = cursor.fetchall()
+    sqliteConnection.commit()
+    cursor.close()
+
+    if not rows:
+        return False
+        
+    for row in rows:
+        row_set = set(row)
+        if distinct_notes.issubset(row_set):
+            return True 
+
+    return False    
 
 
 def has_two_distinct_notes(options):
@@ -54,7 +60,10 @@ def resolve_alternatives(opf_path):
         update_durchen(alternatives_durchen, durchen_path)
 
 
+
 if __name__ == "__main__":
     test_file = Path("./tests/alternative_notes/data/input_durchen.yml")
     yml = load_yaml(test_file)
-    resolve_annotations(yml)
+    durchen = resolve_annotations(yml)
+    #new_yml = toyaml(durchen)
+    #Path("./res.yml").write_text(new_yml)
