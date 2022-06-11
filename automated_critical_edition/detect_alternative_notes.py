@@ -1,17 +1,45 @@
+from cgitb import text
 import csv
 #from utils import get_base_names, update_durchen,toyaml
 from openpecha.core.pecha import OpenPechaFS
 from openpecha.utils import load_yaml
 from pathlib import Path
+from botok import WordTokenizer
 import sqlite3
 import yaml
+wt = WordTokenizer()
 
+def get_tokens(word):
+    tokens =wt.tokenize(word)
+    return tokens
+
+def form_word(tokens):
+    word = ""
+    for token in tokens:
+        word+=token.text
+    return word    
+
+def normalized_option(options):
+    normalized_options=[]
+    for option in options:
+        option = option.replace("།","")
+        tokens = get_tokens(option)
+        if tokens[-1].pos and tokens[-1].pos == "PART":
+            word = form_word(tokens[:-1])
+            normalized_options.append(word)
+        else:
+            normalized_options.append(option)
+
+    return normalized_options
+
+        
 
 def is_alternatives(options):
     distinct_notes = has_two_distinct_notes(options)
+    distinct_notes = normalized_option(distinct_notes)
     sqliteConnection = sqlite3.connect('./res/alternatives.sqlite')
     cursor = sqliteConnection.cursor()
-    cursor.execute(f"SELECT word1,word2 FROM alt_word WHERE word1=? or word1=?",(list(distinct_notes)[0],list(distinct_notes)[1]))
+    cursor.execute(f"SELECT word1,word2 FROM alt_word WHERE word1=? or word1=?",(distinct_notes[0],distinct_notes[1]))
     rows = cursor.fetchall()
     sqliteConnection.commit()
     cursor.close()
@@ -30,7 +58,8 @@ def is_alternatives(options):
 def has_two_distinct_notes(options):
     note_set = set()
     for val in options.values():
-        note_set.add(val["note"])
+        if val["note"] != "":
+            note_set.add(val["note"])
     if len(note_set) == 2:
         return note_set   
 
