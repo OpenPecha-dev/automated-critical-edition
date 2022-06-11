@@ -24,25 +24,27 @@ def get_note(durchen_ann, note_walker):
                 alt_note = note_info['note']
             else:
                 note_md += f"  *{tib_pub}* "
-    note_md += "\n"
+    # note_md += "\n"
     return note_md
 
 
 def reformat_collated_text(text):
     reformated_text = ""
+
     text = re.sub("\n", "", text)
-    text_parts = re.split("(། །)", text)
-    sentence_walker = 0
-    for text_part in text_parts:
-        if text_part == "། །":
-            if sentence_walker == 100:
-                reformated_text += f"{text_part}\n"
-                sentence_walker = 0
-            else:
-                reformated_text += text_part
-                sentence_walker += 1
-        else:
-            reformated_text += text_part
+    # text_parts = re.split("(། །)", text)
+    # sentence_walker = 0
+    # for text_part in text_parts:
+    #     if text_part == "། །":
+    #         if sentence_walker == 100:
+    #             reformated_text += f"{text_part}\n"
+    #             sentence_walker = 0
+    #         else:
+    #             reformated_text += text_part
+    #             sentence_walker += 1
+    #     else:
+    #         reformated_text += text_part
+    reformated_text = re.sub("([།གཤཀ]། ?། ?།)", "\g<1>\n\n", text)
     reformated_text = reformated_text.replace(":", "")
     return reformated_text
             
@@ -55,7 +57,8 @@ def get_collated_text_md(durchen_layer, base_text):
     last_durchen_ann = {}
     for uuid, durchen_ann in durchen_layer['annotations'].items():
         if durchen_ann['printable']:
-            footnotes += f"{get_note(durchen_ann, note_walker)}\n"
+            # footnotes += f"{get_note(durchen_ann, note_walker)}\n"
+            footnotes += f"{get_note(durchen_ann, note_walker)}    "
             prev_chunk = base_text[char_walker:durchen_ann['span']['end']]
             collated_text_md += f"{prev_chunk}[^{note_walker}]"
             char_walker = durchen_ann['span']['end']
@@ -88,7 +91,7 @@ def opf_to_docx(opf_path, output_dir):
 
 
 if __name__ == "__main__":
-    opf_path = Path('./demo_opf/PFCFAE7FE/PFCFAE7FE.opf')
+    opf_path = Path('./data/opfs/shanti_deva/O470B5E71/O470B5E71.opf')
     text_id = "D1118"
-    output_dir = Path('./demo_opf')
-    opf_to_docx(opf_path, output_dir, text_id)
+    output_dir = Path('./')
+    opf_to_docx(opf_path, output_dir)
